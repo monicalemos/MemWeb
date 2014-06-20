@@ -11,13 +11,12 @@
 		<welcome-file>Home.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<display-name>ServletInicial</display-name>
-		<servlet-name>ServletInicial</servlet-name>
-		<servlet-class>servlets.ServletInicial</servlet-class>
+		<servlet-name>ServletInit</servlet-name>
+		<servlet-class>servlets.ServletInit</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ServletInicial</servlet-name>
-		<url-pattern>/ServletInicial</url-pattern>
+		<servlet-name>ServletInit</servlet-name>
+		<url-pattern>/ServletInit</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Login</servlet-name>

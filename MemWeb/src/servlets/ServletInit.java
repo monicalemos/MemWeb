@@ -16,12 +16,12 @@ import javax.servlet.http.HttpSession;
 import classesDados.Utilizador;
 
 @WebServlet("/ServletInicial")
-public class ServletInicial extends HttpServlet {
+public class ServletInit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HttpSession session = null;
 	private Utilizador utilizador;
 
-	public ServletInicial() {
+	public ServletInit() {
 		super();
 	}
 
