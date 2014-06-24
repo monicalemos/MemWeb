@@ -1,5 +1,5 @@
 package enumerados;
 
 public enum TipoUtilizador {
-	PSICOLOGO, ENFERMEIRO, MEDICO;
+	TÉCNICO, PACIENTE, CUIDADOR;
 }
