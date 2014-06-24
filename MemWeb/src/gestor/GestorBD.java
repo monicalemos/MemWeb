@@ -37,18 +37,14 @@ public class GestorBD {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.insertPaciente);
 			preparedStatement.setInt(1, u.getId());
-			preparedStatement.setString(2, u.getNomeCompleto());
+			preparedStatement.setString(2, u.getNome_completo());
 			preparedStatement.setString(3, u.getNomeProprio());
 			preparedStatement.setString(4, u.getApelido());
-			preparedStatement.setDate(5, (Date) u.getData_nascimento());
+			preparedStatement.setDate(5, (Date) u.getData_de_nascimento());
 			preparedStatement.setString(6, u.getEstado_civil());
 			preparedStatement.setString(7, u.getGenero());
-			preparedStatement.setInt(8, u.getTelefone() );
-			preparedStatement.setString(9, u.getEmail() );	
 			preparedStatement.setDate(10, null );
 			preparedStatement.setString(11, u.getNome_medico());
-			preparedStatement.setInt(12, u.getTelefone_medico());
-			preparedStatement.setDate(13, (Date) u.getData_diagnostico() );
 			preparedStatement.setInt(14, u.getNivelDoenca());
 			preparedStatement.setInt(15, u.getMorada().getId());
 			preparedStatement.setInt(16, u.getUtilizador().getId());
@@ -56,7 +52,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o paciente " + u.getNomeCompleto());
+			System.out.println("Não conseguiu inserir o paciente " + u.getNome_completo());
 		}
 		return row;
 	}
@@ -144,7 +140,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar o paciete " + p.getNomeCompleto());
+			System.out.println("Não conseguiu apagar o paciete " + p.getNome_completo());
 		}finally{
 			try {
 				preparedStatement.close();
@@ -431,10 +427,10 @@ public class GestorBD {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.insertPessoa);
 			preparedStatement.setInt(1, p.getId());
-			preparedStatement.setString(2, p.getNomeCompleto());
+			preparedStatement.setString(2, p.getNome_completo());
 			preparedStatement.setString(3, p.getNomeProprio());
 			preparedStatement.setString(4, p.getApelido());
-			preparedStatement.setDate(5, (Date) p.getData_nascimento());
+			preparedStatement.setDate(5, (Date) p.getData_de_nascimento());
 			preparedStatement.setString(6, p.getEstado_civil());
 			preparedStatement.setString(7, p.getGenero());
 			preparedStatement.setInt(8, p.getTelefone() );
@@ -444,7 +440,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o paciente " + p.getNomeCompleto());
+			System.out.println("Não conseguiu inserir o paciente " + p.getNome_completo());
 		}
 		return row;		
 	}
@@ -471,7 +467,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar a pessoa " + pessoa.getNomeCompleto());
+			System.out.println("Não conseguiu apagar a pessoa " + pessoa.getNome_completo());
 		}finally{
 			try {
 				preparedStatement.close();
