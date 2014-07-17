@@ -2,14 +2,14 @@ package classesDados;
 
 import java.sql.Date;
 
-import enumerados.Escolaridade;
+import enumerados.TipoEscolaridade;
 import enumerados.EspecialidadeMedico;
 import enumerados.TipoGenero;
 import enumerados.TipoUtilizador;
 
 public class Paciente extends Pessoa {
 
-	private Escolaridade escolaridade;
+	private TipoEscolaridade escolaridade;
 	private int nivel_doenca;
 	private String nome_medico;
 	private EspecialidadeMedico especialidade_medico;
@@ -17,16 +17,17 @@ public class Paciente extends Pessoa {
 	private String password;
 	private TipoUtilizador tipo_utilizador;
 	private int nivel_sessao;
+	private Cuidador cuidador; //Pensar como fazer
+	private Tecnico tecnico;
 	
 	public Paciente(int idPessoa, String nome_completo,
-			Date data_de_nascimento, Morada local_nascimento,
-			TipoGenero genero, String profissão, Morada morada,
-			Escolaridade escolaridade, int nivel_doenca, String nome_medico,
+			Date data_de_nascimento, Morada local_nascimento, Morada morada,
+			TipoGenero genero, String profissao, TipoEscolaridade escolaridade, int nivel_doenca, String nome_medico,
 			EspecialidadeMedico especialidade_medico, String nome_utilizador,
-			String password, int nivel_sessao) {
+			String password, int nivel_sessao, Tecnico tecnico) {
 		
 		super(idPessoa, nome_completo, data_de_nascimento, local_nascimento,
-				genero, profissão, morada);
+				genero, profissao, morada);
 		
 		this.escolaridade = escolaridade;
 		this.nivel_doenca = nivel_doenca;
@@ -36,10 +37,12 @@ public class Paciente extends Pessoa {
 		this.password = password;
 		this.tipo_utilizador = TipoUtilizador.PACIENTE;
 		this.nivel_sessao = nivel_sessao;
+		//this.cuidador = cuidador;
+		this.tecnico = tecnico;
 	}
 	
 	//GETTERS:
-	public Escolaridade getEscolaridade() {
+	public TipoEscolaridade getEscolaridade() {
 		return escolaridade;
 	}
 	public int getNivel_doenca() {
@@ -63,9 +66,15 @@ public class Paciente extends Pessoa {
 	public int getNivel_sessao() {
 		return nivel_sessao;
 	}
+	public Cuidador getCuidador() {
+		return cuidador;
+	}
 	
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
 	//SETTERS:
-	public void setEscolaridade(Escolaridade escolaridade) {
+	public void setEscolaridade(TipoEscolaridade escolaridade) {
 		this.escolaridade = escolaridade;
 	}
 	public void setNivel_doenca(int nivel_doenca) {
@@ -85,5 +94,11 @@ public class Paciente extends Pessoa {
 	}
 	public void setNivel_sessao(int nivel_sessao) {
 		this.nivel_sessao = nivel_sessao;
+	}
+	public void setCuidador(Cuidador cuidador) {
+		this.cuidador = cuidador;
+	}
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
 	}
 }

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import utils.BCrypt;
 import baseDados.LigacaoBD;
+import classesDados.Familiar;
 import classesDados.Morada;
 import classesDados.Paciente;
-import classesDados.Pessoa;
-import classesDados.Utilizador;
+import classesDados.Relacao;
+import classesDados.Tecnico;
 
 
 public class Utilitario {
@@ -21,63 +22,97 @@ public class Utilitario {
 		gestorBD = new GestorBD(ligacaoBD.getConnection());
 	}
 
-	public void registoPaciente(Paciente paciente){
-		gestorBD.insertPaciente(paciente);
+	//PACIENTE
+	public void registo__Paciente(Paciente paciente){
+		gestorBD.insert_Paciente(paciente);
 	}
 
-	public int novoIdPaciente() throws SQLException{
-		int iVelho = gestorBD.verificaIdPaciente();
+	public int novoId_Paciente() throws SQLException{
+		int iVelho = gestorBD.verificaId_Paciente();
 		return iVelho+1;
 	}
 
-	public String verTodosPacientes(){
-		ArrayList<Paciente> pacientes = gestorBD.selectAllPacientes();
+	public String verTodos_Pacientes(){
+		ArrayList<Paciente> pacientes = gestorBD.selectAll_Pacientes();
 		for(Paciente p : pacientes ){
 			return p.toString() + "\n";
 		}
-		return "N√£o h√° pacientes a imprimir";
+		return "N„o h· pacientes a imprimir";
+	}
+	
+	public Paciente devolve_Paciente(int id){
+		return gestorBD.select_PacienteId(id);
+	}
+	
+	public void apaga_PacienteNome(String nomeCompleto){
+		gestorBD.delete_PacienteNome(nomeCompleto);
 	}
 
-	public void apagaPacienteNome(String nomeCompleto){
-		gestorBD.deletePacienteNome(nomeCompleto);
+	public void apaga_Paciente(Paciente p){
+		gestorBD.delete_Paciente(p);
 	}
 
-	public void apagaPaciente(Paciente p){
-		gestorBD.deletePaciente(p);
+	//MORADA
+	public void registo_Morada(Morada morada){
+		gestorBD.insert_Morada(morada);
 	}
-
-	public void registoMorada(Morada morada){
-		gestorBD.insertMorada(morada);
-	}
-	public int novoIdMorada() throws SQLException {
-		int iVelho = gestorBD.verificaIdMorada();
+	
+	public int novoId_Morada() throws SQLException {
+		int iVelho = gestorBD.verificaId_Morada();
 		return iVelho+1;
 	}
 
-	public String verTodasMoradas() {
-		ArrayList<Morada> moradas = gestorBD.selectAllMoradas();
+	public String verTodos_Moradas() {
+		ArrayList<Morada> moradas = gestorBD.selectAll_Moradas();
 		for(Morada p : moradas ){
 			return p.toString() + "\n";
 		}
-		return "N√£o h√° pacientes a imprimir";
+		return "N„o h· pacientes a imprimir";
 	}
 
-	public void apagaMorada(Morada m){
-		gestorBD.deleteMorada(m);
+	public void apaga_Morada(Morada m){
+		gestorBD.delete_Morada(m);
 	}
 
-	public boolean registoUtilizador(Utilizador utilizador) {
-		return gestorBD.inserUtilizador(utilizador);
-
+	//FAMILIAR
+	public void registo_Familiar(Familiar pessoa) {
+		gestorBD.insert_Familiar(pessoa);		
 	}
 
-	public int novoIdUtilizador() throws SQLException {
-		int iVelho = gestorBD.verificaIdUtilizador();
+	public int novoId_Familiar() throws SQLException {
+		int iVelho = gestorBD.verificaId_Familiar();
 		return iVelho+1;
 	}
 
-	public Utilizador devolveUtilizador(String email, String pass){
-		Utilizador resp = gestorBD.selectUtilizadorEmail(email);
+	public String verTodos_Familiares(){
+		ArrayList<Familiar> familiares = gestorBD.selectAll_Familiares();
+		for(Familiar p : familiares ){
+			return p.toString() + "\n";
+		}
+		return "N„o h· pacientes a imprimir";
+	}
+	
+	public Familiar devolve_Familiar(int id){
+		return gestorBD.select_FamiliarId(id);
+	}
+	
+	public void apaga_Familiar(Familiar pessoa){
+		gestorBD.delete_Familiar(pessoa);
+	}
+
+	//TECNICO
+	public int registo_Tecnico(Tecnico utilizador) {
+		return gestorBD.insert_Tecnico(utilizador);
+
+	}
+
+	public int novoId_Tecnico() throws SQLException {
+		int iVelho = gestorBD.verificaId_Tecnico();
+		return iVelho+1;
+	}
+
+	public Tecnico devolve_Tecnico(String email, String pass){
+		Tecnico resp = gestorBD.select_TecnicoEmail(email);
 
 		if (resp != null) {
 			if (BCrypt.checkpw(pass, resp.getPassword())) {
@@ -91,35 +126,95 @@ public class Utilitario {
 		return resp;
 	}
 
-	public Utilizador devolveUtilizador(int id){
-		return gestorBD.selectUtilizadorId(id);
+	public Tecnico devolve_Tecnico(int id){
+		return gestorBD.select_TecnicoId(id);
 	}
 
-	public void apagaUtilizador(Utilizador u){
-		gestorBD.deleteUtilizador(u);
-	}
-
-	public String verTodosUtilizadores() {
-		ArrayList<Utilizador> utilizadores = gestorBD.selectAllUtilizadores();
-		for(Utilizador p : utilizadores ){
+	public String verTodos_Tecnicos() {
+		ArrayList<Tecnico> tecnicos = gestorBD.selectAll_Tecnicos();
+		for(Tecnico p : tecnicos ){
 			return p.toString() + "\n";
 		}
-		return "N√£o h√° pacientes a imprimir";
-	}
-	
-	public void registoPessoa(Pessoa pessoa) {
-		gestorBD.insertPessoa(pessoa);		
+		return "N„o h· pacientes a imprimir";
 	}
 
-	public int novoIdPessoa() throws SQLException {
-		int iVelho = gestorBD.verificaIdPessoa();
+	public void apaga_Tecnico(Tecnico u){
+		gestorBD.delete_Tecnico(u);
+	}
+	
+	
+	//RELACAO_PACIENTE_FAMILIAR
+	
+	public int registo_Relacao_Paciente_Familiar(Relacao relacao) {
+		return gestorBD.insert_Relacao_Paciente_Familiar(relacao);
+
+	}
+
+	public int novoId_Relacao_Paciente_Familiar() throws SQLException {
+		int iVelho = gestorBD.verificaId_Relacao_Paciente_Familiar();
 		return iVelho+1;
 	}
-	
-	public void apagaPessoa(Pessoa pessoa){
-		gestorBD.deletePessoa(pessoa);
+
+
+	public Relacao devolve_Relacao_Paciente_Familiar(int id){
+		return gestorBD.select_Relacao_Paciente_FamiliarId(id);
 	}
 
+	public String verTodos_Relacao_Paciente_Familiar() {
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar();
+		for(Relacao p : relacoes ){
+			return p.toString() + "\n";
+		}
+		return "N„o h· pacientes a imprimir";
+	}
+
+	public String verTodos_Relacao_Paciente_Familiar_Do_Paciente(Paciente p) {
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar_Do_Paciente(p);
+		for(Relacao r : relacoes ){
+			return r.toString() + "\n";
+		}
+		return "N„o h· pacientes a imprimir";
+	}
 	
+	public void apaga_Relacao_Paciente_Familiar(Familiar f){
+		gestorBD.delete_Relacao_Paciente_Familiar(f);
+	}
+	
+	//RELACAO_Familiar_FAMILIAR
+	
+	public int registo_Relacao_Familiar_Familiar(Relacao relacao) {
+		return gestorBD.insert_Relacao_Familiar_Familiar(relacao);
+
+	}
+
+	public int novoId_Relacao_Familiar_Familiar() throws SQLException {
+		int iVelho = gestorBD.verificaId_Relacao_Familiar_Familiar();
+		return iVelho+1;
+	}
+
+
+	public Relacao devolve_Relacao_Familiar_Familiar(int id){
+		return gestorBD.select_Relacao_Familiar_FamiliarId(id);
+	}
+
+	public String verTodos_Relacao_Familiar_Familiar(Paciente pac) {
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Familiar_Familiar(pac);
+		for(Relacao p : relacoes ){
+			return p.toString() + "\n";
+		}
+		return "N„o h· pacientes a imprimir";
+	}
+
+	public String verTodos_Relacao_Familiar_Familiar_Do_Familiar(Paciente p, Familiar f) {
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Familiar_Familiar_Do_Familiar(p, f);
+		for(Relacao r : relacoes ){
+			return r.toString() + "\n";
+		}
+		return "N„o h· pacientes a imprimir";
+	}
+	
+	public void apaga_Relacao_Familiar_Familiar(Familiar f){
+		gestorBD.delete_Relacao_Familiar_Familiar(f);
+	}
 
 }

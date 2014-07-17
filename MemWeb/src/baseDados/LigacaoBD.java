@@ -8,7 +8,7 @@ public class LigacaoBD {
 	private Connection connection;
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private String username = "root", password = "";
-	private static final String dbname = "jdbc:mysql://localhost:3306/memDataBase";
+	private static final String dbname = "jdbc:mysql://localhost:3306/memDB";
 
 	public LigacaoBD(String userd, String passd) {
 		this.password = passd;

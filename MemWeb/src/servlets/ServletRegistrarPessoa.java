@@ -75,7 +75,7 @@ public class ServletRegistrarPessoa extends HttpServlet {
 					e.printStackTrace();
 				}
 				try {
-					idPessoa = utilitario.novoIdPessoa();
+					idPessoa = utilitario.novoIdFamiliar();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -83,7 +83,7 @@ public class ServletRegistrarPessoa extends HttpServlet {
 				Morada morada = new Morada(idMorada, pais, cidade, rua);
 				utilitario.registoMorada(morada);
 				Pessoa pessoa = new Pessoa(idPessoa, nome, new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0])), estadoCivil, genero, telefone, email, morada);
-				utilitario.registoPessoa(pessoa);
+				utilitario.registoFamiliar(pessoa);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

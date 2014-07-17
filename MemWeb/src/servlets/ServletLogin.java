@@ -35,7 +35,7 @@ public class ServletLogin extends HttpServlet {
 			String pass = request.getParameter("password").trim();
 
 			Utilitario utilitario = new Utilitario();
-			utilizador = utilitario.devolveUtilizador(email, pass);
+			utilizador = utilitario.devolveTecnico(email, pass);
 
 
 			if (utilizador != null) {

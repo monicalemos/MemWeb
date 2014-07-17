@@ -53,7 +53,7 @@ public class ServletConfirmarRegisto extends HttpServlet {
 				e.printStackTrace();
 			}
 			try {
-				idRespMedico = utilitario.novoIdUtilizador();
+				idRespMedico = utilitario.novoIdTecnico();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -73,7 +73,7 @@ public class ServletConfirmarRegisto extends HttpServlet {
 							Integer.parseInt(session.getAttribute("telefone").toString()), 
 							session.getAttribute("email").toString(), morada, hashed, 
 							TipoUtilizador.valueOf(session.getAttribute("tipoResponsabilidade").toString()));
-			utilitario.registoUtilizador(respMedico);
+			utilitario.registoTecnico(respMedico);
 			
 			session = request.getSession();
 			session.setAttribute("email", respMedico.getEmail());

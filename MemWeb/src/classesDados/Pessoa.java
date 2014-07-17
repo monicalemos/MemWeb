@@ -9,7 +9,6 @@ import enumerados.TipoGenero;
 public class Pessoa {
 
 	private int idPessoa;
-	
 	private String nome_completo;
 	private String[] nome;
 	private String nomeProprio;
@@ -19,21 +18,20 @@ public class Pessoa {
 	private Morada morada;
 	private TipoGenero genero;
 	private TipoEstadoCivil estado_civil;
-	private String profissão;
+	private String profissao;
 	
 	private ArrayList <Relacao> relacoes;
 	private ArrayList <Evento> eventos;
 	
 	public Pessoa(int idPessoa, String nome_completo, Date data_de_nascimento,
-			Morada local_nascimento, TipoGenero genero, String profissão,
+			Morada local_nascimento, TipoGenero genero, String profissao,
 			Morada morada) {
-		super();
 		this.idPessoa = idPessoa;
 		this.nome_completo = nome_completo;
 		this.data_de_nascimento = data_de_nascimento;
 		this.local_nascimento = local_nascimento;
 		this.genero = genero;
-		this.profissão = profissão;
+		this.profissao = profissao;
 		this.morada = morada;
 		relacoes = new ArrayList<Relacao>();
 		eventos = new ArrayList<Evento>();
@@ -55,7 +53,7 @@ public class Pessoa {
 
 	public Relacao existeRelacaoPessoa(Pessoa p){
 		for (Relacao rel : relacoes){
-			if(rel.getFamiliar(p) == p){
+			if(rel.getFamiliar_nivel1().equals(p) || rel.getFamiliar_nivel2().equals(p)){
 				System.out.println("Essa relação existe: \n");
 				return rel;
 			}
@@ -65,7 +63,8 @@ public class Pessoa {
 	}
 	public Relacao existeRelacaoPessoa_Pessoa(Pessoa p, Pessoa q){
 		for(Relacao rel: relacoes){
-			if(rel.getFamiliar(p)!= null && rel.getFamiliar(q)!= null)
+			if((rel.getFamiliar_nivel1().equals(p) && rel.getFamiliar_nivel2().equals(q))
+					|| (rel.getFamiliar_nivel1().equals(q) && rel.getFamiliar_nivel2().equals(p)))
 				return rel;
 		}
 		return null;
@@ -124,7 +123,7 @@ public class Pessoa {
 	}
 	
 	//GETTERS:
-	public int getIdPessoa() {
+	public int getId() {
 		return idPessoa;
 	}
 
@@ -164,8 +163,8 @@ public class Pessoa {
 		return estado_civil;
 	}
 
-	public String getProfissão() {
-		return profissão;
+	public String getProfissao() {
+		return profissao;
 	}
 
 	public ArrayList<Relacao> getRelacoes() {

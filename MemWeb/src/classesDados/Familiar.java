@@ -1,37 +1,42 @@
 package classesDados;
 
 import java.sql.Date;
-
 import enumerados.TipoGenero;
-import enumerados.TipoParentesco;
 
 public class Familiar extends Pessoa{
 
-	private TipoParentesco parentesco;
 	private boolean eCuidador;
 	private Date data_obito;
+	private String nome_utilizador;
+	private String password;
 	
-	private Paciente paciente;
-
-	public Familiar(int idPessoa, String nome_completo,
+	public Familiar(int id, String nome_completo,
 			Date data_de_nascimento, Morada local_nascimento,
 			TipoGenero genero, String profissão, Morada morada,
-			TipoParentesco parentesco, boolean eCuidador, Date data_obito,
-			Paciente paciente) {
-		super(idPessoa, nome_completo, data_de_nascimento, local_nascimento,
+			boolean eCuidador) {
+		super(id, nome_completo, data_de_nascimento, local_nascimento,
 				genero, profissão, morada);
-		this.parentesco = parentesco;
 		this.eCuidador = eCuidador;
-		this.data_obito = data_obito;
-		this.paciente = paciente;
+	}
+
+	public Familiar(int id, String nome_completo,
+			Date data_de_nascimento, Morada local_nascimento,
+			TipoGenero genero, String profissão, Morada morada,
+			boolean eCuidador,
+			String nome_utilizador, String password) {
+		super(id, nome_completo, data_de_nascimento, local_nascimento,
+				genero, profissão, morada);
+		
+		this.eCuidador = eCuidador;
+		
+		if(eCuidador == true){
+			this.nome_utilizador = nome_utilizador;
+			this.password = password;
+		}
 	}
 
 	//GETTERS:
-	public TipoParentesco getParentesco() {
-		return parentesco;
-	}
-
-	public boolean iseCuidador() {
+	public boolean eCuidador() {
 		return eCuidador;
 	}
 
@@ -39,14 +44,15 @@ public class Familiar extends Pessoa{
 		return data_obito;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public String getNome_utilizador() {
+		return nome_utilizador;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
 	//SETTERS
-	public void setParentesco(TipoParentesco parentesco) {
-		this.parentesco = parentesco;
-	}
 
 	public void seteCuidador(boolean eCuidador) {
 		this.eCuidador = eCuidador;
@@ -56,7 +62,10 @@ public class Familiar extends Pessoa{
 		this.data_obito = data_obito;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setNome_utilizador(String nome_utilizador) {
+		this.nome_utilizador = nome_utilizador;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

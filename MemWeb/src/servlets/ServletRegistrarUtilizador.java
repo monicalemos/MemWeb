@@ -68,7 +68,7 @@ public class ServletRegistrarUtilizador extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			idUtilizador = utilitario.novoIdUtilizador();
+			idUtilizador = utilitario.novoIdTecnico();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class ServletRegistrarUtilizador extends HttpServlet {
 		Morada morada = new Morada(idMorada, pais, cidade, rua);
 		utilitario.registoMorada(morada);
 		Utilizador utilizador = new Utilizador(idUtilizador, nome, new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0])), genero, telefone, email, morada, password, tipoUtilizador);
-		utilitario.registoUtilizador(utilizador);
+		utilitario.registoTecnico(utilizador);
 			System.out.println("registei utilizador");
 		session = request.getSession();
 		session.setAttribute("nome", nome);

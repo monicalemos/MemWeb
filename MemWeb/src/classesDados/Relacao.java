@@ -1,33 +1,47 @@
 package classesDados;
 
-import java.util.ArrayList;
-
-import enumerados.TipoParentesco;
 import enumerados.TipoRelacao;
 
 public class Relacao {
 
+	private int id;
 	private Paciente paciente;
-	private ArrayList<Familiar> familiares;
+	private Familiar familiar_nivel1;
+	private Familiar familiar_nivel2;
 	private TipoRelacao tipo_relacao;
-	
-	public Relacao(Paciente paciente, TipoRelacao tipo_relacao) {
+
+	public Relacao(int id, Paciente paciente, Familiar  familiar_nivel1, TipoRelacao tipo_relacao) {
+		this.id = id;
 		this.paciente = paciente;
-		this.familiares = new ArrayList<Familiar>();
+		this.familiar_nivel1 = familiar_nivel1;
 		this.tipo_relacao = tipo_relacao;
 	}
-	
+
+	public Relacao(int id, Paciente paciente, Familiar familiar1, Familiar familiar2, TipoRelacao tipo){
+		this.id=id;
+		this.paciente = paciente;
+		this.familiar_nivel1 = familiar1;
+		this.familiar_nivel2 = familiar2;
+		this.tipo_relacao = tipo;
+	}
 	//GETTERS:
+	public int getId() {
+		return id;
+	}
+	
 	public Paciente getPaciente() {
 		return paciente;
 	}
-	public ArrayList<Familiar> getFamiliares() {
-		return familiares;
+	public Familiar getFamiliar_nivel1() {
+		return familiar_nivel1;
+	}
+	public Familiar getFamiliar_nivel2() {
+		return familiar_nivel2;
 	}
 	public TipoRelacao getTipo_relacao() {
 		return tipo_relacao;
 	}
-	
+
 	//SETTERS:
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
@@ -35,24 +49,10 @@ public class Relacao {
 	public void setTipo_relacao(TipoRelacao tipo_relacao) {
 		this.tipo_relacao = tipo_relacao;
 	}
-	
-	public void adicionaFamilar(Familiar f){
-		familiares.add(f);
+	public void setFamiliar_nivel1(Familiar familiar_nivel1) {
+		this.familiar_nivel1 = familiar_nivel1;
 	}
-	public boolean removeFamiliar(Familiar f){
-		boolean removeu = false;
-		
-		if(familiares.contains(f)){
-			familiares.remove(f);
-			removeu = true;
-		}
-		return removeu;
-	}
-
-	public Pessoa getFamiliar(Pessoa p) {
-		if(familiares.contains(p)){
-			return p;
-		}
-		return null;
+	public void setFamiliar_nivel2(Familiar familiar_nivel2) {
+		this.familiar_nivel2 = familiar_nivel2;
 	}	
 }

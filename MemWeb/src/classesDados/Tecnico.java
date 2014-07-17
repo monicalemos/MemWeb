@@ -6,17 +6,24 @@ import enumerados.TipoUtilizador;
 
 public class Tecnico {
 
-	private String nome;
+	private int id;
+	private String nome_completo;
+	private String[] nome;
+	private String nomeProprio;
+	private String apelido;
 	private String nome_utilizador;
 	private String password;
+	private String email;
 	private TipoUtilizador tipo_utilizador;
 
 	private ArrayList<Paciente> pacientes;
 
-	public Tecnico(String nome, String nome_utilizador, String password) {
-		this.nome = nome;
+	public Tecnico(int id, String nome, String nome_utilizador, String password, String email) {
+		this.id = id;
+		this.nome_completo = nome;
 		this.nome_utilizador = nome_utilizador;
 		this.password = password;
+		this.email = email;
 
 		this.tipo_utilizador = TipoUtilizador.TÉCNICO;
 		this.pacientes = new ArrayList<Paciente>();
@@ -54,8 +61,20 @@ public class Tecnico {
 	}
 
 	//GETTERS:
-	public String getNome() {
+	public String getNome_completo() {
+		return nome_completo;
+	}
+
+	public String[] getNome() {
 		return nome;
+	}
+
+	public String getNomeProprio() {
+		return nomeProprio;
+	}
+
+	public String getApelido() {
+		return apelido;
 	}
 	public String getNome_utilizador() {
 		return nome_utilizador;
@@ -69,12 +88,34 @@ public class Tecnico {
 	public ArrayList<Paciente> getPacientes() {
 		return pacientes;
 	}
+	public int getId() {
+		return id;
+	}
+	public String getEmail() {
+		return email;
+	}
 
 	//SETTERS:
+	public void setNomeCompleto(String nome) {
+		this.nome_completo = nome;
+	}
+	
+	public void setApelido(String nome){
+		String[] nomeTemp = nome.split(" ");
+		this.apelido = nomeTemp[nomeTemp.length - 1];
+	}
+
+	public void setNomeProprio(String nome){
+		String[] nomeTemp = nome.split(" ");
+		this.nomeProprio = nomeTemp[0];
+	}
 	public void setNome_utilizador(String nome_utilizador) {
 		this.nome_utilizador = nome_utilizador;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setEmail(String emailL) {
+		this.email = emailL;
 	}
 }

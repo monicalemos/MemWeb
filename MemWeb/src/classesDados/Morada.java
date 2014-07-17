@@ -1,17 +1,21 @@
 package classesDados;
 
 public class Morada {
+	private int id;
 	private String pais;
 	private String cidade;
 	private String regiao;
 	
-	public Morada(String pais, String cidade, String regiao) {
-		super();
+	public Morada(int id, String pais, String cidade, String regiao) {
+		this.id = id;
 		this.pais = pais;
 		this.cidade = cidade;
 		this.regiao = regiao;
 	}
 	
+	public int getId() {
+		return id;
+	}
 	public String getPais() {
 		return pais;
 	}
@@ -20,6 +24,9 @@ public class Morada {
 	}
 	public String getRegiao() {
 		return regiao;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public void setPais(String pais) {
 		this.pais = pais;
