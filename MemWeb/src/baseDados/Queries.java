@@ -11,6 +11,8 @@ public class Queries {
 
 	public static final String select_PacienteId = "select * from `memDB`.`Paciente`, `memDB`.`Morada` where `Paciente`.`idMorada` = `Morada`.`idMorada` and `Paciente`.`idPaciente`=?;";
 
+	public static final String select_PacienteNomeUtilizador = "select * from `memDB`.`Paciente`, `memDB`.`Morada` where `Paciente`.`idMorada` = `Morada`.`idMorada` and `Paciente`.`nome_utilizador`=?;";
+	
 	public static final String delete_PacienteNome = "delete from `memDB`.`Paciente` where `idPaciente` = ?;";
 
 	public static final String delete_Paciente = "delete from `memDB`.`Paciente` where nomeCompleto = ?;";
@@ -43,6 +45,8 @@ public class Queries {
 
 	public static final String select_FamiliarId = "select * from `memDB`.`Familiar`, `memDB`.`Morada` where `Familiar`.`Local_Nascimento_idMorada` = `Morada`.`idMorada` and `Familiar`.`idFamiliar`=?;";
 
+	public static final String select_FamiliarNomeUtilizador = "select * from `memDB`.`Familiar` where `Familiar`.`nome_utilizador`=?;";
+	
 	public static final String delete_Familiar = "delete from `memDB`.`Familiar` where `idFamiliar` = ?;";
 
 	//TECNICO

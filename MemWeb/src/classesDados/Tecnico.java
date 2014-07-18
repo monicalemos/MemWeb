@@ -25,7 +25,7 @@ public class Tecnico {
 		this.password = password;
 		this.email = email;
 
-		this.tipo_utilizador = TipoUtilizador.TÉCNICO;
+		this.tipo_utilizador = TipoUtilizador.TECNICO;
 		this.pacientes = new ArrayList<Paciente>();
 	}
 	//LISTA PACIENTES:

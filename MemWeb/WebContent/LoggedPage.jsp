@@ -11,7 +11,7 @@
 <h1 >Olá : <%= session.getAttribute("nome_completo") %></h1>
  <form action="Inicial">
     <input type="submit" name="RegistrarPaciente" value="Registrar Paciente" /><br>
-    <input type="submit" name="RegistrarPessoa" value="Registrar Pessoa" /><br>
+    <input type="submit" name="RegistrarFamiliar" value="Registrar Familiar" /><br>
     <input type="submit" name="verDados" value="ver dados" />
     <input type="submit" name="logout" value="Logout" />
 </form> 

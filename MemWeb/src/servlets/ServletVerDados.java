@@ -34,7 +34,7 @@ public class ServletVerDados extends HttpServlet {
 		   "</head> \n" +
 		   "<body> \n" + "<h1> Dados do Paciente:</h1><br> \n" + 
 		   "Todos os doentes:<br>" + 
-		   utilitario.verTodosPacientes() +
+		   utilitario.verTodos_Pacientes() +
 		   "<form action = \"Inicial\">" + 
 		   "<input type =\"submit\" name=\"voltarInicio\" value =\"Voltar ao Inicio\">"+ 
 		   "</form>" + 

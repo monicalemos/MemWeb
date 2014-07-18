@@ -14,8 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import classesDados.Morada;
 import classesDados.Paciente;
-import classesDados.Pessoa;
-import classesDados.Utilizador;
+import classesDados.Tecnico;
+import enumerados.EspecialidadeMedico;
+import enumerados.TipoEscolaridade;
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import gestor.Utilitario;
@@ -37,20 +38,32 @@ public class ServletRegistrarPaciente extends HttpServlet {
 		
 		// reading the user input
 		String nome = request.getParameter("nome");
-		String 	dataDeNascimento = request.getParameter("dataNascimento");
+		
+		String 	dataDeNascimento = request.getParameter("data_nascimento");
 		String[] dataNascimento = dataDeNascimento.split("/");
-		TipoEstadoCivil estadoCivil = TipoEstadoCivil.valueOf(request.getParameter("estadoCivil").toUpperCase());
+		Date data_nascimento = new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0]));
+		
+		String paisNascimento = request.getParameter("pais_nascimento");
+		String regiaoNascimento = request.getParameter("regiao_nascimento");
+		String cidadeNascimento = request.getParameter("cidade_nascimento");
+		
+		String paisMorada = request.getParameter("pais_morada");
+		String regiaoMorada = request.getParameter("regiao_morada");
+		String cidadeMorada = request.getParameter("cidade_morada");
+		
 		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
-		int telefone = Integer.parseInt(request.getParameter("telefone"));
-		String email = request.getParameter("email");
-		String pais= request.getParameter("pais");
-		String cidade= request.getParameter("cidade");
-		String rua= request.getParameter("rua");
-		String nomeMedico= request.getParameter("nomeMedico");
-		int telefoneMedico = Integer.parseInt(request.getParameter("telefoneMedico"));
-		int nivelDoenca = Integer.parseInt(request.getParameter("nivelDoenca"));		
-		String dataDeDiagnostico = request.getParameter("dataDiagnostico");
-		String[] dataDiagnostico = dataDeDiagnostico.split("/");
+		String profissao = request.getParameter("profissao");
+		TipoEscolaridade escolaridade = TipoEscolaridade.valueOf(request.getParameter("escolaridade").toUpperCase());
+		TipoEstadoCivil estadoCivil = TipoEstadoCivil.valueOf(request.getParameter("estado_civil").toUpperCase());
+		
+		int nivelDoenca = Integer.parseInt(request.getParameter("nivel_doenca"));
+		String nomeMedico= request.getParameter("nome_medico");
+		EspecialidadeMedico especialidadeMedico = EspecialidadeMedico.valueOf(request.getParameter("especialidade_medico").toUpperCase());
+				
+		String nomeUtilizador = request.getParameter("nome_utilizador");
+		String password = request.getParameter("password");
+		
+		int nivelSessao = Integer.parseInt(request.getParameter("nivel_sessao"));
 		
 		PrintWriter out = response.getWriter();
 		out.println ( 
@@ -63,41 +76,53 @@ public class ServletRegistrarPaciente extends HttpServlet {
 		   "<body> \n" + "<h1> Dados do Paciente:</h1><br> \n" + 
 		   "Nome: " + nome + "<br>\n" +
 		   "Data de Nascimento: " + dataDeNascimento + "<br>\n" +
+		   "Local de Nascimento: " + paisNascimento + ", " + regiaoNascimento + ", rua " + cidadeNascimento +"<br>\n" +
+		   "Morada Atual: " + paisMorada + ", " + regiaoMorada + ", rua " + cidadeMorada +"<br>\n" +
+		   "GÈnero: " + genero + "<br>\n" +
+		   "Profiss„o " + profissao + "<br>\n" +
+		   "Escolaridade " + escolaridade + "<br>\n" +
 		   "Estado Civil: " + estadoCivil + "<br>\n" +
-		   "G√©nero: " + genero + "<br>\n" +
-		   "Telefone: " + telefone + "<br>\n" + 
-		   "Email: " + email + "<br>\n" + 
-		   "Morada: " + pais + ", " + cidade + ", rua " + rua +"<br>\n" +
-		   "Nome do M√©dico: " + nomeMedico + "<br>\n" +
-		   "Telefone do m√©dico: " + telefoneMedico + "<br>\n" + 
-		   "N√≠vel de Doen√ßa: " + nivelDoenca + "<br>\n" +
-		   "Data de Diagn√≥stico: " + dataDeDiagnostico + "<br\n" + 
+		   "NÌvel de donÁa " + nivelDoenca + "<br>\n" +
+		   "Nome do MÈdico " + nomeMedico + "<br>\n" +
+		   "Especialidade do MÈdico " + especialidadeMedico + "<br>\n" +
+		   "Nome de Utilizador " + nomeUtilizador + "<br>\n" +
+		   "Nivel de Sessao " + nivelSessao + "<br>\n" + 
 		   "<form action = \"Inicial\">" + 
 		   "<input type =\"submit\" name=\"voltarInicio\" value =\"Voltar ao Inicio\">"+ 
 		   "</form>" + 
 		   "</body> \n" +
 		"</html>" );
 		
+		int idLocalNascimento = 0;
 		int idMorada=0;
 		int idPaciente = 0;
 		
 		try {
-			idMorada = utilitario.novoIdMorada();
+			idLocalNascimento = utilitario.novoId_Morada();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
-			idPaciente = utilitario.novoIdPaciente();
+			idMorada = utilitario.novoId_Morada();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			idPaciente = utilitario.novoId_Paciente();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		Morada morada = new Morada(idMorada, pais, cidade, rua);
-		utilitario.registoMorada(morada);
+		Morada localNascimento = new Morada(idLocalNascimento, paisNascimento, regiaoNascimento, cidadeNascimento);
+		Morada morada = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
+		utilitario.registo_Morada(localNascimento);
+		utilitario.registo_Morada(morada);
 		
-		Pessoa medico = new Pessoa(nomeMedico, telefoneMedico);
+		Tecnico tecnico = (Tecnico) session.getAttribute("tecnico");
+		
 		//TODO tem de ser acrescentado o resp medico de login
-		Paciente paciente = new Paciente(idPaciente, nome, new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0])), estadoCivil, genero, telefone, email, morada, medico.getNomeCompleto(), medico.getTelefone(), new Date(Integer.parseInt(dataDiagnostico[2]), Integer.parseInt(dataDiagnostico[1]), Integer.parseInt(dataDiagnostico[0])), nivelDoenca, (Utilizador) session.getAttribute("respMedico"));	
-		utilitario.registoPaciente(paciente);
+		Paciente paciente = new Paciente(idPaciente, nome, data_nascimento, localNascimento, morada, genero, profissao, escolaridade, nivelDoenca, nomeMedico, especialidadeMedico, nomeUtilizador, password, nivelSessao, tecnico);
+			
+		utilitario.registo_Paciente(paciente);
 	}
 }

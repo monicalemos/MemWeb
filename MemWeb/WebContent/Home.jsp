@@ -12,8 +12,8 @@
 
 		<div id="container">
 			<form action="./ServletInicial?accao=validar" method="post">
-				<label for="email">Email:</label> <input type="email" id="var_email"
-					name="email" required="required"> <br>
+				<label for="username">Nome de Utilizador:</label> <input type="username" id="var_username"
+					name="username" required="required"> <br>
 					<label for="password">Password:</label>
 				<input type="password" id="var_password" name="password"
 					required="required">

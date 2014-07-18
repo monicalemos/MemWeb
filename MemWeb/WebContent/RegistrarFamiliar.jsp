@@ -11,22 +11,27 @@
 		<h1>Dados da Pessoa</h1><br> 
 		Nome Completo: <input type="text" id="nome" name="nome"	size="40px"> <br>
 		Data de Nascimento: (dd/mm/aaaa) <input type="text" id="dataNascimento" name="dataNascimento" size="40px"><br>
+		
+		Local de Nascimento:
+		País <input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"><br>
+		Região: <input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"><br>
+		Cidade <input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"><br>
+		
+		Género: <select name="genero">
+			<option value="Masculino">Masculino</option>
+			<option value="Feminino">Feminino</option>
+		</select><br>
+		
 		Estado Civil: <select name="estadoCivil">
 			<option value="Solteiro">Solteiro</option>
 			<option value="Casado">Casado</option>
 			<option value="Divorciado">Divorciado</option>
 			<option value="Viuvo">Viúvo</option>
 		</select> <br>
-		Género: <select name="genero">
-			<option value="Masculino">Masculino</option>
-			<option value="Feminino">Feminino</option>
-		</select><br>
-		Telefone: <input type="int" id="telefone" name="telefone" size="40px"><br>
-		Email: <input type="text" id="email" name="email" size="40px"><br>
-		Morada:
-		País <input type="text" id="pais" name="pais" size="40px"><br>
-		Cidade <input type="text" id="cidade" name="cidade" size="40px"><br>
-		Rua: <input type="text" id="rua" name="rua" size="40px"><br>
+		
+		Profissão: <input type="text" id="profissao" name="profissao" size="40px"><br>
+		
+		
 		<input type="submit" value="submit">
 	</form>
 	<!-- <form action="${pageContext.request.contextPath}/Home.jsp"> -->

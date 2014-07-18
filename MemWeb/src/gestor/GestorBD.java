@@ -171,6 +171,53 @@ public class GestorBD {
 		return paciente;
 
 	}
+	public Paciente select_PacienteNomeUtilizador(String user) {
+		Paciente paciente = null;
+		try {
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.select_PacienteNomeUtilizador);
+			preparedStatement.setString(1, user);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				paciente = new Paciente(resultSet.getInt("idPaciente"),
+						resultSet.getString("nome_completo"), 
+						resultSet.getDate("data_de_nascimento"),
+						new Morada(resultSet.getInt("idMorada"), 
+								resultSet.getString("pais"),
+								resultSet.getString("cidade"),
+								resultSet.getString("regiao")),
+								new Morada(resultSet.getInt("idMorada"), 
+										resultSet.getString("pais"),
+										resultSet.getString("cidade"),
+										resultSet.getString("regiao")), 
+										TipoGenero.valueOf(resultSet.getString("genero")),
+										resultSet.getString("profissao"),
+										TipoEscolaridade.valueOf(resultSet.getString("escolaridade")),
+										resultSet.getInt("nivel_de_doenca"), 
+										resultSet.getString("nome_medico"),
+										EspecialidadeMedico.valueOf(resultSet.getString("especialidade_medico")),
+										resultSet.getString("nome_utilizador"),
+										resultSet.getString("password"),
+										resultSet.getInt("nivel_sessao"),
+										select_TecnicoId(resultSet.getInt("Tecnico_idTecnico")));
+	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return paciente;
+	}
+
+
 	public int delete_PacienteNome(String nomeCompleto){
 		int row = 0;
 		try {
@@ -401,6 +448,45 @@ public class GestorBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return familiar;
+	}
+	
+	public Familiar select_FamiliarNomeUtilizador(String user) {
+		Familiar familiar = null;
+		try {
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.select_PacienteNomeUtilizador);
+			preparedStatement.setString(1, user);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				familiar = new Familiar(resultSet.getInt("idFamiliar"),
+						resultSet.getString("nome_completo"), 
+						resultSet.getDate("data_de_nascimento"),
+						new Morada(resultSet.getInt("idMorada"), 
+								resultSet.getString("pais"),
+								resultSet.getString("cidade"),
+								resultSet.getString("regiao")),
+								TipoGenero.valueOf(resultSet.getString("genero")),
+								resultSet.getString("profissao"),
+								new Morada(resultSet.getInt("idMorada"), 
+										resultSet.getString("pais"),
+										resultSet.getString("cidade"),
+										resultSet.getString("regiao")), 
+										resultSet.getBoolean("e_cuidador"));	
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
 		} finally {
 			try {
 				preparedStatement.close();

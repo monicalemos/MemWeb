@@ -23,7 +23,7 @@ public class Utilitario {
 	}
 
 	//PACIENTE
-	public void registo__Paciente(Paciente paciente){
+	public void registo_Paciente(Paciente paciente){
 		gestorBD.insert_Paciente(paciente);
 	}
 
@@ -42,6 +42,21 @@ public class Utilitario {
 	
 	public Paciente devolve_Paciente(int id){
 		return gestorBD.select_PacienteId(id);
+	}
+	
+	public Paciente devolve_Paciente(String user, String pass){
+		Paciente p = gestorBD.select_PacienteNomeUtilizador(user);
+
+		if (p != null) {
+			if (BCrypt.checkpw(pass, p.getPassword())) {
+				System.out.println("Password matches");
+				return p;
+			} else {
+				System.out.println("Password does not match");
+			}
+		}
+
+		return p;
 	}
 	
 	public void apaga_PacienteNome(String nomeCompleto){
@@ -94,6 +109,21 @@ public class Utilitario {
 	
 	public Familiar devolve_Familiar(int id){
 		return gestorBD.select_FamiliarId(id);
+	}
+	
+	public Familiar devolve_Familiar(String user, String pass){
+		Familiar f = gestorBD.select_FamiliarNomeUtilizador(user);
+
+		if (f != null) {
+			if (BCrypt.checkpw(pass, f.getPassword())) {
+				System.out.println("Password matches");
+				return f;
+			} else {
+				System.out.println("Password does not match");
+			}
+		}
+
+		return f;
 	}
 	
 	public void apaga_Familiar(Familiar pessoa){

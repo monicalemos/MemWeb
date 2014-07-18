@@ -3,7 +3,6 @@ package servlets;
 import gestor.Utilitario;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -17,9 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import utils.BCrypt;
 import classesDados.Morada;
-import classesDados.Utilizador;
-import enumerados.TipoGenero;
-import enumerados.TipoUtilizador;
+import classesDados.Tecnico;
 
 /**
  * Servlet implementation class ServletConfirmaRegisto
@@ -37,7 +34,6 @@ public class ServletConfirmarRegisto extends HttpServlet {
 		session = request.getSession();
 		
 
-		String[] dataNascimento = ((String) session.getAttribute("dataDeNascimento")).split("/");
 		if (request.getParameter("simConfirma") != null){
 
 
@@ -45,42 +41,38 @@ public class ServletConfirmarRegisto extends HttpServlet {
 			Utilitario utilitario = new Utilitario();
 
 			int idMorada=0;
-			int idRespMedico = 0;
+			int idTecnico = 0;
 
 			try {
-				idMorada = utilitario.novoIdMorada();
+				idMorada = utilitario.novoId_Morada();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			try {
-				idRespMedico = utilitario.novoIdTecnico();
+				idTecnico = utilitario.novoId_Tecnico();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
 			Morada morada = new Morada(idMorada, session.getAttribute("pais").toString(), 
-					session.getAttribute("cidade").toString(), 
-					session.getAttribute("rua").toString());
-			utilitario.registoMorada(morada);
+					session.getAttribute("regiao").toString(), 
+					session.getAttribute("cidade").toString());
+			
+			utilitario.registo_Morada(morada);
 			String hashed = BCrypt.hashpw(session.getAttribute("password").toString(), BCrypt.gensalt());
-			@SuppressWarnings("deprecation")
-			Utilizador respMedico = new Utilizador(idRespMedico, 
-					session.getAttribute("nome").toString(), 
-					new Date(Integer.parseInt(dataNascimento[2]), 
-							Integer.parseInt(dataNascimento[1]), 
-							Integer.parseInt(dataNascimento[0])), 
-							TipoGenero.valueOf(session.getAttribute("genero").toString()), 
-							Integer.parseInt(session.getAttribute("telefone").toString()), 
-							session.getAttribute("email").toString(), morada, hashed, 
-							TipoUtilizador.valueOf(session.getAttribute("tipoResponsabilidade").toString()));
-			utilitario.registoTecnico(respMedico);
+			
+			Tecnico	tecnico = new Tecnico(idTecnico, session.getAttribute("nome").toString(), 
+					session.getAttribute("nome_utilizador").toString(),
+					hashed, session.getAttribute("email").toString());
+			
+			utilitario.registo_Tecnico(tecnico);
 			
 			session = request.getSession();
-			session.setAttribute("email", respMedico.getEmail());
-			session.setAttribute("nome_completo", respMedico.getNomeCompleto());
-			session.setAttribute("idRespMedico", respMedico.getId());
+			session.setAttribute("email", tecnico.getEmail());
+			session.setAttribute("nome_completo", tecnico.getNome_completo());
+			session.setAttribute("idTecnico", tecnico.getId());
 			session.setAttribute("validado", "sim");
-			session.setAttribute("respMedico", respMedico);
+			session.setAttribute("tecnico", tecnico);
 			ServletContext sc = this.getServletContext();
 			RequestDispatcher rd = sc.getRequestDispatcher("/PaginaOperacao.jsp");
 			if (rd != null)
@@ -88,7 +80,7 @@ public class ServletConfirmarRegisto extends HttpServlet {
 		}
 
 		else if (request.getParameter("naoConfirma") != null){
-			System.out.println("Cliquei no n√£o confirmar");
+			System.out.println("Cliquei no n„o confirmar");
 			request.setAttribute("naoConfirmo", request.getServletPath());
 			RequestDispatcher rd = request.getRequestDispatcher("/RegistrarRespMedico.jsp");
 			if (rd != null)
