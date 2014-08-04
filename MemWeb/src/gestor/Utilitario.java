@@ -1,11 +1,14 @@
 package gestor;
 
+import java.awt.List;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import utils.BCrypt;
 import baseDados.LigacaoBD;
 import classesDados.Familiar;
+import classesDados.Imagem;
 import classesDados.Morada;
 import classesDados.Paciente;
 import classesDados.Relacao;
@@ -17,11 +20,23 @@ public class Utilitario {
 	private GestorBD gestorBD;
 
 	public Utilitario() {
-		ligacaoBD = new LigacaoBD();
+		ligacaoBD = new LigacaoBD("root","");
 		ligacaoBD.connect();
 		gestorBD = new GestorBD(ligacaoBD.getConnection());
 	}
 
+	//IMAGEM
+	
+	public void registo_Imagem(Imagem foto) throws FileNotFoundException{
+		gestorBD.insert_Imagem(foto);
+	}
+	
+	public int novoId_Imagem() throws SQLException{
+		int iVelho = gestorBD.verificaId_Imagem();
+		return iVelho+1;
+	}
+	
+	
 	//PACIENTE
 	public void registo_Paciente(Paciente paciente){
 		gestorBD.insert_Paciente(paciente);
@@ -32,16 +47,16 @@ public class Utilitario {
 		return iVelho+1;
 	}
 
-	public String verTodos_Pacientes(){
-		ArrayList<Paciente> pacientes = gestorBD.selectAll_Pacientes();
-		for(Paciente p : pacientes ){
-			return p.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+	public ArrayList<Paciente> verTodos_Pacientes(int idTecnico){
+		ArrayList<Paciente> pacientes = gestorBD.selectAll_Pacientes(idTecnico);
+//		for(Paciente p : pacientes ){
+//			return p.toString() + "\n";
+//		}
+		return pacientes;
 	}
 	
-	public Paciente devolve_Paciente(int id){
-		return gestorBD.select_PacienteId(id);
+	public Paciente devolve_Paciente(int id_paciente, int id_tecnico){
+		return gestorBD.select_PacienteId(id_paciente, id_tecnico);
 	}
 	
 	public Paciente devolve_Paciente(String user, String pass){
@@ -74,7 +89,11 @@ public class Utilitario {
 	
 	public int novoId_Morada() throws SQLException {
 		int iVelho = gestorBD.verificaId_Morada();
-		return iVelho+1;
+		//System.out.println("iVelho " + iVelho);
+		int iNovo = iVelho+1;	
+		//System.out.println("iNovo " + iNovo);
+		return iNovo;
+		
 	}
 
 	public String verTodos_Moradas() {
@@ -99,12 +118,9 @@ public class Utilitario {
 		return iVelho+1;
 	}
 
-	public String verTodos_Familiares(){
-		ArrayList<Familiar> familiares = gestorBD.selectAll_Familiares();
-		for(Familiar p : familiares ){
-			return p.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+	public ArrayList<Familiar> verTodos_Familiares(int idPaciente){
+		ArrayList<Familiar> familiares = gestorBD.selectAll_Familiares(idPaciente);
+		return familiares;
 	}
 	
 	public Familiar devolve_Familiar(int id){
@@ -141,11 +157,12 @@ public class Utilitario {
 		return iVelho+1;
 	}
 
-	public Tecnico devolve_Tecnico(String email, String pass){
-		Tecnico resp = gestorBD.select_TecnicoEmail(email);
+	public Tecnico devolve_Tecnico(String nome_utilizador, String pass){
+		Tecnico resp = gestorBD.select_TecnicoNome_Utilizador(nome_utilizador);
 
 		if (resp != null) {
-			if (BCrypt.checkpw(pass, resp.getPassword())) {
+			if(pass.equals(resp.getPassword())){
+//			if (BCrypt.checkpw(pass, resp.getPassword())) {
 				System.out.println("Password matches");
 				return resp;
 			} else {
@@ -186,8 +203,8 @@ public class Utilitario {
 	}
 
 
-	public Relacao devolve_Relacao_Paciente_Familiar(int id){
-		return gestorBD.select_Relacao_Paciente_FamiliarId(id);
+	public Relacao devolve_Relacao_Paciente_Familiar(int id, int id_tecnico){
+		return gestorBD.select_Relacao_Paciente_FamiliarId(id, id_tecnico);
 	}
 
 	public String verTodos_Relacao_Paciente_Familiar() {

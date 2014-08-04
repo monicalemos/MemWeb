@@ -178,7 +178,8 @@ footer {
 }
 
 #menu ul li a {
-	padding: 2px 80px;
+	text-align:center;
+	padding: 3px 5%;
 	display: inline-block;
 	/* visual do link */
 	background-color: #EDEDED;

@@ -18,15 +18,16 @@
 		<div id="menu">
 			<div class="line"></div>
 			<ul>
-				<li><a class="selected" href="Home.jsp">Home</a></li>
+				<li><a href="Home.jsp">Home</a></li>
+				<li><a class="selected" href="./RegistrarTecnico.jsp">Novo Registo</a></li>
 				<li><a href="./ServletInicial?accao=sobreNos">Sobre Nós</a></li>
 				<li><a href="./ServletInicial?accao=contactos">Contactos</a></li>
 			</ul>
 		</div>
 		<div id="container">
-			<form id="RegistrarUtilizador" action="RegistrarUtilizador">
+			<form id="RegistrarTecnico" action="RegistrarTecnico">
 				<header id="header" class="info">
-					<h2>Novo Registo</h1>
+					<h2>Novo Registo</h2>
 				</header>
 
 				<label for="nome">Nome Completo:</label> 
@@ -46,8 +47,9 @@
 				</div>
 			</form>
 			<!-- <form action="${pageContext.request.contextPath}/Home.jsp"> -->
+		</div>
 	</div>
-	</section>
+	
 	<footer>
 		<p>Copyright 2014 - MEM +</p>
 	</footer>

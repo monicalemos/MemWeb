@@ -11,12 +11,11 @@
 			onclick="window.location.href='Home.jsp'" />
 
 		<div id="container">
-			<form action="./ServletInicial?accao=validar" method="post">
-				<label for="username">Nome de Utilizador:</label> <input type="username" id="var_username"
-					name="username" required="required"> <br>
-					<label for="password">Password:</label>
-				<input type="password" id="var_password" name="password"
-					required="required">
+			 <form action="./Inicial?accao=validar" method="post">
+				<label for="nome_utilizador">Nome de Utilizador:</label> 
+					<input type="text" id="nome_utilizador" name="nome_utilizador" required="required"> <br>
+				<label for="password">Password:</label>
+					<input type="password" id="var_password" name="password" required="required">
 
 				<%
 					if (session.getAttribute("msgErroAutenticacao") == null) {
@@ -27,7 +26,7 @@
 				<div id="lower">
 					<p>
 						<a style="font-size: 18px; color: red;"
-							href="./RegistrarUtilizador.jsp">Registe-se!</a>
+							href="./RegistrarTecnico.jsp">Registe-se!</a>
 					</p>
 					<input type="submit" value="login">
 				</div>
@@ -42,7 +41,7 @@
 			<ul>
 				<li><a class="selected" href="Home.jsp">Home</a></li>
 				<li><a href="SobreNos.jsp">Sobre Nós</a></li>
-				<li><a href="./ServletInicial?accao=contactos">Contactos</a></li>
+				<li><a href="./Inicial?accao=contactos">Contactos</a></li>
 				<%=session.getAttribute("informações")%>
 			</ul>
 		</div>

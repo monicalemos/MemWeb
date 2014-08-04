@@ -1,10 +1,11 @@
 package classesDados;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import enumerados.TipoUtilizador;
 
-public class Tecnico {
+public class Tecnico implements Serializable {
 
 	private int id;
 	private String nome_completo;
@@ -21,6 +22,8 @@ public class Tecnico {
 	public Tecnico(int id, String nome, String nome_utilizador, String password, String email) {
 		this.id = id;
 		this.nome_completo = nome;
+		setNomeProprio(nome_completo);
+		setApelido(nome_completo);
 		this.nome_utilizador = nome_utilizador;
 		this.password = password;
 		this.email = email;

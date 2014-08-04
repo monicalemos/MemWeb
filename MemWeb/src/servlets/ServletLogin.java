@@ -40,7 +40,8 @@ public class ServletLogin extends HttpServlet {
 		System.out.println(request.getParameter("accao"));
 
 		if(request.getParameter("accao").equals("validar")){
-			String user = request.getParameter("user").trim();
+			System.out.println("entrei no login");
+			String user = request.getParameter("nome_utilizador").trim();
 			String pass = request.getParameter("password").trim();
 
 			Utilitario utilitario = new Utilitario();

@@ -7,16 +7,17 @@ html,body {
 }
 
 #logo {
-	position: relative;
-	float: left;
 	margin-left: 10%;
-	margin-top: 5%;
+	float: left;
 }
 
 #page {
+	margin: 0 auto 0 auto;
+	display: table;
+	overflow: hidden;
 	width: 85%;
 	height: 100%;
-	margin: 0 auto;
+	margin-top: 35%;
 	position: relative;
 }
 
@@ -51,6 +52,32 @@ h2 {
 	animation-timing-function: linear;
 }
 
+#containerLogout {
+	position: relative;
+	float: right;
+	margin-top: 3%;
+	margin-right: 10%;
+	width: 25%;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+	-webkit-animation-name: bounceIn;
+	-webkit-animation-fill-mode: both;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: bounceIn;
+	-moz-animation-fill-mode: both;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: linear;
+	animation-name: bounceIn;
+	animation-fill-mode: both;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+}
 .line {
 	margin-bottom: 1%;
 	position: relative;
@@ -171,7 +198,8 @@ input[type=submit]:active {
 }
 
 #menu ul li a {
-	padding: 2px 80px;
+	text-align:center;
+	padding: 3px 5%;
 	display: inline-block;
 	/* visual do link */
 	background-color: #EDEDED;

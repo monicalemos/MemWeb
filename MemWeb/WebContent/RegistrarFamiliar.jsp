@@ -1,42 +1,158 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
+<%@ page import="java.util.*"%>
+<%@ page import="classesDados.Paciente;"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <head>
+<link rel="stylesheet" href="Styles/Paciente.css">
+<title>MEM+</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
+
+<script type="text/javascript">
+
+function showHide(checkbox, group)
+{
+	 var visSetting = (checkbox.checked) ? "visible" : "hidden"; 
+	 document.getElementById(group).style.visibility = visSetting; 
+}
+
+</script>
 <body>
-<form action="RegistrarPessoa">
-		<h1>Dados da Pessoa</h1><br> 
-		Nome Completo: <input type="text" id="nome" name="nome"	size="40px"> <br>
-		Data de Nascimento: (dd/mm/aaaa) <input type="text" id="dataNascimento" name="dataNascimento" size="40px"><br>
-		
-		Local de Nascimento:
-		Pa√≠s <input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"><br>
-		Regi√£o: <input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"><br>
-		Cidade <input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"><br>
-		
-		G√©nero: <select name="genero">
-			<option value="Masculino">Masculino</option>
-			<option value="Feminino">Feminino</option>
-		</select><br>
-		
-		Estado Civil: <select name="estadoCivil">
-			<option value="Solteiro">Solteiro</option>
-			<option value="Casado">Casado</option>
-			<option value="Divorciado">Divorciado</option>
-			<option value="Viuvo">Vi√∫vo</option>
-		</select> <br>
-		
-		Profiss√£o: <input type="text" id="profissao" name="profissao" size="40px"><br>
-		
-		
-		<input type="submit" value="submit">
-	</form>
-	<!-- <form action="${pageContext.request.contextPath}/Home.jsp"> -->
-	 <form action="Inicial">
-		<input type="submit" name="voltarInicio" value="voltar ao Inicio">
-	</form>
+	<div class="content">
+		<header>
+			<img id="logo" src="images/mem+.png"
+				onclick="window.location.href='LoggedPage.jsp'" />
+
+			<div id="containerLogout">
+				<h2>
+					Ol· :
+					<%=session.getAttribute("nome_utilizador")%></h2>
+				<form action="./Inicial?accao=logout" method="post">
+					<div id="lower">
+						<input type="submit" name="logout" value="Logout" />
+					</div>
+				</form>
+			</div>
+
+		</header>
+
+		<div id="menu">
+			<div class="line"></div>
+			<ul>
+				<li><a href="./LoggedPage.jsp">Home</a></li>
+				<li><a class="selected"
+					href="./ServletInicial?accao=verPacientes">Ver Pacientes</a></li>
+				<li><a href="./RegistrarPaciente.jsp">Registrar Novo
+						Paciente</a></li>
+				<li><a href="./ServletInicial?accao=evolucaoPacientes">EvoluÁ„o
+						dos Pacientes</a></li>
+			</ul>
+		</div>
+
+		<div id="menu-lateral">
+			<div class="line"></div>
+			<ul>
+				<li><a class="selected"
+					href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
+				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
+						Familiar</a></li>
+				<li><a href="./ServletInicial?accao=verFamiliares">Ver
+						Familiares</a></li>
+				<li><a href="./ServletInicial?accao=novoEvento">Inserir
+						Evento</a></li>
+				<li><a href="./ServletInicial?accao=verEventos">Ver Eventos</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+			<form id="RegistrarFamiliar" action="RegistrarFamiliar">
+				<header id="header" class="info">
+					<h2>Dados do Familiar</h2>
+				</header>
+								
+				<label for="tipo_relacao">Parentesco: </label> 
+				<select name="tipo_relacao">
+					<option value="filho">Filho</option>
+					<option value="filho">Filha</option>
+					<option value="irmao">irm„o</option>
+					<option value="irmao">Irm„</option>
+					<option value="esposo">Esposo</option>
+					<option value="esposo">Esposa</option>
+					<option value="pais">Pai</option>
+					<option value="pais">M„e</option>
+				</select> 
+				<br> 
+				
+				<label for="nome">Nome Completo:</label> 
+				<input type="text" id="nome" name="nome"> 
+				<br> 
+				
+				<label for="data_nascimento">Data de Nascimento: (dd/mm/aaaa)</label> 
+				<input type="text" id="data_nascimento" name="data_nascimento"> 
+				<br>
+
+				<label for="local_nascimento">Local de Nascimento: </label> 
+				<br>
+				<label2 for="pais">PaÌs:</label2>
+				<input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"> 
+				<br>
+				<label2 for="regiao">Regi„o: </label2>
+				<input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"> 
+				<br>
+				<label2 for="cidade">Cidade: </label2>
+				<input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"> 
+				<br> 
+				
+				<label for="morada_atual">Morada Atual: </label> 
+				<br>
+				<label2 for="pais">PaÌs:</label2>
+				<input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"> 
+				<br>
+				<label2 for="regiao">Regi„o: </label2>
+				<input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"> 
+				<br>
+				<label2 for="cidade">Cidade: </label2>
+				<input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"> 
+				<br> 
+				
+				<label for="genero">GÈnero</label> 
+				<select name="genero" id="genero">
+					<option value="Masculino">Masculino</option>
+					<option value="Feminino">Feminino</option>
+				</select> 
+				<br> 
+				
+				<label for="profissao">Profiss„o: </label> 
+				<input type="text" id="profissao" name="profissao" size="40px"> 
+				<br>
+
+				<label for="eCuidador">… cuidador?</label>
+				<div class="checkbox">
+					<input type="checkbox" value="1" id="eCuidador" onclick="showHide(this, 'myGroup');"/>
+					<label for="checkboxInput"></label>
+				</div><br>
+				
+				<span id="myGroup" style="visibility:hidden" >
+				<label for="nome_utilizador" id="label_user">Nome de Utilizador: </label> 
+					<input type="text" id="nome_utilizador" name="nome_utilizador" size="40px" >
+				<br>
+				<label for="password" id= "label_password">Password: </label> 
+					<input type="password" id="password" name="password" size="40px" >
+				</span>
+				
+				<div id="lower">
+					<input type="submit" value="Registar">
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<footer>
+		<p>Copyright 2014 - MEM +</p>
+	</footer>
 </body>
 </html>

@@ -10,13 +10,21 @@
     <welcome-file>default.jsp</welcome-file>
 		<welcome-file>Home.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>ServletInit</servlet-name>
 		<servlet-class>servlets.ServletInit</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ServletInit</servlet-name>
 		<url-pattern>/ServletInit</url-pattern>
+	</servlet-mapping>-->
+	<servlet>
+		<servlet-name>Inicial</servlet-name>
+		<servlet-class>servlets.ServletInit</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Inicial</servlet-name>
+		<url-pattern>/Inicial</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Login</servlet-name>
@@ -35,12 +43,12 @@
 		<url-pattern>/RegistrarPaciente</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>RegistrarPessoa</servlet-name>
-		<servlet-class>servlets.ServletRegistrarPessoa</servlet-class>
+		<servlet-name>RegistrarFamiliar</servlet-name>
+		<servlet-class>servlets.ServletRegistrarFamiliar</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>RegistrarPessoa</servlet-name>
-		<url-pattern>/RegistrarPessoa</url-pattern>
+		<servlet-name>RegistrarFamiliar</servlet-name>
+		<url-pattern>/RegistrarFamiliar</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>VerDados</servlet-name>
@@ -51,12 +59,12 @@
 		<url-pattern>/VerDados</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>RegistrarUtilizador</servlet-name>
-		<servlet-class>servlets.ServletRegistrarUtilizador</servlet-class>
+		<servlet-name>RegistrarTecnico</servlet-name>
+		<servlet-class>servlets.ServletRegistrarTecnico</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>RegistrarUtilizador</servlet-name>
-		<url-pattern>/RegistrarUtilizador</url-pattern>
+		<servlet-name>RegistrarTecnico</servlet-name>
+		<url-pattern>/RegistrarTecnico</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ConfirmarRegisto</servlet-name>

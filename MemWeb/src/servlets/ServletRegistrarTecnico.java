@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import classesDados.Tecnico;
 
-@WebServlet("/ServletRegistrarRespMedico")
+@WebServlet("/ServletRegistrarTecnico")
 public class ServletRegistrarTecnico extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HttpSession session = null;
@@ -35,7 +35,7 @@ public class ServletRegistrarTecnico extends HttpServlet {
 		
 		// reading the user input
 		nome = request.getParameter("nome");
-		nome_utilizador = request.getParameter("user");
+		nome_utilizador = request.getParameter("nome_utilizador");
 		password = request.getParameter("password");
 		email = request.getParameter("email");
 		//tipoUtilizador = TipoUtilizador.valueOf(request.getParameter("tipoUtilizador").toUpperCase());
@@ -51,7 +51,6 @@ public class ServletRegistrarTecnico extends HttpServlet {
 		Tecnico tecnico = new Tecnico(idUtilizador, nome, nome_utilizador, password, email);
 	
 		utilitario.registo_Tecnico(tecnico);
-			System.out.println("registei utilizador");
 		session = request.getSession();
 		session.setAttribute("nome", tecnico.getNome());
 		session.setAttribute("nome_utilizador", tecnico.getNome_utilizador());
@@ -59,8 +58,9 @@ public class ServletRegistrarTecnico extends HttpServlet {
 		session.setAttribute("email", tecnico.getEmail());
 		session.setAttribute("tipo_utilizador", tecnico.getTipo_utilizador());
 		session.setAttribute("tecnico", tecnico);
+		System.out.println("registei utilizador");
 		RequestDispatcher dispatcher =
-				getServletContext().getRequestDispatcher("/PaginaOperacao.jsp");
+				getServletContext().getRequestDispatcher("/LoggedPage.jsp");
 				dispatcher.forward(request,response);
 		
 //		PrintWriter out = response.getWriter();

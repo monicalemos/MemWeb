@@ -1,8 +1,9 @@
 package classesDados;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Evento {
+public class Evento implements Serializable {
 
 	private int id;
 	private Date data;

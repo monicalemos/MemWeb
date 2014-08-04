@@ -1,5 +1,7 @@
 package gestor;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import baseDados.Queries;
 import classesDados.Familiar;
+import classesDados.Imagem;
 import classesDados.Morada;
 import classesDados.Paciente;
 import classesDados.Relacao;
@@ -19,6 +22,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import enumerados.EspecialidadeMedico;
 import enumerados.TipoEscolaridade;
+import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import enumerados.TipoRelacao;
 
@@ -32,6 +36,40 @@ public class GestorBD {
 		this.connection = connection;
 	}
 
+	//IMAGEM
+	public int insert_Imagem(Imagem foto) throws FileNotFoundException{
+		int row = 0;
+		FileInputStream fis = new FileInputStream(foto.getFoto());
+		try{
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.insert_Imagem);
+			preparedStatement.setInt(1, foto.getId());
+			preparedStatement.setString(2, foto.getNome());
+			preparedStatement.setBinaryStream(3, fis, (int)foto.getFoto().length());
+			row = preparedStatement.executeUpdate();
+
+			System.out.println("Fiz os inserts da imagem");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Não conseguiu inserir a foto " + foto.getNome());
+		}
+		return row;
+
+	}
+
+	public int verificaId_Imagem() throws SQLException {
+		preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.ultimoId_Imagem);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		int lastInsertedId = 0;
+
+		if (resultSet != null) {
+			if (resultSet.next()) {
+				lastInsertedId=resultSet.getInt(1);
+			}
+			resultSet.close();
+		}
+		return lastInsertedId;
+	}
 
 	//PACIENTE
 	public int insert_Paciente(Paciente u) {
@@ -58,8 +96,16 @@ public class GestorBD {
 			preparedStatement.setString(16, u.getPassword());
 			preparedStatement.setInt(17, u.getNivel_sessao());
 			preparedStatement.setInt(18, u.getTecnico().getId());
-
+			//preparedStatement.setInt(19, u.getFoto().getId());
 			row = preparedStatement.executeUpdate();
+
+			//			preparedStatement = (PreparedStatement) connection
+			//					.prepareStatement(Queries.insert_Paciente_2Morada);
+			//			preparedStatement.setInt(1, u.getMorada().getId());
+			//			preparedStatement.setInt(2, u.getId());
+			//			System.out.println("Fiz os inserts da 2 morada");
+			//			row = preparedStatement.executeUpdate();
+
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,15 +128,17 @@ public class GestorBD {
 		return lastInsertedId;
 	}
 
-	public ArrayList<Paciente> selectAll_Pacientes(){
+	public ArrayList<Paciente> selectAll_Pacientes(int idTecnico){
 		ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
 		try {
 
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.selectAll_PacientesComMorada);
+			preparedStatement.setInt(1, idTecnico);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {	
+
 				pacientes.add(new Paciente(resultSet.getInt("idPaciente"),
 						resultSet.getString("nome_completo"), 
 						resultSet.getDate("data_de_nascimento"),
@@ -105,6 +153,7 @@ public class GestorBD {
 										TipoGenero.valueOf(resultSet.getString("genero")),
 										resultSet.getString("profissao"),
 										TipoEscolaridade.valueOf(resultSet.getString("escolaridade")),
+										TipoEstadoCivil.valueOf(resultSet.getString("estado_civil")),
 										resultSet.getInt("nivel_de_doenca"), 
 										resultSet.getString("nome_medico"),
 										EspecialidadeMedico.valueOf(resultSet.getString("especialidade_medico")),
@@ -126,41 +175,42 @@ public class GestorBD {
 		return pacientes;
 	}
 
-	public Paciente select_PacienteId(int id){
+	public Paciente select_PacienteId(int id_paciente, int id_tecnico){
 		Paciente paciente = null;
+		Morada local = null;
+		Morada morada = null;
 		try {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.select_PacienteId);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(1, id_paciente);
+			preparedStatement.setInt(2, id_tecnico);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
+				local = select_MoradaId(resultSet.getInt("LocalNascimento_idMorada"));
+				morada = select_MoradaId(resultSet.getInt("Morada_idMorada"));
+
 				paciente = new Paciente(resultSet.getInt("idPaciente"),
 						resultSet.getString("nome_completo"), 
 						resultSet.getDate("data_de_nascimento"),
-						new Morada(resultSet.getInt("idMorada"), 
-								resultSet.getString("pais"),
-								resultSet.getString("cidade"),
-								resultSet.getString("regiao")),
-								new Morada(resultSet.getInt("idMorada"), 
-										resultSet.getString("pais"),
-										resultSet.getString("cidade"),
-										resultSet.getString("regiao")), 
-										TipoGenero.valueOf(resultSet.getString("genero")),
-										resultSet.getString("profissao"),
-										TipoEscolaridade.valueOf(resultSet.getString("escolaridade")),
-										resultSet.getInt("nivel_de_doenca"), 
-										resultSet.getString("nome_medico"),
-										EspecialidadeMedico.valueOf(resultSet.getString("especialidade_medico")),
-										resultSet.getString("nome_utilizador"),
-										resultSet.getString("password"),
-										resultSet.getInt("nivel_sessao"),
-										select_TecnicoId(resultSet.getInt("Tecnico_idTecnico")));
+						local,
+						morada, 
+						TipoGenero.valueOf(resultSet.getString("genero")),
+						resultSet.getString("profissao"),
+						TipoEscolaridade.valueOf(resultSet.getString("escolaridade")),
+						TipoEstadoCivil.valueOf(resultSet.getString("estado_civil")),
+						resultSet.getInt("nivel_de_doenca"), 
+						resultSet.getString("nome_medico"),
+						EspecialidadeMedico.valueOf(resultSet.getString("especialidade_medico")),
+						resultSet.getString("nome_utilizador"),
+						resultSet.getString("password"),
+						resultSet.getInt("nivel_sessao"),
+						select_TecnicoId(resultSet.getInt("Tecnico_idTecnico")));
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("O tecnico com id " + id + " não existe na BD");
+			System.out.println("O paciente com id " + id_paciente + " não existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -178,7 +228,7 @@ public class GestorBD {
 					.prepareStatement(Queries.select_PacienteNomeUtilizador);
 			preparedStatement.setString(1, user);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				paciente = new Paciente(resultSet.getInt("idPaciente"),
 						resultSet.getString("nome_completo"), 
@@ -194,6 +244,7 @@ public class GestorBD {
 										TipoGenero.valueOf(resultSet.getString("genero")),
 										resultSet.getString("profissao"),
 										TipoEscolaridade.valueOf(resultSet.getString("escolaridade")),
+										TipoEstadoCivil.valueOf(resultSet.getString("estado_civil")),
 										resultSet.getInt("nivel_de_doenca"), 
 										resultSet.getString("nome_medico"),
 										EspecialidadeMedico.valueOf(resultSet.getString("especialidade_medico")),
@@ -201,9 +252,9 @@ public class GestorBD {
 										resultSet.getString("password"),
 										resultSet.getInt("nivel_sessao"),
 										select_TecnicoId(resultSet.getInt("Tecnico_idTecnico")));
-	
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
@@ -266,6 +317,7 @@ public class GestorBD {
 			preparedStatement.setString(2, m.getPais());
 			preparedStatement.setString(3, m.getCidade());
 			preparedStatement.setString(4, m.getRegiao());
+			//preparedStatement.setInt(5, m.getFoto().getId());
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts da morada");
 		} catch (Exception e) {
@@ -290,6 +342,34 @@ public class GestorBD {
 		return lastInsertedId;
 	}
 
+	public Morada select_MoradaId(int id_morada){
+		Morada morada = null;
+		try {
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.select_MoradaId);
+			preparedStatement.setInt(1, id_morada);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+
+				morada = new Morada(resultSet.getInt("idMorada"), resultSet.getString("pais"),
+						resultSet.getString("cidade"),
+						resultSet.getString("regiao"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("A morada com id " + id_morada + " não existe na BD");
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return morada;
+	}
 	public ArrayList<Morada> selectAll_Moradas(){
 		ArrayList<Morada> moradas = new ArrayList<Morada>();
 
@@ -346,14 +426,21 @@ public class GestorBD {
 			preparedStatement.setString(4, p.getApelido());
 			preparedStatement.setDate(5, (Date) p.getData_de_nascimento());
 			preparedStatement.setInt(6, p.getLocal_nascimento().getId());
-			preparedStatement.setString(7, p.getGenero().toString());
-			preparedStatement.setString(8, p.getEstado_civil().toString());
-			preparedStatement.setString(9, p.getProfissao());
-			preparedStatement.setInt(10, p.getMorada().getId());
+			preparedStatement.setInt(7, p.getMorada().getId());
+			preparedStatement.setString(8, p.getGenero().toString());
+			preparedStatement.setString(9, null);
+			preparedStatement.setString(10, p.getProfissao());
 			preparedStatement.setBoolean(11, p.eCuidador());
-			preparedStatement.setString(12, p.getNome_utilizador());
-			preparedStatement.setString(13, p.getPassword());
-
+			if(p.getNome_utilizador() != null & p.getPassword() != null){
+				preparedStatement.setString(12, p.getNome_utilizador());
+				preparedStatement.setString(13, p.getPassword());
+			}
+			else{
+				preparedStatement.setString(12, null);
+				preparedStatement.setString(13, null);
+			}
+			preparedStatement.setString(14, null);
+			
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
@@ -380,29 +467,28 @@ public class GestorBD {
 	}
 
 
-	public ArrayList<Familiar> selectAll_Familiares(){
+	public ArrayList<Familiar> selectAll_Familiares(int idPaciente){
 		ArrayList<Familiar> familiares = new ArrayList<Familiar>();
-
+		Morada local = null;
+		Morada morada = null;
 		try {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.selectAll_Familiares);
+			preparedStatement.setInt(1, idPaciente);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {	
+				local = select_MoradaId(resultSet.getInt("Local_Nascimento_idMorada"));
+				morada = select_MoradaId(resultSet.getInt("Morada_idMorada"));
+				
 				familiares.add(new Familiar(resultSet.getInt("idFamiliar"),
-						resultSet.getString("nome_completo"), 
+						setNomeCompleto(resultSet.getString("nome_proprio"), resultSet.getString("apelido")), 
 						resultSet.getDate("data_de_nascimento"),
-						new Morada(resultSet.getInt("idMorada"), 
-								resultSet.getString("pais"),
-								resultSet.getString("cidade"),
-								resultSet.getString("regiao")),
-								TipoGenero.valueOf(resultSet.getString("genero")),
-								resultSet.getString("profissao"),
-								new Morada(resultSet.getInt("idMorada"), 
-										resultSet.getString("pais"),
-										resultSet.getString("cidade"),
-										resultSet.getString("regiao")),
-										resultSet.getBoolean("eCuidador")));
+						local,
+								morada,
+										TipoGenero.valueOf(resultSet.getString("genero")),
+										resultSet.getString("profissao"),
+										resultSet.getBoolean("e_cuidador")));
 			}
 
 
@@ -420,8 +506,14 @@ public class GestorBD {
 	}
 
 
+	private String setNomeCompleto(String nome, String apelido) {
+		return nome + " " + apelido;
+	}
+
 	public Familiar select_FamiliarId(int id) {
 		Familiar familiar = null;
+		Morada local = null;
+		Morada morada = null;
 		try {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.select_FamiliarId);
@@ -429,20 +521,35 @@ public class GestorBD {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				familiar = new Familiar(resultSet.getInt("idFamiliar"),
-						resultSet.getString("nome_completo"), 
-						resultSet.getDate("data_de_nascimento"),
-						new Morada(resultSet.getInt("idMorada"), 
-								resultSet.getString("pais"),
-								resultSet.getString("cidade"),
-								resultSet.getString("regiao")),
-								TipoGenero.valueOf(resultSet.getString("genero")),
-								resultSet.getString("profissao"),
-								new Morada(resultSet.getInt("idMorada"), 
-										resultSet.getString("pais"),
-										resultSet.getString("cidade"),
-										resultSet.getString("regiao")), 
-										resultSet.getBoolean("e_cuidador"));	
+				local = select_MoradaId(resultSet.getInt("Local_Nascimento_idMorada"));
+				morada = select_MoradaId(resultSet.getInt("Morada_idMorada"));
+				boolean eCuidador = resultSet.getBoolean("e_cuidador");
+				String user = null;
+				String pass = null;
+
+				if(eCuidador== true){
+					user = resultSet.getString("nome_utilizador");
+					pass = resultSet.getString("password");
+
+					familiar = new Familiar(resultSet.getInt("idFamiliar"),
+							resultSet.getString("nome_completo"), 
+							resultSet.getDate("data_de_nascimento"),
+							local,
+							morada,
+							TipoGenero.valueOf(resultSet.getString("genero")),
+							resultSet.getString("profissao"),
+							resultSet.getBoolean("e_cuidador"), user, pass);
+				}
+				else{ 
+					familiar = new Familiar(resultSet.getInt("idFamiliar"),
+							resultSet.getString("nome_completo"), 
+							resultSet.getDate("data_de_nascimento"),
+							local,
+							morada,
+							TipoGenero.valueOf(resultSet.getString("genero")),
+							resultSet.getString("profissao"),
+							resultSet.getBoolean("e_cuidador"));
+				}
 
 			}
 		} catch (SQLException e) {
@@ -457,34 +564,51 @@ public class GestorBD {
 		}
 		return familiar;
 	}
-	
+
 	public Familiar select_FamiliarNomeUtilizador(String user) {
 		Familiar familiar = null;
+		Morada local = null;
+		Morada morada = null;
+
 		try {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.select_PacienteNomeUtilizador);
 			preparedStatement.setString(1, user);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			while (resultSet.next()) {
-				familiar = new Familiar(resultSet.getInt("idFamiliar"),
-						resultSet.getString("nome_completo"), 
-						resultSet.getDate("data_de_nascimento"),
-						new Morada(resultSet.getInt("idMorada"), 
-								resultSet.getString("pais"),
-								resultSet.getString("cidade"),
-								resultSet.getString("regiao")),
-								TipoGenero.valueOf(resultSet.getString("genero")),
-								resultSet.getString("profissao"),
-								new Morada(resultSet.getInt("idMorada"), 
-										resultSet.getString("pais"),
-										resultSet.getString("cidade"),
-										resultSet.getString("regiao")), 
-										resultSet.getBoolean("e_cuidador"));	
 
-			}
-			
-		} catch (SQLException e) {
+			while (resultSet.next()) {
+				local = select_MoradaId(resultSet.getInt("Local_Nascimento_idMorada"));
+				morada = select_MoradaId(resultSet.getInt("Morada_idMorada"));
+				boolean eCuidador = resultSet.getBoolean("e_cuidador");
+				String nome_user = null;
+				String pass = null;
+
+				if(eCuidador== true){
+					nome_user = resultSet.getString("nome_utilizador");
+					pass = resultSet.getString("password");
+
+					familiar = new Familiar(resultSet.getInt("idFamiliar"),
+							resultSet.getString("nome_completo"), 
+							resultSet.getDate("data_de_nascimento"),
+							local,
+							morada,
+							TipoGenero.valueOf(resultSet.getString("genero")),
+							resultSet.getString("profissao"),
+							resultSet.getBoolean("e_cuidador"), nome_user, pass);
+				}
+				else{ 
+					familiar = new Familiar(resultSet.getInt("idFamiliar"),
+							resultSet.getString("nome_completo"), 
+							resultSet.getDate("data_de_nascimento"),
+							local,
+							morada,
+							TipoGenero.valueOf(resultSet.getString("genero")),
+							resultSet.getString("profissao"),
+							resultSet.getBoolean("e_cuidador"));
+				}
+
+			} 
+		}catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
 		} finally {
@@ -586,6 +710,34 @@ public class GestorBD {
 		return tecnico;
 	}
 
+	public Tecnico select_TecnicoNome_Utilizador(String nome_utilizador) {
+		Tecnico tecnico = null;
+		try {
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.select_TecnicoNome_Utilizador);
+			preparedStatement.setString(1, nome_utilizador);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				tecnico = new Tecnico(resultSet.getInt("idTecnico"),
+						resultSet.getString("nome_completo"),
+						resultSet.getString("nome_utilizador"),
+						resultSet.getString("password"),
+						resultSet.getString("email"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("A base de dados não tem  o tecnico com o nome de utilizador " + nome_utilizador );
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return tecnico;
+	}
+
 	public Tecnico select_TecnicoId(int idTecnico) {
 		Tecnico tecnico = null;
 		try {
@@ -665,7 +817,7 @@ public class GestorBD {
 	public int insert_Relacao_Paciente_Familiar(Relacao r){
 		int row = 0;
 		try {
-	
+
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.insert_Relacao_Paciente_Familiar);
 			preparedStatement.setInt(1, r.getId());
@@ -673,7 +825,7 @@ public class GestorBD {
 			preparedStatement.setInt(3, r.getPaciente().getId());
 			preparedStatement.setInt(4, r.getPaciente().getTecnico().getId());
 			preparedStatement.setString(5, r.getTipo_relacao().toString());
-	
+
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
@@ -698,25 +850,27 @@ public class GestorBD {
 		}
 		return lastInsertedId;
 	}
-	public Relacao select_Relacao_Paciente_FamiliarId(int id) {
+	public Relacao select_Relacao_Paciente_FamiliarId(int id_relacao, int id_tecnico) {
 		Relacao relacao = null;
 		try {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.select_Relacao_Paciente_FamiliarId);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(1, id_relacao);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"));
+			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"), id_tecnico);
+			
 			Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
 
 			while (resultSet.next()) {	
 				relacao = new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						paciente, familiar, 
+						paciente, paciente.getTecnico(), familiar, 
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A relacao com id " + id + " não existe na BD");
+			System.out.println("A relacao com id " + id_relacao + " não existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -735,12 +889,13 @@ public class GestorBD {
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.selectAll_Relacao_Paciente_Familiar);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"));
+		
+			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"),resultSet.getInt("Paciente_Tecnico_idTecnico"));
 			Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
 
 			while (resultSet.next()) {	
 				relacao_Paciente_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						paciente, familiar, 
+						paciente, paciente.getTecnico(), familiar, 
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao"))));
 
 			}
@@ -771,7 +926,7 @@ public class GestorBD {
 
 			while (resultSet.next()) {	
 				relacao_Paciente_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						p, familiar, 
+						p, p.getTecnico(), familiar, 
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao"))));
 
 			}
@@ -808,17 +963,20 @@ public class GestorBD {
 	}
 
 
+	//RELACAO_FAMILIAR_FAMILIAR
 	public int insert_Relacao_Familiar_Familiar(Relacao r){
 		int row = 0;
 		try {
-	
+
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.insert_Relacao_Familiar_Familiar);
 			preparedStatement.setInt(1, r.getId());
 			preparedStatement.setInt(2, r.getFamiliar_nivel1().getId());
 			preparedStatement.setInt(3, r.getFamiliar_nivel2().getId());
 			preparedStatement.setString(5, r.getTipo_relacao().toString());
-	
+			preparedStatement.setInt(4, r.getPaciente().getId());
+			preparedStatement.setInt(5, r.getPaciente().getTecnico().getId());
+
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts da relação");
 		} catch (Exception e) {
@@ -829,7 +987,6 @@ public class GestorBD {
 	}
 
 
-	//RELACAO_FAMILIAR_FAMILIAR
 	public int verificaId_Relacao_Familiar_Familiar() throws SQLException {
 		preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.ultimoId_Relacao_Familiar_Familiar);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -851,13 +1008,13 @@ public class GestorBD {
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"));
+			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"), resultSet.getInt("Paciente_Tecnico_idTecnico"));
 			Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
 			Familiar familiar1 = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar1"));
 
 			while (resultSet.next()) {	
-				relacao = new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						paciente, familiar, familiar1,
+				relacao = new Relacao(resultSet.getInt("idRelacao_Familiar_Familiar"),
+						paciente, paciente.getTecnico(), familiar, familiar1,
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao")));
 			}
 		} catch (SQLException e) {
@@ -872,7 +1029,7 @@ public class GestorBD {
 		}
 		return relacao;
 	}
-	
+
 	public ArrayList<Relacao> selectAll_Relacao_Familiar_Familiar(Paciente p){
 		ArrayList<Relacao> relacao_Familiar_Familiar = new ArrayList<Relacao>();
 
@@ -885,8 +1042,8 @@ public class GestorBD {
 			Familiar familiar2 = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar1"));
 
 			while (resultSet.next()) {	
-				relacao_Familiar_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						p, familiar1, familiar2, 
+				relacao_Familiar_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Familiar_Familiar"),
+						p, p.getTecnico(), familiar1, familiar2, 
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao"))));
 
 			}
@@ -916,8 +1073,8 @@ public class GestorBD {
 			Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar1"));
 
 			while (resultSet.next()) {	
-				relacao_Paciente_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
-						p, f, familiar, 
+				relacao_Paciente_Familiar.add(new Relacao(resultSet.getInt("idRelacao_Familiar_Familiar"),
+						p, p.getTecnico(), f, familiar, 
 						TipoRelacao.valueOf(resultSet.getString("tipo_relacao"))));
 
 			}

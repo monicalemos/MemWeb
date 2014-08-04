@@ -4,33 +4,53 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import classesDados.Familiar;
 import classesDados.Morada;
+import classesDados.Paciente;
+import classesDados.Relacao;
+import classesDados.Tecnico;
 import enumerados.TipoGenero;
+import enumerados.TipoRelacao;
 import gestor.Utilitario;
 
 
-@WebServlet("/ServletRegistrarPessoa")
+@WebServlet("/ServletRegistrarFamiliar")
 public class ServletRegistrarFamiliar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	HttpSession session = null;
+	
 	public ServletRegistrarFamiliar() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("deprecation")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Utilitario utilitario = new Utilitario();
+		session = request.getSession();
+		
+		Tecnico tecnico = (Tecnico) session.getAttribute("utilizador");
+		System.out.println("tem tecnico?" + session.getAttribute("utilizador"));
+		System.out.println("nome tecnico? " + tecnico.getNome_completo());
+		System.out.println("Tem id tecnico? " + session.getAttribute("idUtilizador"));
+		
+		Paciente paciente = (Paciente) session.getAttribute("paciente");
+		System.out.println("tem paciente?" + session.getAttribute("paciente"));
+		System.out.println("nome paciente? " + paciente.getNome_completo());
+		System.out.println("Tem id paciente? " + paciente.getId());
 
 		// reading the user input
+		TipoRelacao tipoRelacao = TipoRelacao.valueOf(request.getParameter("tipo_relacao").toUpperCase());
+		
 		String nome = request.getParameter("nome");
 
 		String 	dataDeNascimento = request.getParameter("data_nascimento");
@@ -41,14 +61,16 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 		String regiaoNascimento = request.getParameter("regiao_nascimento");
 		String cidadeNascimento = request.getParameter("cidade_nascimento");
 
-		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
-		String profissao = request.getParameter("profissao");
-
 		String paisMorada = request.getParameter("pais_morada");
 		String regiaoMorada = request.getParameter("regiao_morada");
 		String cidadeMorada = request.getParameter("cidade_morada");
-
-		boolean eCuidador = false;
+		
+		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
+		
+		String profissao = request.getParameter("profissao");
+		
+		boolean eCuidador = request.getParameter("eCuidador") != null;
+		
 		String nomeUtilizador = null;
 		String password = null;
 		if(request.getParameter("e_cuidador") != null){
@@ -57,63 +79,75 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 			password = request.getParameter("password");
 		}
 
-		//		PrintWriter out = response.getWriter();
-		//				out.println ( 
-		//						"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-		//								"<html> \n" +
-		//				   "<head> \n" +
-		//				   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\"> \n" +
-		//				   "<title> Dados da Pessoa </title> \n" +
-		//				   "</head> \n" +
-		//				   "<body> \n" + "<h1> Dados da Pessoa:</h1><br> \n" + 
-		//				   "Nome: " + nome + "<br>\n" +
-		//				   "Data de Nascimento: " + dataDeNascimento + "<br>\n" +
-		//				   "Estado Civil: " + estadoCivil + "<br>\n" +
-		//				   "Género: " + genero + "<br>\n" +
-		//				   "Telefone: " + telefone + "<br>\n" + 
-		//				   "Email: " + email + "<br>\n" + 
-		//				   "Morada: " + pais + ", " + cidade + ", rua " + rua +"<br>\n" +
-		//				   "<form action = \"Inicial\">" + 
-		//				   "<input type =\"submit\" name=\"voltarInicio\" value =\"Voltar ao Inicio\">"+ 
-		//				   "</form>" + 
-		//				   "</body> \n" +
-		//				"</html>" );
-
 		int idLocalNascimento = 0;
 		int idMorada=0;
 		int idFamiliar = 0;
+		int idRelacao = 0;
+		//		int idFotoLocalNascimento = 0;
+		//		int idFotoMorada = 0;
+		//		int idFotoPaciente = 0;
+
+		Morada localNascimento = null;
+		Morada morada = null;
+		Familiar familiar = null;
+		Relacao relacao = null;
+
 
 		try {
 			idLocalNascimento = utilitario.novoId_Morada();
+			localNascimento = new Morada(idLocalNascimento, paisNascimento, regiaoNascimento, cidadeNascimento);
+			utilitario.registo_Morada(localNascimento);
+			System.out.println("idLocalNascimemto " + idLocalNascimento);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+
 		try {
 			idMorada = utilitario.novoId_Morada();
+			morada  = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
+			utilitario.registo_Morada(morada);
+		
+			System.out.println("idMorada " + idMorada);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		try {
 			idFamiliar = utilitario.novoId_Familiar();
+			if(eCuidador)
+				
+				familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, profissao,  eCuidador, nomeUtilizador, password);
+			else
+				familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, profissao,  eCuidador);
+			
+			utilitario.registo_Familiar(familiar);
+			System.out.println("registou familiar");
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		Morada localNascimento = new Morada(idLocalNascimento, paisNascimento, regiaoNascimento, cidadeNascimento);
-		Morada morada = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
-		utilitario.registo_Morada(localNascimento);
-		utilitario.registo_Morada(morada);
-		Familiar familiar;
-		if(eCuidador == true)
-			familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, genero, profissao, morada, eCuidador, nomeUtilizador, password);
-		else
-			familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, genero, profissao, morada, eCuidador);
 		
-		utilitario.registo_Familiar(familiar);
-	}
+		try{
+			idRelacao = utilitario.novoId_Relacao_Paciente_Familiar();
+			relacao = new Relacao(idRelacao, paciente, tecnico, familiar, tipoRelacao);
+			utilitario.registo_Relacao_Paciente_Familiar(relacao);
+			System.out.println("registou relacao");
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/Paciente.jsp");
 
+		if (rd != null){
+			session = request.getSession();
+			utilitario.devolve_Paciente(paciente.getId(), tecnico.getId());
+			session.setAttribute("paciente", paciente);
+			System.out.println(paciente);					
+			rd.forward(request, response);
+		}
+	}
 }

@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import classesDados.Tecnico;
 
 /**
  * Servlet implementation class verDadosServlet
@@ -17,12 +20,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/verDadosServlet")
 public class ServletVerDados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private Tecnico tecnico;
+	HttpSession session = null;
     public ServletVerDados() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		session = request.getSession();
+		tecnico = (Tecnico) session.getAttribute("tecnico");
 		Utilitario utilitario = new Utilitario();
 		PrintWriter out = response.getWriter();
 		out.println ( 
@@ -34,7 +40,7 @@ public class ServletVerDados extends HttpServlet {
 		   "</head> \n" +
 		   "<body> \n" + "<h1> Dados do Paciente:</h1><br> \n" + 
 		   "Todos os doentes:<br>" + 
-		   utilitario.verTodos_Pacientes() +
+		   utilitario.verTodos_Pacientes(tecnico.getId()) +
 		   "<form action = \"Inicial\">" + 
 		   "<input type =\"submit\" name=\"voltarInicio\" value =\"Voltar ao Inicio\">"+ 
 		   "</form>" + 

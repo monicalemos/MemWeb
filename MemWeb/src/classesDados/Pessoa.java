@@ -1,12 +1,14 @@
 package classesDados;
 
+import java.io.File;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 
-public class Pessoa {
+public class Pessoa implements Serializable {
 
 	private int idPessoa;
 	private String nome_completo;
@@ -19,6 +21,7 @@ public class Pessoa {
 	private TipoGenero genero;
 	private TipoEstadoCivil estado_civil;
 	private String profissao;
+	private Imagem foto;
 	
 	private ArrayList <Relacao> relacoes;
 	private ArrayList <Evento> eventos;
@@ -28,6 +31,8 @@ public class Pessoa {
 			Morada morada) {
 		this.idPessoa = idPessoa;
 		this.nome_completo = nome_completo;
+		setNomeProprio(nome_completo);
+		setApelido(nome_completo);
 		this.data_de_nascimento = data_de_nascimento;
 		this.local_nascimento = local_nascimento;
 		this.genero = genero;
@@ -35,6 +40,14 @@ public class Pessoa {
 		this.morada = morada;
 		relacoes = new ArrayList<Relacao>();
 		eventos = new ArrayList<Evento>();
+	}
+	
+	public void setFoto(Imagem foto){
+		this.foto = foto;
+	}
+	
+	public Imagem getFoto() {
+		return foto;
 	}
 	
 	public void novaRelacao(Relacao r){

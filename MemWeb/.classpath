@@ -9,7 +9,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Utilizador/Documents/TESE/mysql-connector-java-5.1.31/mysql-connector-java-5.1.31-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Utilizador/Documents/TESE/apache-tomcat-7.0.54/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Utilizador/Documents/TESE/mysql-connector-java-5.1.31/mysql-connector-java-5.1.31-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

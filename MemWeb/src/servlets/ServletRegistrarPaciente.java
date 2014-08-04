@@ -1,10 +1,11 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ import gestor.Utilitario;
 public class ServletRegistrarPaciente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HttpSession session = null;
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -35,94 +36,98 @@ public class ServletRegistrarPaciente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilitario utilitario = new Utilitario();
 		session = request.getSession();
-		
+
+		Tecnico tecnico = (Tecnico) session.getAttribute("utilizador");
+		System.out.println("tem tecnico?" + session.getAttribute("utilizador"));
+		System.out.println("nome tecnico? " + tecnico.getNome_completo());
+		System.out.println("Tem id tecnico? " + session.getAttribute("idUtilizador"));
 		// reading the user input
+
 		String nome = request.getParameter("nome");
-		
+
 		String 	dataDeNascimento = request.getParameter("data_nascimento");
 		String[] dataNascimento = dataDeNascimento.split("/");
 		Date data_nascimento = new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0]));
-		
+
 		String paisNascimento = request.getParameter("pais_nascimento");
 		String regiaoNascimento = request.getParameter("regiao_nascimento");
 		String cidadeNascimento = request.getParameter("cidade_nascimento");
-		
+
 		String paisMorada = request.getParameter("pais_morada");
 		String regiaoMorada = request.getParameter("regiao_morada");
 		String cidadeMorada = request.getParameter("cidade_morada");
-		
+
 		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
 		String profissao = request.getParameter("profissao");
 		TipoEscolaridade escolaridade = TipoEscolaridade.valueOf(request.getParameter("escolaridade").toUpperCase());
 		TipoEstadoCivil estadoCivil = TipoEstadoCivil.valueOf(request.getParameter("estado_civil").toUpperCase());
-		
+
 		int nivelDoenca = Integer.parseInt(request.getParameter("nivel_doenca"));
 		String nomeMedico= request.getParameter("nome_medico");
 		EspecialidadeMedico especialidadeMedico = EspecialidadeMedico.valueOf(request.getParameter("especialidade_medico").toUpperCase());
-				
+
+
 		String nomeUtilizador = request.getParameter("nome_utilizador");
 		String password = request.getParameter("password");
-		
+
 		int nivelSessao = Integer.parseInt(request.getParameter("nivel_sessao"));
-		
-		PrintWriter out = response.getWriter();
-		out.println ( 
-				"<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-						"<html> \n" +
-		   "<head> \n" +
-		   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\"> \n" +
-		   "<title> Dados do Cliente  </title> \n" +
-		   "</head> \n" +
-		   "<body> \n" + "<h1> Dados do Paciente:</h1><br> \n" + 
-		   "Nome: " + nome + "<br>\n" +
-		   "Data de Nascimento: " + dataDeNascimento + "<br>\n" +
-		   "Local de Nascimento: " + paisNascimento + ", " + regiaoNascimento + ", rua " + cidadeNascimento +"<br>\n" +
-		   "Morada Atual: " + paisMorada + ", " + regiaoMorada + ", rua " + cidadeMorada +"<br>\n" +
-		   "Género: " + genero + "<br>\n" +
-		   "Profissão " + profissao + "<br>\n" +
-		   "Escolaridade " + escolaridade + "<br>\n" +
-		   "Estado Civil: " + estadoCivil + "<br>\n" +
-		   "Nível de donça " + nivelDoenca + "<br>\n" +
-		   "Nome do Médico " + nomeMedico + "<br>\n" +
-		   "Especialidade do Médico " + especialidadeMedico + "<br>\n" +
-		   "Nome de Utilizador " + nomeUtilizador + "<br>\n" +
-		   "Nivel de Sessao " + nivelSessao + "<br>\n" + 
-		   "<form action = \"Inicial\">" + 
-		   "<input type =\"submit\" name=\"voltarInicio\" value =\"Voltar ao Inicio\">"+ 
-		   "</form>" + 
-		   "</body> \n" +
-		"</html>" );
-		
+
 		int idLocalNascimento = 0;
 		int idMorada=0;
 		int idPaciente = 0;
-		
+		//		int idFotoLocalNascimento = 0;
+		//		int idFotoMorada = 0;
+		//		int idFotoPaciente = 0;
+
+		Morada localNascimento = null;
+		Morada morada = null;
+		Paciente paciente = null;
+
+
 		try {
 			idLocalNascimento = utilitario.novoId_Morada();
+
+			localNascimento = new Morada(idLocalNascimento, paisNascimento, regiaoNascimento, cidadeNascimento);
+			utilitario.registo_Morada(localNascimento);
+			System.out.println("idLocalNascimemto " + idLocalNascimento);
+
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 		try {
 			idMorada = utilitario.novoId_Morada();
+
+			morada  = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
+			utilitario.registo_Morada(morada);
+
+			System.out.println("idMorada " + idMorada);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 		try {
 			idPaciente = utilitario.novoId_Paciente();
+			paciente = new Paciente(idPaciente, nome, data_nascimento, localNascimento, morada, genero, profissao, escolaridade, estadoCivil, nivelDoenca, nomeMedico, especialidadeMedico, nomeUtilizador, password, nivelSessao, tecnico);
+			utilitario.registo_Paciente(paciente);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Morada localNascimento = new Morada(idLocalNascimento, paisNascimento, regiaoNascimento, cidadeNascimento);
-		Morada morada = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
-		utilitario.registo_Morada(localNascimento);
-		utilitario.registo_Morada(morada);
-		
-		Tecnico tecnico = (Tecnico) session.getAttribute("tecnico");
-		
-		//TODO tem de ser acrescentado o resp medico de login
-		Paciente paciente = new Paciente(idPaciente, nome, data_nascimento, localNascimento, morada, genero, profissao, escolaridade, nivelDoenca, nomeMedico, especialidadeMedico, nomeUtilizador, password, nivelSessao, tecnico);
-			
-		utilitario.registo_Paciente(paciente);
+
+		ServletContext sc = this.getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/Paciente.jsp");
+
+		if (rd != null){
+			session = request.getSession();
+			utilitario.devolve_Paciente(idPaciente, tecnico.getId());
+			session.setAttribute("paciente", paciente);
+			System.out.println(paciente);					
+			rd.forward(request, response);
+		}
 	}
 }

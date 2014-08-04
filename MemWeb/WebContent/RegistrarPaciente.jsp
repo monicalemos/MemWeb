@@ -1,71 +1,132 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="Styles/Registo.css">
+<title>MEM+</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<form action="RegistrarPaciente">
-		<h1>Dados do Paciente</h1><br> 
-		Nome Completo: <input type="text" id="nome" name="nome"	size="40px"> <br>
-		Data de Nascimento: (dd/mm/aaaa) <input type="text" id="data_nascimento" name="data_nascimento" size="40px"><br>
+	
+	<header>
+		<img id="logo" src="images/mem+.png"
+			onclick="window.location.href='LoggedPage.jsp'" />
+
+		<div id="containerLogout">
+			<h2>Ol· : <%= session.getAttribute("nome_utilizador") %></h2>
+			 <form action="./Inicial?accao=logout" method="post">
+				<div id="lower">
+					 <input type="submit" name="logout" value="Logout" />
+				</div>
+			</form>
+		</div>
 		
-		Local de Nascimento:
-		Pa√≠s <input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"><br>
-		Regi√£o: <input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"><br>
-		Cidade <input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"><br>
-		
-		Morada Atual:
-		Pa√≠s <input type="text" id="pais_morada" name="pais_morada" size="40px"><br>
-		Regi√£o: <input type="text" id="regiao_morada" name="regiao_morada" size="40px"><br>
-		Cidade <input type="text" id="cidade_morada" name="cidade_morada" size="40px"><br>
-		
-		G√©nero: <select name="genero">
-			<option value="Masculino">Masculino</option>
-			<option value="Feminino">Feminino</option>
-		</select><br>
-		
-		Profiss√£o: <input type="text" id="profissao" name="profissao" size="40px"><br>
-		
-		Escolaridade: <select name="escolaridade">
-			<option value="Ensino_Basico">Ensino B√°sico</option>
-			<option value="Secundario">Secund√°rio</option>
-			<option value="Licenciatura">Licenciatura</option>
-			<option value="Pos_Graduacao">P√≥s-Gradua√ß√£o</option>
-			<option value="Mestrado">Mestrado</option>
-			<option value="Douturamento">Douturamento</option>
-		</select> <br>
-		
-		Estado Civil: <select name="estado_civil">
-			<option value="Solteiro">Solteiro</option>
-			<option value="Casado">Casado</option>
-			<option value="Divorciado">Divorciado</option>
-			<option value="Viuvo">Vi√∫vo</option>
-		</select> <br>
-		
-		N√≠vel de Doen√ßa: <select name="nivel_doenca">
-			<option value="1">1</option> <option value="2">2</option>
-			<option value="3">3</option> <option value="4">4</option>
-			<option value="5">5</option> <option value="6">6</option>
-			<option value="7">7</option> <option value="8">8</option>
-			<option value="9">9</option> <option value="10">10</option>
-		</select><br>
-		
-		Nome do M√©dico: <input type="text" id="nomeMedico" name="nomeMedico" size="40px"><br>
-		Especialidade do M√©dico: <select name="especialidade_medico">
-			<option value="Neurologista">Neurologista</option>
-			<option value="Psiquiatra">Psiquiatra</option>
-		</select> <br>
-		
-		Nome de Utilizador: <input type="text" id="nome_utilizador" name ="nome_utilizador" size="40px"><br>
-		Password: <input type="password" id="password" name ="password" size="40px"><br>		
-		<input type="submit" value="submit">
-	</form>
-	<!-- <form action="${pageContext.request.contextPath}/Home.jsp"> -->
-	 <form action="Inicial">
-		<input type="submit" name="voltarInicio" value="voltar ao Inicio">
-	</form>
+	</header>
+	<div id="page">
+		<div id="menu">
+			<div class="line"></div>
+			<ul>
+				<li><a href="./LoggedPage.jsp">Home</a></li>
+				<li><a href="./ServletInicial?accao=verPacientes">Ver Pacientes</a></li>
+				<li><a class="selected" href="./RegistrarPaciente.jsp">Registrar Novo Paciente</a></li>
+				<li><a href="./ServletInicial?accao=evolucaoPacientes">EvoluÁ„o dos Pacientes</a></li>
+			</ul>
+		</div>
+		<div id="container">
+			<form action="Inicial">
+				<div id="lower">
+					<input type="submit" name="voltarInicio" value="voltar ao Inicio">
+				</div>
+			</form>
+			
+			<form id="RegistrarPaciente" action="RegistrarPaciente">
+				<header id="header" class="info">
+					<h2>Dados do Paciente</h2>
+				</header>
+
+				<label for="nome">Nome Completo:</label> <input type="text"
+					id="nome" name="nome" size="40px"> <br> <label
+					for="data_nascimento">Data de Nascimento: (dd/mm/aaaa)</label> <input
+					type="text" id="data_nascimento" name="data_nascimento" size="40px">
+				<br> <label for="local_nascimento">Local de Nascimento:
+				</label> <label for="pais">PaÌs:</label> <input type="text"
+					id="pais_nascimento" name="pais_nascimento" size="40px"> <br>
+				<label for="regiao">Regi„o: </label> <input type="text"
+					id="regiao_nascimento" name="regiao_nascimento" size="40px">
+				<br> <label for="cidade">Cidade: </label> <input type="text"
+					id="cidade_nascimento" name="cidade_nascimento" size="40px">
+				<br> <label for="morada_atual">Morada Atual: </label> <label
+					for="pais">PaÌs:</label> <input type="text" id="pais_nascimento"
+					name="pais_nascimento" size="40px"> <br> <label
+					for="regiao">Regi„o: </label> <input type="text"
+					id="regiao_nascimento" name="regiao_nascimento" size="40px">
+				<br> <label for="cidade">Cidade: </label> <input type="text"
+					id="cidade_nascimento" name="cidade_nascimento" size="40px">
+				<br> <label for="genero">GÈnero</label> <select name="genero">
+					<option value="Masculino">Masculino</option>
+					<option value="Feminino">Feminino</option>
+				</select> <br> <label for="profissao">Profiss„o: </label> <input
+					type="text" id="profissao" name="profissao" size="40px"> <br>
+
+				<label for="escolaridade">Escolaridade: </label> <select
+					name="escolaridade">
+					<option value="Ensino_Basico">Ensino B·sico</option>
+					<option value="Ensino_Secundario">Ensino Secund·rio</option>
+					<option value="Licenciatura">Licenciatura</option>
+					<option value="Pos_Graduacao">PÛs-GraduaÁ„o</option>
+					<option value="Mestrado">Mestrado</option>
+					<option value="Douturamento">Douturamento</option>
+				</select> <br> <label for="estado_civil">Estado Civil: </label> <select
+					name="estado_civil">
+					<option value="Solteiro">Solteiro</option>
+					<option value="Casado">Casado</option>
+					<option value="Divorciado">Divorciado</option>
+					<option value="Viuvo">Vi˙vo</option>
+				</select> <br> 
+				<label for="nivel_doenca">NÌvel de DoenÁa: </label> <select
+					name="nivel_doenca">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select> 
+				<br>
+				<label for="nivel_sessao">NÌvel de Sess„o Inicial Esperado: </label> <select
+					name="nivel_sessao">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select> <br>
+				 <label for="nome_medico">Nome do MÈdico: </label> <input
+					type="text" id="nomeMedico" name="nomeMedico" size="40px">
+				<br> <label for="especialidade_medico">Especialidade do
+					MÈdico: </label> <select name="especialidade_medico">
+					<option value="Neurologista">Neurologista</option>
+					<option value="Psiquiatra">Psiquiatra</option>
+				</select> <br> <label for="nome_utilizador">Nome de Utilizador:
+				</label> <input type="text" id="nome_utilizador" name="nome_utilizador"
+					size="40px"> <br> <label for="password">Password:
+				</label> <input type="password" id="password" name="password" size="40px">
+				<br>
+
+				<div id="lower">
+					<input type="submit" value="Registar">
+				</div>
+			</form>
+			<!-- <form action="${pageContext.request.contextPath}/Home.jsp"> -->
+
+		</div>
+	</div>
+
+	<footer>
+		<p>Copyright 2014 - MEM +</p>
+	</footer>
 </body>
 </html>

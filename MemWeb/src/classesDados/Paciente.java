@@ -1,13 +1,15 @@
 package classesDados;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import enumerados.TipoEscolaridade;
 import enumerados.EspecialidadeMedico;
+import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import enumerados.TipoUtilizador;
 
-public class Paciente extends Pessoa {
+public class Paciente extends Pessoa implements Serializable {
 
 	private TipoEscolaridade escolaridade;
 	private int nivel_doenca;
@@ -19,10 +21,11 @@ public class Paciente extends Pessoa {
 	private int nivel_sessao;
 	private Cuidador cuidador; //Pensar como fazer
 	private Tecnico tecnico;
+	private TipoEstadoCivil estado_civil;
 	
 	public Paciente(int idPessoa, String nome_completo,
 			Date data_de_nascimento, Morada local_nascimento, Morada morada,
-			TipoGenero genero, String profissao, TipoEscolaridade escolaridade, int nivel_doenca, String nome_medico,
+			TipoGenero genero, String profissao, TipoEscolaridade escolaridade, TipoEstadoCivil estado_civil, int nivel_doenca, String nome_medico,
 			EspecialidadeMedico especialidade_medico, String nome_utilizador,
 			String password, int nivel_sessao, Tecnico tecnico) {
 		
@@ -39,6 +42,7 @@ public class Paciente extends Pessoa {
 		this.nivel_sessao = nivel_sessao;
 		//this.cuidador = cuidador;
 		this.tecnico = tecnico;
+		setEstado_civil(estado_civil);
 	}
 	
 	//GETTERS:
@@ -73,6 +77,7 @@ public class Paciente extends Pessoa {
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
+	
 	//SETTERS:
 	public void setEscolaridade(TipoEscolaridade escolaridade) {
 		this.escolaridade = escolaridade;

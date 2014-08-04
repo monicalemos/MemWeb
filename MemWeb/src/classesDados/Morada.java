@@ -1,16 +1,27 @@
 package classesDados;
 
-public class Morada {
+import java.io.Serializable;
+
+public class Morada implements Serializable {
 	private int id;
 	private String pais;
 	private String cidade;
 	private String regiao;
+	private Imagem foto;
 	
 	public Morada(int id, String pais, String cidade, String regiao) {
 		this.id = id;
 		this.pais = pais;
 		this.cidade = cidade;
 		this.regiao = regiao;
+	}
+	
+	public void setFoto(Imagem foto) {
+		this.foto = foto;
+	}
+	
+	public Imagem getFoto() {
+		return foto;
 	}
 	
 	public int getId() {
