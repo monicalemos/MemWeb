@@ -51,6 +51,14 @@
 		<url-pattern>/RegistrarFamiliar</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>RegistrarEvento</servlet-name>
+		<servlet-class>servlets.ServletRegistrarEvento</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegistrarEvento</servlet-name>
+		<url-pattern>/RegistrarEvento</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>VerDados</servlet-name>
 		<servlet-class>servlets.ServletVerDados</servlet-class>
 	</servlet>

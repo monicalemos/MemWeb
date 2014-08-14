@@ -48,7 +48,7 @@ public class Queries {
 	
 	public static final String insert_Familiar = "insert into `memDb`.`Familiar` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
-	public static final String ultimoId_Familiar = "select `idPaciente` from `memDb`.`Paciente` order by `idPaciente` desc limit 1;";
+	public static final String ultimoId_Familiar = "select `idFamiliar` from `memDb`.`Familiar` order by `idFamiliar` desc limit 1;";
 
 	public static final String selectAll_Familiares = "select * from `memDb`.`Familiar`, `memDb`.`relacao_paciente_familiar` where `relacao_paciente_familiar`.`Familiar_idFamiliar` = `Familiar`.`idFamiliar`and `relacao_paciente_familiar`.`Paciente_idPaciente` = ?;";
 
@@ -100,4 +100,17 @@ public class Queries {
 	public static final String selectAll_Relacao_Familiar_Familiar_Do_Familiar ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Familiar_Familiar`.`Familiar_idFamiliar`=?;";
 
 	public static final String delete_Relacao_Familiar_Familiar = "delete from `memDb`.`Relacao_Familiar_Familiar` where `Familiar_idFamiliar` = ? or `Familiar_idFamiliar1 = ?;";
-}
+	
+	//EVENTO:
+	public static final String insert_Evento_Sem_Familiar = "insert into `memDb`.`Evento` values(?,?,?,?,?,?);";
+	
+	public static final String insert_Evento_Com_Familiar = "insert into `memDb`.`Evento` values(?,?,?,?,?,?,?);";
+	
+	public static final String ultimoId_Evento = "select `idEvento` from `memDb`.`Evento` order by `idEvento` desc limit 1;";
+	
+	public static final String select_EventoId = "select * from `memDb`.`Evento` where `Evento`.`idEvento` = ?;";
+	
+	public static final String selectAll_Evento = "select * from `memDb`.`Evento` where `Evento`.`Paciente_idPaciente`=?;";
+	
+	public static final String delete_Evento = "delete from `memDb`.`Evento` where `Evento`.`idEvento`= ?;";
+	}

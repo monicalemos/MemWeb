@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import baseDados.Queries;
+import classesDados.Evento;
 import classesDados.Familiar;
 import classesDados.Imagem;
 import classesDados.Morada;
@@ -138,7 +139,8 @@ public class GestorBD {
 			preparedStatement.setInt(1, idTecnico);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {	
-
+				Tecnico tecnico = select_TecnicoId(resultSet.getInt("Tecnico_idTecnico"));
+				System.out.println("id do tecnico: " + tecnico.getId());
 				pacientes.add(new Paciente(resultSet.getInt("idPaciente"),
 						resultSet.getString("nome_completo"), 
 						resultSet.getDate("data_de_nascimento"),
@@ -160,7 +162,7 @@ public class GestorBD {
 										resultSet.getString("nome_utilizador"),
 										resultSet.getString("password"),
 										resultSet.getInt("nivel_sessao"),
-										select_TecnicoId(resultSet.getInt("Tecnico_idTecnico"))));
+										tecnico));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -315,8 +317,8 @@ public class GestorBD {
 					.prepareStatement(Queries.insert_Morada);
 			preparedStatement.setInt(1, m.getId());
 			preparedStatement.setString(2, m.getPais());
-			preparedStatement.setString(3, m.getCidade());
-			preparedStatement.setString(4, m.getRegiao());
+			preparedStatement.setString(3, m.getRegiao());
+			preparedStatement.setString(4, m.getCidade());
 			//preparedStatement.setInt(5, m.getFoto().getId());
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts da morada");
@@ -442,10 +444,10 @@ public class GestorBD {
 			preparedStatement.setString(14, null);
 			
 			row = preparedStatement.executeUpdate();
-			System.out.println("Fiz os inserts do paciente");
+			System.out.println("Fiz os inserts do familiar");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o paciente " + p.getNome_completo());
+			System.out.println("Não conseguiu inserir o familiar " + p.getNome_completo());
 		}
 		return row;		
 	}
@@ -502,6 +504,7 @@ public class GestorBD {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("tamanho familiares gestor: " + familiares.size());
 		return familiares;
 	}
 
@@ -541,8 +544,9 @@ public class GestorBD {
 							resultSet.getBoolean("e_cuidador"), user, pass);
 				}
 				else{ 
+					System.out.println("nome todo do while " + resultSet.getString("nome_proprio") + " " + resultSet.getString("apelido") );
 					familiar = new Familiar(resultSet.getInt("idFamiliar"),
-							resultSet.getString("nome_completo"), 
+							resultSet.getString("nome_proprio") + " " + resultSet.getString("apelido"), 
 							resultSet.getDate("data_de_nascimento"),
 							local,
 							morada,
@@ -814,6 +818,8 @@ public class GestorBD {
 		return row;
 	}
 
+	
+	//RELACAO_PACIENTE_FAMILIAR
 	public int insert_Relacao_Paciente_Familiar(Relacao r){
 		int row = 0;
 		try {
@@ -834,9 +840,7 @@ public class GestorBD {
 		}
 		return row;
 	}
-
-
-	//RELACAO_PACIENTE_FAMILIAR
+	
 	public int verificaId_Relacao_Paciente_Familiar() throws SQLException {
 		preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.ultimoId_Relacao_Paciente_Familiar);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -881,13 +885,14 @@ public class GestorBD {
 		return relacao;
 	}
 
-	public ArrayList<Relacao> selectAll_Relacao_Paciente_Familiar(){
+	public ArrayList<Relacao> selectAll_Relacao_Paciente_Familiar(int idTecnico){
 		ArrayList<Relacao> relacao_Paciente_Familiar = new ArrayList<Relacao>();
 
 		try {
 
 			preparedStatement = (PreparedStatement) connection
 					.prepareStatement(Queries.selectAll_Relacao_Paciente_Familiar);
+			preparedStatement.setInt(1, idTecnico);
 			ResultSet resultSet = preparedStatement.executeQuery();
 		
 			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"),resultSet.getInt("Paciente_Tecnico_idTecnico"));
@@ -909,6 +914,7 @@ public class GestorBD {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("tamanhoioos : " + relacao_Paciente_Familiar.size());
 		return relacao_Paciente_Familiar;
 	}
 
@@ -986,7 +992,6 @@ public class GestorBD {
 		return row;
 	}
 
-
 	public int verificaId_Relacao_Familiar_Familiar() throws SQLException {
 		preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.ultimoId_Relacao_Familiar_Familiar);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -1000,6 +1005,7 @@ public class GestorBD {
 		}
 		return lastInsertedId;
 	}
+	
 	public Relacao select_Relacao_Familiar_FamiliarId(int id) {
 		Relacao relacao = null;
 		try {
@@ -1110,6 +1116,157 @@ public class GestorBD {
 		return row;
 	}
 
+	//EVENTO:
+	public int insert_Evento(Evento e){
+		int row = 0;
+		if(e.getFamiliar()!=null){
+			try {
+				preparedStatement = (PreparedStatement) connection
+						.prepareStatement(Queries.insert_Evento_Com_Familiar);
+				preparedStatement.setInt(1, e.getId());
+				preparedStatement.setDate(2, e.getData());
+				preparedStatement.setString(3, e.getTipo_de_evento());
+				preparedStatement.setInt(4, e.getLocal_evento().getId());
+				preparedStatement.setString(5, e.getDescricao());
+				preparedStatement.setInt(6, e.getPaciente().getId());
+				preparedStatement.setInt(7, e.getFamiliar().getId());
+	
+				row = preparedStatement.executeUpdate();
+				System.out.println("Fiz os inserts do evento com familiar");
+			} catch (Exception g) {
+				g.printStackTrace();
+				System.out.println("Não conseguiu inserir o evento com familiar");
+			}
+		}
+		else{
+			try {
 
+				preparedStatement = (PreparedStatement) connection
+						.prepareStatement(Queries.insert_Evento_Sem_Familiar);
+				preparedStatement.setInt(1, e.getId());
+				preparedStatement.setDate(2, e.getData());
+				preparedStatement.setString(3, e.getTipo_de_evento());
+				preparedStatement.setInt(4, e.getLocal_evento().getId());
+				preparedStatement.setString(5, e.getDescricao());
+				preparedStatement.setInt(6, e.getPaciente().getId());
 
+				row = preparedStatement.executeUpdate();
+				System.out.println("Fiz os inserts do evento sem familiar");
+			} catch (Exception g) {
+				g.printStackTrace();
+				System.out.println("Não conseguiu inserir o evento sem familiar");
+			}
+		}
+		return row;
+	}
+
+	public int verificaId_Evento() throws SQLException {
+		preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.ultimoId_Evento);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		int lastInsertedId = 0;
+
+		if (resultSet != null) {
+			if (resultSet.next()) {
+				lastInsertedId=resultSet.getInt(1);
+			}
+			resultSet.close();
+		}
+		return lastInsertedId;
+	}
+
+	public Evento select_EventoId(int id) {
+		Evento evento = null;
+		try {
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.select_EventoId);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			
+			while (resultSet.next()) {	
+				Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"), resultSet.getInt("Paciente_Tecnico_idTecnico"));
+				Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
+				Morada morada = select_MoradaId(resultSet.getInt("Local_Evento_idMorada"));
+				
+				if(familiar!=null){
+				evento = new Evento(resultSet.getInt("idEvento"), resultSet.getDate("Data"), resultSet.getString("tipo_de_evento"),
+						morada, resultSet.getString("descricao"),paciente, familiar);
+				}
+				else{
+					evento = new Evento(resultSet.getInt("idEvento"), resultSet.getDate("Data"), resultSet.getString("tipo_de_evento"),
+							morada, resultSet.getString("descricao"),paciente);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("O evento com id " + id + " não existe na BD");
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return evento;
+	}
+
+	public ArrayList<Evento> selectAll_Evento(Paciente p){
+		ArrayList<Evento> eventos = new ArrayList<Evento>();
+		int idPaciente = p.getId();
+		try {
+
+			preparedStatement = (PreparedStatement) connection
+					.prepareStatement(Queries.selectAll_Evento);
+			preparedStatement.setInt(1, idPaciente);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+
+			while (resultSet.next()) {	
+				Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idPessoa"));
+				System.out.println("encontrou familiar? " + familiar!=null);
+				Morada morada = select_MoradaId(resultSet.getInt("Local_Evento_idMorada"));
+				
+				if(familiar!=null){
+				eventos.add(new Evento(resultSet.getInt("idEvento"), resultSet.getDate("Data"), 
+						resultSet.getString("tipo_de_evento"), morada, resultSet.getString("descricao"),
+						p, familiar));
+				}
+				else{
+					eventos.add(new Evento(resultSet.getInt("idEvento"), resultSet.getDate("Data"), 
+							resultSet.getString("tipo_de_evento"), morada, resultSet.getString("descircao"),
+							p));
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("A base de dados não tem relaçoes");
+		} finally {
+			try {
+				preparedStatement.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return eventos;
+	}
+
+	public int delete_Evento(Evento evento){
+		int row = 0;
+		try {
+			preparedStatement = (PreparedStatement) connection.prepareStatement(Queries.delete_Evento);
+			preparedStatement.setInt(1, evento.getId());
+			row = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Não conseguiu apagar o evento " + evento);
+			e.printStackTrace();
+		}finally{
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 }

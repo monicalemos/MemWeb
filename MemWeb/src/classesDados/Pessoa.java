@@ -1,6 +1,5 @@
 package classesDados;
 
-import java.io.File;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -25,14 +24,20 @@ public class Pessoa implements Serializable {
 	
 	private ArrayList <Relacao> relacoes;
 	private ArrayList <Evento> eventos;
+
 	
 	public Pessoa(int idPessoa, String nome_completo, Date data_de_nascimento,
 			Morada local_nascimento, TipoGenero genero, String profissao,
 			Morada morada) {
 		this.idPessoa = idPessoa;
 		this.nome_completo = nome_completo;
-		setNomeProprio(nome_completo);
-		setApelido(nome_completo);
+		System.out.println("nome completo do const: " + nome_completo);
+		System.out.println("nome completo do this: " + this.nome_completo);
+		String[] nomeTemp = this.nome_completo.split(" ");
+		this.nomeProprio = nomeTemp[0];
+		System.out.println("nome proprio: " + nomeProprio);
+		this.apelido = nomeTemp[nomeTemp.length - 1];
+		System.out.println("apelido : " + apelido);
 		this.data_de_nascimento = data_de_nascimento;
 		this.local_nascimento = local_nascimento;
 		this.genero = genero;
@@ -194,13 +199,11 @@ public class Pessoa implements Serializable {
 	}
 	
 	public void setApelido(String nome){
-		String[] nomeTemp = nome.split(" ");
-		this.apelido = nomeTemp[nomeTemp.length - 1];
+		this.apelido = nome;
 	}
 
 	public void setNomeProprio(String nome){
-		String[] nomeTemp = nome.split(" ");
-		this.nomeProprio = nomeTemp[0];
+		this.nomeProprio = nome;
 	}
 		
 	public void setEstado_civil(TipoEstadoCivil estado_civil) {
@@ -211,5 +214,11 @@ public class Pessoa implements Serializable {
 		this.morada = m;
 	}
 	
-	
+	@SuppressWarnings("deprecation")
+	@Override
+	public String toString() {
+		return nomeProprio + " " + apelido +
+				" data de nascimento: ( " + data_de_nascimento.getDay() + "/" + data_de_nascimento.getMonth() + "/" + data_de_nascimento.getYear() +
+				" prof. " + profissao;
+	}
 }

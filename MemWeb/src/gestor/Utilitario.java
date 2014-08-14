@@ -1,12 +1,12 @@
 package gestor;
 
-import java.awt.List;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import utils.BCrypt;
 import baseDados.LigacaoBD;
+import classesDados.Evento;
 import classesDados.Familiar;
 import classesDados.Imagem;
 import classesDados.Morada;
@@ -115,11 +115,13 @@ public class Utilitario {
 
 	public int novoId_Familiar() throws SQLException {
 		int iVelho = gestorBD.verificaId_Familiar();
-		return iVelho+1;
+		int iNovo = iVelho+1;	
+		return iNovo;
 	}
 
 	public ArrayList<Familiar> verTodos_Familiares(int idPaciente){
 		ArrayList<Familiar> familiares = gestorBD.selectAll_Familiares(idPaciente);
+		System.out.println("tamanho familiares: " + familiares.size());
 		return familiares;
 	}
 	
@@ -177,12 +179,9 @@ public class Utilitario {
 		return gestorBD.select_TecnicoId(id);
 	}
 
-	public String verTodos_Tecnicos() {
+	public ArrayList<Tecnico> verTodos_Tecnicos() {
 		ArrayList<Tecnico> tecnicos = gestorBD.selectAll_Tecnicos();
-		for(Tecnico p : tecnicos ){
-			return p.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+		return tecnicos;
 	}
 
 	public void apaga_Tecnico(Tecnico u){
@@ -207,20 +206,15 @@ public class Utilitario {
 		return gestorBD.select_Relacao_Paciente_FamiliarId(id, id_tecnico);
 	}
 
-	public String verTodos_Relacao_Paciente_Familiar() {
-		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar();
-		for(Relacao p : relacoes ){
-			return p.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+	public ArrayList<Relacao> verTodos_Relacao_Paciente_Familiar(int idTecnico) {
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar(idTecnico);
+		return relacoes;
 	}
 
-	public String verTodos_Relacao_Paciente_Familiar_Do_Paciente(Paciente p) {
+	public ArrayList<Relacao> verTodos_Relacao_Paciente_Familiar_Do_Paciente(Paciente p) {
 		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar_Do_Paciente(p);
-		for(Relacao r : relacoes ){
-			return r.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+	
+		return relacoes;
 	}
 	
 	public void apaga_Relacao_Paciente_Familiar(Familiar f){
@@ -244,24 +238,41 @@ public class Utilitario {
 		return gestorBD.select_Relacao_Familiar_FamiliarId(id);
 	}
 
-	public String verTodos_Relacao_Familiar_Familiar(Paciente pac) {
+	public ArrayList<Relacao> verTodos_Relacao_Familiar_Familiar(Paciente pac) {
 		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Familiar_Familiar(pac);
-		for(Relacao p : relacoes ){
-			return p.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+		
+		return relacoes;
 	}
 
-	public String verTodos_Relacao_Familiar_Familiar_Do_Familiar(Paciente p, Familiar f) {
+	public ArrayList<Relacao> verTodos_Relacao_Familiar_Familiar_Do_Familiar(Paciente p, Familiar f) {
 		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Familiar_Familiar_Do_Familiar(p, f);
-		for(Relacao r : relacoes ){
-			return r.toString() + "\n";
-		}
-		return "Não há pacientes a imprimir";
+		return relacoes;
 	}
 	
 	public void apaga_Relacao_Familiar_Familiar(Familiar f){
 		gestorBD.delete_Relacao_Familiar_Familiar(f);
 	}
-
+	
+	//EVENTO
+	public int registo_Evento(Evento evento){
+		return gestorBD.insert_Evento(evento);
+	}
+	
+	public int novoId_Evento() throws SQLException{
+		int iVelho = gestorBD.verificaId_Evento();
+		return iVelho+1;
+	}
+	
+	public Evento devolte_Evento(int id){
+		return gestorBD.select_EventoId(id);
+	}
+	
+	public ArrayList<Evento> verTodos_Eventos(Paciente p){
+		ArrayList<Evento> eventos = gestorBD.selectAll_Evento(p);
+		return eventos;
+	}
+	
+	public void apaga_Evento(Evento e){
+		gestorBD.delete_Evento(e);
+	}
 }

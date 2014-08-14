@@ -8,6 +8,7 @@ import enumerados.EspecialidadeMedico;
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import enumerados.TipoUtilizador;
+import gestor.Utilitario;
 
 public class Paciente extends Pessoa implements Serializable {
 
@@ -21,17 +22,20 @@ public class Paciente extends Pessoa implements Serializable {
 	private int nivel_sessao;
 	private Cuidador cuidador; //Pensar como fazer
 	private Tecnico tecnico;
-	private TipoEstadoCivil estado_civil;
-	
+	private Utilitario utilitario;
+
 	public Paciente(int idPessoa, String nome_completo,
 			Date data_de_nascimento, Morada local_nascimento, Morada morada,
 			TipoGenero genero, String profissao, TipoEscolaridade escolaridade, TipoEstadoCivil estado_civil, int nivel_doenca, String nome_medico,
 			EspecialidadeMedico especialidade_medico, String nome_utilizador,
 			String password, int nivel_sessao, Tecnico tecnico) {
-		
+
 		super(idPessoa, nome_completo, data_de_nascimento, local_nascimento,
 				genero, profissao, morada);
-		
+
+		//setRelacoes();
+		//setEventos();
+
 		this.escolaridade = escolaridade;
 		this.nivel_doenca = nivel_doenca;
 		this.nome_medico = nome_medico;
@@ -44,7 +48,41 @@ public class Paciente extends Pessoa implements Serializable {
 		this.tecnico = tecnico;
 		setEstado_civil(estado_civil);
 	}
+
+	private void setRelacoes() {
+		System.out.println("set das relações");
 	
+//		if(utilitario.verTodos_Relacao_Paciente_Familiar()!=null){
+//			for(Relacao r: utilitario.verTodos_Relacao_Paciente_Familiar()){
+//				novaRelacao(r);
+//			}
+//		}
+//		if(utilitario.verTodos_Relacao_Paciente_Familiar_Do_Paciente(this)!=null){
+//			for(Relacao r:utilitario.verTodos_Relacao_Paciente_Familiar_Do_Paciente(this)){
+//				novaRelacao(r);
+//			}
+//		}
+//		if(utilitario.verTodos_Relacao_Familiar_Familiar(this)!=null){
+//			for(Relacao r: utilitario.verTodos_Relacao_Familiar_Familiar(this)){
+//				novaRelacao(r);
+//			}
+//		}
+//		if(utilitario.verTodos_Familiares(this.getId())!=null){
+//			for(Familiar f: utilitario.verTodos_Familiares(this.getId())){
+//				if(utilitario.verTodos_Relacao_Familiar_Familiar_Do_Familiar(this, f)!=null){
+//					for(Relacao r: utilitario.verTodos_Relacao_Familiar_Familiar_Do_Familiar(this, f))
+//						if(r!=null)
+//							novaRelacao(r);
+//				}
+//			}
+//		}
+	}
+
+	public void setEventos(){
+		for(Evento e: utilitario.verTodos_Eventos(this)){
+			novoEvento(e);
+		}
+	}
 	//GETTERS:
 	public TipoEscolaridade getEscolaridade() {
 		return escolaridade;
@@ -73,11 +111,11 @@ public class Paciente extends Pessoa implements Serializable {
 	public Cuidador getCuidador() {
 		return cuidador;
 	}
-	
+
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
-	
+
 	//SETTERS:
 	public void setEscolaridade(TipoEscolaridade escolaridade) {
 		this.escolaridade = escolaridade;

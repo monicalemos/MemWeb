@@ -43,47 +43,69 @@
 					<h2>Dados do Paciente</h2>
 				</header>
 
-				<label for="nome">Nome Completo:</label> <input type="text"
-					id="nome" name="nome" size="40px"> <br> <label
-					for="data_nascimento">Data de Nascimento: (dd/mm/aaaa)</label> <input
-					type="text" id="data_nascimento" name="data_nascimento" size="40px">
-				<br> <label for="local_nascimento">Local de Nascimento:
-				</label> <label for="pais">País:</label> <input type="text"
-					id="pais_nascimento" name="pais_nascimento" size="40px"> <br>
-				<label for="regiao">Região: </label> <input type="text"
-					id="regiao_nascimento" name="regiao_nascimento" size="40px">
-				<br> <label for="cidade">Cidade: </label> <input type="text"
-					id="cidade_nascimento" name="cidade_nascimento" size="40px">
-				<br> <label for="morada_atual">Morada Atual: </label> <label
-					for="pais">País:</label> <input type="text" id="pais_nascimento"
-					name="pais_nascimento" size="40px"> <br> <label
-					for="regiao">Região: </label> <input type="text"
-					id="regiao_nascimento" name="regiao_nascimento" size="40px">
-				<br> <label for="cidade">Cidade: </label> <input type="text"
-					id="cidade_nascimento" name="cidade_nascimento" size="40px">
-				<br> <label for="genero">Género</label> <select name="genero">
-					<option value="Masculino">Masculino</option>
-					<option value="Feminino">Feminino</option>
-				</select> <br> <label for="profissao">Profissão: </label> <input
-					type="text" id="profissao" name="profissao" size="40px"> <br>
+				<label for="nome">Nome Completo:</label> 
+				<input type="text" id="nome" name="nome" size="40px"> 
+				<br> 
+				
+				<label for="data_nascimento">Data de Nascimento: (dd/mm/aaaa)</label> 
+				<input type="text" id="data_nascimento" name="data_nascimento" size="40px">
+				<br> 
+				
+				<label for="local_nascimento">Local de Nascimento:</label> 
+				<label for="pais">País:</label> 
+				<input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"> 
+				<br>
+				<label for="regiao">Região: </label> 
+				<input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px">
+				<br> 
+				<label for="cidade">Cidade: </label> 
+				<input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px">
+				<br> 
+				
+				<label for="morada_atual">Morada Atual: </label> 
+				<label  for="pais">País:</label> 
+				<input type="text" id="pais_atual" name="pais_atual" size="40px"> 
+				<br> 
+				<label for="regiao">Região:</label> 
+				<input type="text" id="regiao_atual" name="regiao_atual" size="40px">
+				<br> 
+				<label for="cidade">Cidade:</label> 
+				<input type="text" id="cidade_atual" name="cidade_atual" size="40px">
+				<br> 
+				
+				<label for="genero">Género</label> 
+					<select name="genero">
+						<option value="Masculino">Masculino</option>
+						<option value="Feminino">Feminino</option>
+					</select> 
+				<br> 
+				
+				<label for="profissao">Profissão:</label> 
+				<input type="text" id="profissao" name="profissao" size="40px"> 
+				<br>
 
-				<label for="escolaridade">Escolaridade: </label> <select
-					name="escolaridade">
+				<label for="escolaridade">Escolaridade:</label> 
+				<select name="escolaridade">
 					<option value="Ensino_Basico">Ensino Básico</option>
 					<option value="Ensino_Secundario">Ensino Secundário</option>
 					<option value="Licenciatura">Licenciatura</option>
 					<option value="Pos_Graduacao">Pós-Graduação</option>
 					<option value="Mestrado">Mestrado</option>
 					<option value="Douturamento">Douturamento</option>
-				</select> <br> <label for="estado_civil">Estado Civil: </label> <select
-					name="estado_civil">
+				</select> 
+				<br> 
+				
+				<label for="estado_civil">Estado Civil:</label> 
+				<select name="estado_civil">
 					<option value="Solteiro">Solteiro</option>
 					<option value="Casado">Casado</option>
 					<option value="Divorciado">Divorciado</option>
 					<option value="Viuvo">Viúvo</option>
-				</select> <br> 
-				<label for="nivel_doenca">Nível de Doença: </label> <select
-					name="nivel_doenca">
+				</select> 
+				<br> 
+				
+				<label for="nivel_doenca">Nível de Doença:</label> 
+				<select name="nivel_doenca">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -96,24 +118,34 @@
 					<option value="10">10</option>
 				</select> 
 				<br>
-				<label for="nivel_sessao">Nível de Sessão Inicial Esperado: </label> <select
-					name="nivel_sessao">
+				
+				<label for="nivel_sessao">Nível de Sessão Inicial Esperado:</label> 
+				<select name="nivel_sessao">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
-				</select> <br>
-				 <label for="nome_medico">Nome do Médico: </label> <input
-					type="text" id="nomeMedico" name="nomeMedico" size="40px">
-				<br> <label for="especialidade_medico">Especialidade do
-					Médico: </label> <select name="especialidade_medico">
+				</select> 
+				<br>
+				
+				<label for="nome_medico">Nome do Médico:</label> 
+				<input type="text" id="nome_medico" name="nome_medico" size="40px">
+				<br> 
+				
+				<label for="especialidade_medico">Especialidade do Médico:</label> 
+				<select name="especialidade_medico">
 					<option value="Neurologista">Neurologista</option>
 					<option value="Psiquiatra">Psiquiatra</option>
-				</select> <br> <label for="nome_utilizador">Nome de Utilizador:
-				</label> <input type="text" id="nome_utilizador" name="nome_utilizador"
-					size="40px"> <br> <label for="password">Password:
-				</label> <input type="password" id="password" name="password" size="40px">
+				</select> 
+				<br> 
+				
+				<label for="nome_utilizador">Nome de Utilizador:</label> 
+				<input type="text" id="nome_utilizador" name="nome_utilizador" size="40px"> 
+				<br> 
+				
+				<label for="password">Password:</label> 
+				<input type="password" id="password" name="password" size="40px">
 				<br>
 
 				<div id="lower">

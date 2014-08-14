@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import classesDados.Familiar;
-import classesDados.Paciente;
-import classesDados.Tecnico;
+import classesDados.*;
 
 @WebServlet("/ServletInicial")
 public class ServletInit extends HttpServlet {
@@ -35,6 +33,7 @@ public class ServletInit extends HttpServlet {
 		super();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("entrei no inicial");
@@ -116,7 +115,7 @@ public class ServletInit extends HttpServlet {
 
 		}
 		
-		else if(request.getParameter("accao").equals("registrarEvento")){
+		else if(request.getParameter("accao").equals("novoEvento")){
 			System.out.println("cliquei no registrar Evento");
 
 			ServletContext sc = this.getServletContext();
@@ -136,6 +135,25 @@ public class ServletInit extends HttpServlet {
 				rd.forward(request, response);
 			}
 
+		}
+		
+		else if(request.getParameter("accao").equals("verEventos")){
+			System.out.println("cliquei no ver Eventos");
+
+			ServletContext sc = this.getServletContext();
+			RequestDispatcher rd = sc.getRequestDispatcher("/verEventos.jsp");
+
+			if (rd != null){
+				session = request.getSession();
+			
+				Paciente paciente = (Paciente)session.getAttribute("paciente");
+			
+				ArrayList<Evento> eventos = utilitario.verTodos_Eventos(paciente);
+
+				session.setAttribute("lista_eventos", eventos);
+
+				rd.forward(request, response);
+			}
 		}
 
 		else if(request.getParameter("accao").equals("contactos")){
@@ -230,18 +248,16 @@ public class ServletInit extends HttpServlet {
 
 			if (rd != null){
 				session = request.getSession();
-				int id = (int) session.getAttribute("idUtilizador");
+
 				int idPaciente = (int) session.getAttribute("idPaciente");
-
+				
+				
+				System.out.println("tamanho litsa: " + utilitario.verTodos_Familiares(idPaciente).size() );
 				ArrayList<Familiar> familiares = utilitario.verTodos_Familiares(idPaciente);
-
+		
 				session.setAttribute("lista_familiares", familiares);
 
 				rd.forward(request, response);
-
-				ArrayList<Familiar> list = new ArrayList<Familiar>(); 
-				list = (ArrayList<Familiar>)session.getAttribute("lista_familiares"); 
-
 			}
 		}
 

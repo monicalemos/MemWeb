@@ -49,6 +49,9 @@ public class Morada implements Serializable {
 		this.regiao = regiao;
 	}
 	
-
+	@Override
+	public String toString() {
+		return pais + ", " + cidade + " - " + regiao;
+	}
 	
 }

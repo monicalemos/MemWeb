@@ -61,9 +61,9 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 		String regiaoNascimento = request.getParameter("regiao_nascimento");
 		String cidadeNascimento = request.getParameter("cidade_nascimento");
 
-		String paisMorada = request.getParameter("pais_morada");
-		String regiaoMorada = request.getParameter("regiao_morada");
-		String cidadeMorada = request.getParameter("cidade_morada");
+		String paisMorada = request.getParameter("pais_atual");
+		String regiaoMorada = request.getParameter("regiao_atual");
+		String cidadeMorada = request.getParameter("cidade_atual");
 		
 		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
 		
@@ -116,6 +116,7 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 		
 		try {
 			idFamiliar = utilitario.novoId_Familiar();
+			System.out.println("id familiar: " + idFamiliar);
 			if(eCuidador)
 				
 				familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, profissao,  eCuidador, nomeUtilizador, password);
@@ -132,8 +133,25 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 		try{
 			idRelacao = utilitario.novoId_Relacao_Paciente_Familiar();
 			relacao = new Relacao(idRelacao, paciente, tecnico, familiar, tipoRelacao);
+			
 			utilitario.registo_Relacao_Paciente_Familiar(relacao);
 			System.out.println("registou relacao");
+			
+			if(familiar.getRelacoes()!=null & !familiar.getRelacoes().contains(relacao)){
+				familiar.novaRelacao(relacao);
+				System.out.println("Nova relacao no familiar " + relacao.getId());
+			}
+			else
+				System.out.println("esta relacao ja existe no familiar");
+			
+			if(!paciente.getRelacoes().contains(relacao)){
+				paciente.novaRelacao(relacao);
+				System.out.println("Nova relacao no paciente " + relacao.getId());
+			}
+			else{
+				System.out.println("esta relacao ja existe no paciente");
+			}
+			
 		}
 		catch(SQLException e){
 			e.printStackTrace();

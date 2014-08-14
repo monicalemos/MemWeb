@@ -53,9 +53,9 @@ public class ServletRegistrarPaciente extends HttpServlet {
 		String regiaoNascimento = request.getParameter("regiao_nascimento");
 		String cidadeNascimento = request.getParameter("cidade_nascimento");
 
-		String paisMorada = request.getParameter("pais_morada");
-		String regiaoMorada = request.getParameter("regiao_morada");
-		String cidadeMorada = request.getParameter("cidade_morada");
+		String paisMorada = request.getParameter("pais_atual");
+		String regiaoMorada = request.getParameter("regiao_atual");
+		String cidadeMorada = request.getParameter("cidade_atual");
 
 		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
 		String profissao = request.getParameter("profissao");

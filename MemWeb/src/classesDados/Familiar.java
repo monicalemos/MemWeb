@@ -1,6 +1,7 @@
 package classesDados;
 
 import java.sql.Date;
+
 import enumerados.TipoGenero;
 
 public class Familiar extends Pessoa{
@@ -24,7 +25,6 @@ public class Familiar extends Pessoa{
 			String nome_utilizador, String password) {
 		super(id, nome_completo, data_de_nascimento, local_nascimento,
 				genero, profissão, morada);
-		
 		this.eCuidador = eCuidador;
 		
 		if(eCuidador == true){

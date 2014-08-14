@@ -55,9 +55,8 @@ function showHide(checkbox, group)
 		<div id="menu-lateral">
 			<div class="line"></div>
 			<ul>
-				<li><a class="selected"
-					href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
-				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
+				<li><a 	href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
+				<li><a class="selected" href="./ServletInicial?accao=registrarFamiliar">Inserir
 						Familiar</a></li>
 				<li><a href="./ServletInicial?accao=verFamiliares">Ver
 						Familiares</a></li>
@@ -109,13 +108,13 @@ function showHide(checkbox, group)
 				<label for="morada_atual">Morada Atual: </label> 
 				<br>
 				<label2 for="pais">País:</label2>
-				<input type="text" id="pais_nascimento" name="pais_nascimento" size="40px"> 
+				<input type="text" id="pais_atual" name="pais_atual" size="40px"> 
 				<br>
 				<label2 for="regiao">Região: </label2>
-				<input type="text" id="regiao_nascimento" name="regiao_nascimento" size="40px"> 
+				<input type="text" id="regiao_atual" name="regiao_atual" size="40px"> 
 				<br>
 				<label2 for="cidade">Cidade: </label2>
-				<input type="text" id="cidade_nascimento" name="cidade_nascimento" size="40px"> 
+				<input type="text" id="cidade_atual" name="cidade_atual" size="40px"> 
 				<br> 
 				
 				<label for="genero">Género</label> 
@@ -129,10 +128,10 @@ function showHide(checkbox, group)
 				<input type="text" id="profissao" name="profissao" size="40px"> 
 				<br>
 
-				<label for="eCuidador">É cuidador?</label>
+			
 				<div class="checkbox">
-					<input type="checkbox" value="1" id="eCuidador" onclick="showHide(this, 'myGroup');"/>
-					<label for="checkboxInput"></label>
+					<input type="checkbox" value="1" id="eCuidador" onclick="showHide(this, 'myGroup');"/> 
+					<label for="eCuidador">É cuidador?</label>
 				</div><br>
 				
 				<span id="myGroup" style="visibility:hidden" >
