@@ -101,7 +101,7 @@ public class Utilitario {
 		for(Morada p : moradas ){
 			return p.toString() + "\n";
 		}
-		return "N„o h· pacientes a imprimir";
+		return "N√£o h√° pacientes a imprimir";
 	}
 
 	public void apaga_Morada(Morada m){

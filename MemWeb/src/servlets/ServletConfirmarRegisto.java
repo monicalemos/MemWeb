@@ -80,7 +80,7 @@ public class ServletConfirmarRegisto extends HttpServlet {
 		}
 
 		else if (request.getParameter("naoConfirma") != null){
-			System.out.println("Cliquei no n„o confirmar");
+			System.out.println("Cliquei no n√£o confirmar");
 			request.setAttribute("naoConfirmo", request.getServletPath());
 			RequestDispatcher rd = request.getRequestDispatcher("/RegistrarRespMedico.jsp");
 			if (rd != null)

@@ -13,18 +13,18 @@ public class Familiar extends Pessoa{
 	
 	public Familiar(int id, String nome_completo,
 			Date data_de_nascimento, Morada local_nascimento, Morada morada,
-			TipoGenero genero, String profissão, boolean eCuidador) {
+			TipoGenero genero, String profissao, boolean eCuidador) {
 		super(id, nome_completo, data_de_nascimento, local_nascimento,
-				genero, profissão, morada);
+				genero, profissao, morada);
 		this.eCuidador = eCuidador;
 	}
 
 	public Familiar(int id, String nome_completo,
 			Date data_de_nascimento, Morada local_nascimento, Morada morada,
-			TipoGenero genero, String profissão, boolean eCuidador,
+			TipoGenero genero, String profissao, boolean eCuidador,
 			String nome_utilizador, String password) {
 		super(id, nome_completo, data_de_nascimento, local_nascimento,
-				genero, profissão, morada);
+				genero, profissao, morada);
 		this.eCuidador = eCuidador;
 		
 		if(eCuidador == true){

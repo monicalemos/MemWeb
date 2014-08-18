@@ -50,7 +50,7 @@ public class Tecnico implements Serializable {
 				encontrou = true;
 			}
 		}
-		System.out.println("Esse paciente n„o existe: \n");
+		System.out.println("Esse paciente n√£o existe: \n");
 		return encontrou;
 	}
 	public boolean eliminaPaciente(Paciente p){
@@ -59,7 +59,7 @@ public class Tecnico implements Serializable {
 			System.out.println("Eliminou paciente \n");
 			pacientes.remove(p);
 		}
-		System.out.println("N„o eliminou o paciente \n");
+		System.out.println("N√£o eliminou o paciente \n");
 		return eliminou;
 	}
 

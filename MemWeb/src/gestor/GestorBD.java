@@ -52,7 +52,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts da imagem");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir a foto " + foto.getNome());
+			System.out.println("NÃ£o conseguiu inserir a foto " + foto.getNome());
 		}
 		return row;
 
@@ -110,7 +110,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o paciente " + u.getNome_completo());
+			System.out.println("NÃ£o conseguiu inserir o paciente " + u.getNome_completo());
 		}
 		return row;
 	}
@@ -166,7 +166,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem pacientes");
+			System.out.println("A base de dados nÃ£o tem pacientes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -212,7 +212,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("O paciente com id " + id_paciente + " não existe na BD");
+			System.out.println("O paciente com id " + id_paciente + " nÃ£o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -259,7 +259,7 @@ public class GestorBD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
+			System.out.println("A base de dados nÃ£o tem  o paciente com o nome de utilizador " + user );
 		} finally {
 			try {
 				preparedStatement.close();
@@ -279,7 +279,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar o paciete " + nomeCompleto);
+			System.out.println("NÃ£o conseguiu apagar o paciete " + nomeCompleto);
 		}finally{
 			try {
 				preparedStatement.close();
@@ -298,7 +298,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar o paciete " + p.getNome_completo());
+			System.out.println("NÃ£o conseguiu apagar o paciete " + p.getNome_completo());
 		}finally{
 			try {
 				preparedStatement.close();
@@ -323,7 +323,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 			System.out.println("Fiz os inserts da morada");
 		} catch (Exception e) {
-			System.out.println("Não conseguiu inserir a morada " + m);
+			System.out.println("NÃ£o conseguiu inserir a morada " + m);
 			e.printStackTrace();
 		}
 		return row;
@@ -361,7 +361,7 @@ public class GestorBD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A morada com id " + id_morada + " não existe na BD");
+			System.out.println("A morada com id " + id_morada + " nï¿½o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -387,7 +387,7 @@ public class GestorBD {
 						resultSet.getString("regiao")));
 			}
 		} catch (SQLException e) {
-			System.out.println("A base de dados não tem moradas");
+			System.out.println("A base de dados nï¿½o tem moradas");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -405,7 +405,7 @@ public class GestorBD {
 			preparedStatement.setInt(1, morada.getId());
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("Não conseguiu apagar a morada " + morada);
+			System.out.println("Nï¿½o conseguiu apagar a morada " + morada);
 			e.printStackTrace();
 		}finally{
 			try {
@@ -447,7 +447,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts do familiar");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o familiar " + p.getNome_completo());
+			System.out.println("Nï¿½o conseguiu inserir o familiar " + p.getNome_completo());
 		}
 		return row;		
 	}
@@ -496,7 +496,7 @@ public class GestorBD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem familiares");
+			System.out.println("A base de dados nï¿½o tem familiares");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -614,7 +614,7 @@ public class GestorBD {
 			} 
 		}catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem  o paciente com o nome de utilizador " + user );
+			System.out.println("A base de dados nï¿½o tem  o paciente com o nome de utilizador " + user );
 		} finally {
 			try {
 				preparedStatement.close();
@@ -633,7 +633,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar a familiar " + familiar.getNome_completo());
+			System.out.println("Nï¿½o conseguiu apagar a familiar " + familiar.getNome_completo());
 		}finally{
 			try {
 				preparedStatement.close();
@@ -678,7 +678,7 @@ public class GestorBD {
 			return row;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir o tecnico " + rm.getNome_completo());
+			System.out.println("Nï¿½o conseguiu inserir o tecnico " + rm.getNome_completo());
 			row=0;
 		}
 		return row;
@@ -703,7 +703,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem  o tecnico com o email " + email );
+			System.out.println("A base de dados nï¿½o tem  o tecnico com o email " + email );
 		} finally {
 			try {
 				preparedStatement.close();
@@ -731,7 +731,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem  o tecnico com o nome de utilizador " + nome_utilizador );
+			System.out.println("A base de dados nï¿½o tem  o tecnico com o nome de utilizador " + nome_utilizador );
 		} finally {
 			try {
 				preparedStatement.close();
@@ -759,7 +759,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("O tecnico com id " + idTecnico + " não existe na BD");
+			System.out.println("O tecnico com id " + idTecnico + " nï¿½o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -788,7 +788,7 @@ public class GestorBD {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem tecnicos");
+			System.out.println("A base de dados nï¿½o tem tecnicos");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -836,7 +836,7 @@ public class GestorBD {
 			System.out.println("Fiz os inserts do paciente");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir a relação ");
+			System.out.println("Nï¿½o conseguiu inserir a relaï¿½ï¿½o ");
 		}
 		return row;
 	}
@@ -874,7 +874,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A relacao com id " + id_relacao + " não existe na BD");
+			System.out.println("A relacao com id " + id_relacao + " nï¿½o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -906,7 +906,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem pacientes");
+			System.out.println("A base de dados nï¿½o tem pacientes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -938,7 +938,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem pacientes");
+			System.out.println("A base de dados nï¿½o tem pacientes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -957,7 +957,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar a relação familiar ");
+			System.out.println("Nï¿½o conseguiu apagar a relaï¿½ï¿½o familiar ");
 		}finally{
 			try {
 				preparedStatement.close();
@@ -984,10 +984,10 @@ public class GestorBD {
 			preparedStatement.setInt(5, r.getPaciente().getTecnico().getId());
 
 			row = preparedStatement.executeUpdate();
-			System.out.println("Fiz os inserts da relação");
+			System.out.println("Fiz os inserts da relaï¿½ï¿½o");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu inserir a relação ");
+			System.out.println("Nï¿½o conseguiu inserir a relaï¿½ï¿½o ");
 		}
 		return row;
 	}
@@ -1025,7 +1025,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A relacao com id " + id + " não existe na BD");
+			System.out.println("A relacao com id " + id + " nï¿½o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -1055,7 +1055,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem relaçoes");
+			System.out.println("A base de dados nï¿½o tem relaï¿½oes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -1086,7 +1086,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem pacientes");
+			System.out.println("A base de dados nï¿½o tem pacientes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -1105,7 +1105,7 @@ public class GestorBD {
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Não conseguiu apagar a relação familiar ");
+			System.out.println("Nï¿½o conseguiu apagar a relaï¿½ï¿½o familiar ");
 		}finally{
 			try {
 				preparedStatement.close();
@@ -1135,7 +1135,7 @@ public class GestorBD {
 				System.out.println("Fiz os inserts do evento com familiar");
 			} catch (Exception g) {
 				g.printStackTrace();
-				System.out.println("Não conseguiu inserir o evento com familiar");
+				System.out.println("Nï¿½o conseguiu inserir o evento com familiar");
 			}
 		}
 		else{
@@ -1154,7 +1154,7 @@ public class GestorBD {
 				System.out.println("Fiz os inserts do evento sem familiar");
 			} catch (Exception g) {
 				g.printStackTrace();
-				System.out.println("Não conseguiu inserir o evento sem familiar");
+				System.out.println("Nï¿½o conseguiu inserir o evento sem familiar");
 			}
 		}
 		return row;
@@ -1199,7 +1199,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("O evento com id " + id + " não existe na BD");
+			System.out.println("O evento com id " + id + " nï¿½o existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -1240,7 +1240,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A base de dados não tem relaçoes");
+			System.out.println("A base de dados nï¿½o tem relaï¿½oes");
 		} finally {
 			try {
 				preparedStatement.close();
@@ -1258,7 +1258,7 @@ public class GestorBD {
 			preparedStatement.setInt(1, evento.getId());
 			row = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("Não conseguiu apagar o evento " + evento);
+			System.out.println("Nï¿½o conseguiu apagar o evento " + evento);
 			e.printStackTrace();
 		}finally{
 			try {

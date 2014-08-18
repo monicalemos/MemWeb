@@ -50,7 +50,7 @@ public class Paciente extends Pessoa implements Serializable {
 	}
 
 	private void setRelacoes() {
-		System.out.println("set das relações");
+		System.out.println("set das relacÃµes");
 	
 //		if(utilitario.verTodos_Relacao_Paciente_Familiar()!=null){
 //			for(Relacao r: utilitario.verTodos_Relacao_Paciente_Familiar()){

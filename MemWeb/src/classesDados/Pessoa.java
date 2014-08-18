@@ -65,18 +65,18 @@ public class Pessoa implements Serializable {
 				return true;
 			}
 		}
-		System.out.println("Essa relaÁ„o n„o existe");
+		System.out.println("Essa rela√ß√£o n√£o existe");
 		return false;
 	}
 
 	public Relacao existeRelacaoPessoa(Pessoa p){
 		for (Relacao rel : relacoes){
 			if(rel.getFamiliar_nivel1().equals(p) || rel.getFamiliar_nivel2().equals(p)){
-				System.out.println("Essa relaÁ„o existe: \n");
+				System.out.println("Essa rela√ß√£o existe: \n");
 				return rel;
 			}
 		}
-		System.out.println("Essa relaÁ„o n„o existe");
+		System.out.println("Essa rela√ß√£o n√£o existe");
 		return null;
 	}
 	public Relacao existeRelacaoPessoa_Pessoa(Pessoa p, Pessoa q){
@@ -91,11 +91,11 @@ public class Pessoa implements Serializable {
 	public Relacao existeRelacaoPaciente(Paciente p){
 		for (Relacao rel : relacoes){
 			if(rel.getPaciente() == p){
-				System.out.println("Essa relaÁ„o existe: \n");
+				System.out.println("Essa rela√ß√£o existe: \n");
 				return rel;
 			}
 		}
-		System.out.println("Essa relaÁ„o n„o existe");
+		System.out.println("Essa rela√ß√£o n√£o existe");
 		return null;
 	}
 
@@ -103,7 +103,7 @@ public class Pessoa implements Serializable {
 		for( Relacao r: relacoes){
 			return r.toString() + ";\n";
 		}
-		System.out.println("n„o h· relaÁıes entre esta pessoa");
+		System.out.println("N√£o h√° rela√ß√µes entre esta pessoa");
 		return null;
 	}
 
@@ -117,7 +117,7 @@ public class Pessoa implements Serializable {
 				return true;
 			}
 		}
-		System.out.println("Esse evento n„o existe");
+		System.out.println("Esse evento n√£o existe");
 		return false;
 	}
 
@@ -128,7 +128,7 @@ public class Pessoa implements Serializable {
 				return ev;
 			}
 		}
-		System.out.println("Esse evento n„o existe");
+		System.out.println("Esse evento n√£o existe");
 		return null;
 	}
 
@@ -136,7 +136,7 @@ public class Pessoa implements Serializable {
 		for (Evento ev: eventos){
 			return ev.toString() + ";\n";
 		}
-		System.out.println("n„o h· eventos para esta pessoa");
+		System.out.println("nÔøΩo hÔøΩ eventos para esta pessoa");
 		return null;
 	}
 	
