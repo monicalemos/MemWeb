@@ -241,7 +241,7 @@ public class ServletInit extends HttpServlet {
 			}
 		}
 		else if(request.getParameter("accao").equals("verFamiliares")){
-			System.out.println("cliquei no ver Pacientes");
+			System.out.println("cliquei no ver Familiares");
 
 			ServletContext sc = this.getServletContext();
 			RequestDispatcher rd = sc.getRequestDispatcher("/verFamiliares.jsp");
@@ -250,7 +250,7 @@ public class ServletInit extends HttpServlet {
 				session = request.getSession();
 
 				int idPaciente = (int) session.getAttribute("idPaciente");
-				
+				int id = (int) session.getAttribute("idUtilizador");
 				
 				System.out.println("tamanho litsa: " + utilitario.verTodos_Familiares(idPaciente).size() );
 				ArrayList<Familiar> familiares = utilitario.verTodos_Familiares(idPaciente);
@@ -258,6 +258,44 @@ public class ServletInit extends HttpServlet {
 				session.setAttribute("lista_familiares", familiares);
 
 				rd.forward(request, response);
+			}
+		}
+                
+                else if(request.getParameter("accao").equals("verFamiliar")){
+			System.out.println("cliquei no ver Familiar");
+
+			ServletContext sc = this.getServletContext();
+			RequestDispatcher rd = sc.getRequestDispatcher("/Familiar.jsp");
+
+			if (rd != null){
+				session = request.getSession();
+				int id = (int) session.getAttribute("idUtilizador");
+				//int id_paciente = Integer.parseInt(request.getParameter("id_paciente"));
+
+				int linhaId = Integer.parseInt(request.getParameter("linhaId"));
+                                
+                              	System.out.println("lidaId " + linhaId);
+				System.out.println("id_tecnico " + id);
+				
+                                Paciente paciente = utilitario.devolve_Paciente(linhaId, id);
+                                Familiar familiar = utilitario.devolve_Familiar(linhaId);
+                                
+                                System.out.println("id tecnico : " + id + "id paciente: " + paciente.getId() + " id familiar " + familiar.getId());
+                                
+				//Relacao relacao = utilitario.devolve_Relacao_Paciente_Familiar(id, paciente.getId(), familiar.getId());
+                                 
+                                session.setAttribute("paciente", paciente);
+				session.setAttribute("idPaciente", paciente.getId());
+                                
+                                session.setAttribute("familiar", familiar);
+                                session.setAttribute("idFamiliar", familiar.getId());
+                                
+//                                session.setAttribute("relacao", relacao);
+//                                session.setAttribute("idRelacao", relacao.getId());
+                                
+				System.out.println(familiar);					
+				rd.forward(request, response);
+
 			}
 		}
 

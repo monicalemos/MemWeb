@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<%@page import="enumerados.TipoRelacao"%>
 <html>
+<%@ page import="enumerados.TipoRelacao"%>
 <%@ page import="java.util.*" %>
-<%@ page import="classesDados.*;" %>
+<%@ page import="classesDados.*" %>
+<%@ page import="gestor.Utilitario" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <head>
@@ -58,22 +59,22 @@
 	
 	<table>
 	 <% ArrayList<Familiar> list = new ArrayList<Familiar>(); 
-		Object lista_familiares = session.getAttribute("lista_familiares");  
+                Utilitario utilitario = new Utilitario();
+                
+                Tecnico tecnico = (Tecnico) session.getAttribute("utilizador");
+                
+                Object lista_familiares = session.getAttribute("lista_familiares");  
 		Paciente paciente = (Paciente)session.getAttribute("paciente");
 		list = (ArrayList<Familiar>)lista_familiares; 
 	
 		ArrayList familiares = new ArrayList(); 
 		for(Familiar f : list){
 			Map pac = new HashMap();
-			TipoRelacao parentesco = null;
 			
-			ArrayList<Relacao> relacoes = f.getRelacoes();
-			for(Relacao r : relacoes){
-				if (r.getPaciente().equals(paciente))
-					parentesco = r.getTipo_relacao();
-					
-			}
-
+			//Relacao relacao = utilitario.devolve_Relacao_Paciente_Familiar(tecnico.getId(), paciente.getId(), f.getId());
+                        //TipoRelacao parentesco = relacao.getTipo_relacao();
+                        TipoRelacao parentesco=null;
+                       
 			pac.put("id", f.getId());
 			pac.put("nome_proprio", f.getNomeProprio());
 			pac.put("apelido", f.getApelido());
@@ -98,11 +99,11 @@
 			 <td><c:out value="${current.apelido}"/></td>
 			 <td><c:out value="${current.data_nascimento}" /></td>
 			 <td><c:out value="${current.profissao}" /></td>
-			 <td><c:out value="${current.parentesco}" /></td>	
+			 <td><c:out value="${current.parentesco}" /></td>
 			 <td>
-			 <form action="./Inicial?accao=verPaciente" method="post">
+			 <form action="./Inicial?accao=verFamiliar" method="post">
 			 <input type="hidden" name="linhaId" value="${current.id}"/>
-			 <input type="submit" value="Ver Paciente"/>
+			 <input type="submit" value="Ver Familiar"/>
 			 </form>
 			 </td>
   			</tr>	

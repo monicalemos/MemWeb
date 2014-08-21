@@ -81,7 +81,9 @@ public class Queries {
 
 	public static final String select_Relacao_Paciente_FamiliarId ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Paciente_Familiar`.`idRelacao_Paciente_Familiar` = ? ;";
 	
-	public static final String selectAll_Relacao_Paciente_Familiar ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Paciente_Familiar`.`Paciente_Tecnico_idTecnico` = ? ;";
+	public static final String select_Relacao_Paciente_Familiar ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Paciente_Familiar`.`Paciente_Tecnico_idTecnico` = ? and `Relacao_Paciente_Familiar`.`Paciente_idPaciente` = ? and `Relacao_Paciente_Familiar`.`Familiar_idFamiliar` = ? ;";
+        
+        public static final String selectAll_Relacao_Paciente_Familiar ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Paciente_Familiar`.`Paciente_Tecnico_idTecnico` = ? ;";
 
 	public static final String selectAll_Relacao_Paciente_Familiar_Do_Paciente ="select * from `memDb`.`Relacao_Paciente_Familiar` where `Relacao_Paciente_Familiar`.`Paciente_idPaciente`=?;";
 

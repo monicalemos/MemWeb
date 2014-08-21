@@ -854,18 +854,24 @@ public class GestorBD {
 		}
 		return lastInsertedId;
 	}
-	public Relacao select_Relacao_Paciente_FamiliarId(int id_relacao, int id_tecnico) {
+	public Relacao select_Relacao_Paciente_Familiar(int id_tecnico, int id_paciente, int id_familiar) {
 		Relacao relacao = null;
+                Paciente paciente = null;
+                Familiar familiar = null;
 		try {
 			preparedStatement = (PreparedStatement) connection
-					.prepareStatement(Queries.select_Relacao_Paciente_FamiliarId);
-			preparedStatement.setInt(1, id_relacao);
+					.prepareStatement(Queries.select_Relacao_Paciente_Familiar);
+			preparedStatement.setInt(1, id_tecnico);
+                        preparedStatement.setInt(2, id_paciente);
+                        preparedStatement.setInt(3, id_familiar);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			Paciente paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"), id_tecnico);
+			//paciente = select_PacienteId(resultSet.getInt("Paciente_idPaciente"), id_tecnico);
+                        paciente = select_PacienteId(id_paciente, id_tecnico);
 			
-			Familiar familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
+			//familiar = select_FamiliarId(resultSet.getInt("Familiar_idFamiliar"));
+                        familiar = select_FamiliarId(id_familiar);
 
 			while (resultSet.next()) {	
 				relacao = new Relacao(resultSet.getInt("idRelacao_Paciente_Familiar"),
@@ -874,7 +880,7 @@ public class GestorBD {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("A relacao com id " + id_relacao + " n�o existe na BD");
+			System.out.println("A relacao com id " + relacao.getId() + " e paciente " + paciente +" e familiar: " + familiar + " não existe na BD");
 		} finally {
 			try {
 				preparedStatement.close();

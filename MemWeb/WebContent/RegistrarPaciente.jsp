@@ -118,6 +118,10 @@
 					<option value="10">10</option>
 				</select> 
 				<br>
+                                
+                                <label for="fotografia">Insira uma fotografia:</label>
+                                <input type="file" name="pic" accept="image/*">
+                                <input type="submit">
 				
 				<label for="nivel_sessao">Nível de Sessão Inicial Esperado:</label> 
 				<select name="nivel_sessao">

@@ -57,7 +57,8 @@ public class ServletRegistrarTecnico extends HttpServlet {
 		session.setAttribute("password", tecnico.getPassword());
 		session.setAttribute("email", tecnico.getEmail());
 		session.setAttribute("tipo_utilizador", tecnico.getTipo_utilizador());
-		session.setAttribute("tecnico", tecnico);
+		session.setAttribute("utilizador", tecnico);
+                session.setAttribute("idUtilizador", tecnico.getId());
 		System.out.println("registei utilizador");
 		RequestDispatcher dispatcher =
 				getServletContext().getRequestDispatcher("/LoggedPage.jsp");

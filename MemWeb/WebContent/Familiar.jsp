@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page import="java.util.*"%>
-<%@ page import="classesDados.Paciente;"%>
+<%@ page import="classesDados.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
@@ -45,11 +45,10 @@
 		<div id="menu-lateral">
 			<div class="line"></div>
 			<ul>
-				<li><a class="selected"
-					href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
+				<li><a href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
 				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
 						Familiar</a></li>
-				<li><a href="./ServletInicial?accao=verFamiliares">Ver
+				<li><a class="selected" href="./ServletInicial?accao=verFamiliares">Ver
 						Familiares</a></li>
 				<li><a href="./ServletInicial?accao=novoEvento">Inserir
 						Evento</a></li>
@@ -58,21 +57,19 @@
 		</div>
 
 		<div id="container">
-			<h2>Dados do Paciente:</h2>
+			<h2>Dados do Familiar</h2>
 			<%
-				Paciente p = (Paciente) session.getAttribute("paciente");
+				Familiar p = (Familiar) session.getAttribute("familiar");
+                               // Relacao r = (Relacao) session.getAttribute("relacao");
 			%>
 			<label for="nome"> Nome: <%=p.getNome_completo()%></label><br> <label
 				for="data_nascimento"> Data de Nascimento: <%=p.getData_de_nascimento()%></label><br>
 			<label for="local_nascimento"> Local de Nascimento: <%=p.getLocal_nascimento()%></label><br>
 			<label for="morada_atual"> Morada Atual: <%=p.getMorada()%></label><br>
 			<label for="profissao"> Profissão: <%=p.getProfissao()%></label><br>
-			<label for="escolaridade"> Escolaridade: <%=p.getEscolaridade()%></label><br>
 			<label for="estado_civil"> Estado civil: <%=p.getEstado_civil()%></label><br>
-			<label for="nivel_doenca"> Nível da Doença: <%=p.getNivel_doenca()%></label><br>
-			<label for="nome_medico"> Nome do Médico: <%=p.getNome_medico()%></label><br>
-			<label for="especialidade_medico"> Especialidade do Médico: <%=p.getEspecialidade_medico()%></label><br>
-			<label for="nivel_sessao"> Nível de Sessão: <%=p.getNivel_sessao()%></label><br>
+                       <!-- <label for="parentesco"> Relação com Paciente:</label><br> -->
+			<label for="eCuidador"> É cuidador?: <%=p.eCuidador()%></label><br>
 
 		</div>
 	</div>

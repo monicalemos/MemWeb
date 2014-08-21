@@ -42,6 +42,10 @@
 				<label for="email">Email:</label> 
 				<input type="text" id="email" name="email"><br> 
 				
+                                <label for="fotografia">Insira uma fotografia:</label>
+                                <input type="file" name="pic" accept="image/*">
+                                <input type="submit">
+                                
 				<div id="lower">
 					<input type="submit" value="Registar">
 				</div>

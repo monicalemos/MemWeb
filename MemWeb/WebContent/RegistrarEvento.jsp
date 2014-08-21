@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page import="java.util.*"%>
-<%@ page import="classesDados.*;"%>
+<%@ page import="classesDados.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
@@ -106,10 +106,12 @@ function show(group)
 				<label for="descricao_evento">Descrição do Evento:</label> 
 				<textarea id="descricao_evento" name="descricao_evento" rows="5" cols="60">
 				</textarea>
-				
 				<br> 
 				
-				
+				<label for="fotografia">Insira uma fotografia do evento:</label>
+                                <input type="file" name="pic" accept="image/*">
+                                <input type="submit">
+                                
 				<div class="checkbox">
 					<input type="checkbox" value="1" id="temFamiliar" onclick="show('myGroup');"/><label for="temFamiliar">Esteve um familiar presente</label>
 					<label for="checkboxInput"></label>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page import="java.util.*"%>
-<%@ page import="classesDados.Paciente;"%>
+<%@ page import="classesDados.Paciente"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
@@ -127,8 +127,11 @@ function showHide(checkbox, group)
 				<label for="profissao">Profissão: </label> 
 				<input type="text" id="profissao" name="profissao" size="40px"> 
 				<br>
-
-			
+                                
+                                <label for="fotografia">Insira uma fotografia:</label>
+                                <input type="file" name="pic" accept="image/*">
+                                <input type="submit">
+                                
 				<div class="checkbox">
 					<input type="checkbox" value="1" id="eCuidador" onclick="showHide(this, 'myGroup');"/> 
 					<label for="eCuidador">É cuidador?</label>

@@ -33,6 +33,7 @@ public class ServletRegistrarPaciente extends HttpServlet {
 		super.init();
 	}
 	@SuppressWarnings("deprecation")
+        @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilitario utilitario = new Utilitario();
 		session = request.getSession();

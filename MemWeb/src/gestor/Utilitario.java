@@ -202,8 +202,8 @@ public class Utilitario {
 	}
 
 
-	public Relacao devolve_Relacao_Paciente_Familiar(int id, int id_tecnico){
-		return gestorBD.select_Relacao_Paciente_FamiliarId(id, id_tecnico);
+	public Relacao devolve_Relacao_Paciente_Familiar(int id_tecnico, int id_paciente, int id_familiar){
+		return gestorBD.select_Relacao_Paciente_Familiar(id_tecnico, id_paciente, id_familiar);
 	}
 
 	public ArrayList<Relacao> verTodos_Relacao_Paciente_Familiar(int idTecnico) {
