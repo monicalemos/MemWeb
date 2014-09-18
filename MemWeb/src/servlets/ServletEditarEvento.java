@@ -2,7 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -19,13 +19,13 @@ import gestor.Utilitario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet("/ServletRegistrarEvento")
-public class ServletRegistrarEvento extends HttpServlet {
+@WebServlet("/ServletEditarEvento")
+public class ServletEditarEvento extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     HttpSession session = null;
 
-    public ServletRegistrarEvento() {
+    public ServletEditarEvento() {
         super();
     }
 
@@ -45,18 +45,23 @@ public class ServletRegistrarEvento extends HttpServlet {
         System.out.println("nome paciente? " + paciente.getNome_completo());
         System.out.println("Tem id paciente? " + paciente.getId());
 
+        Evento evento = (Evento) session.getAttribute("evento");
+        System.out.println("tem evento?" + session.getAttribute("evento"));
+        System.out.println("descircao evento? " + evento.getDescricao());
+        System.out.println("Tem id evento? " + evento.getId());
+
 		// reading the user input
-        String dataDeNascimento = request.getParameter("data_nascimento");
+        String dataDoEvento = request.getParameter("data_nascimento");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date data_evento = null;
+        Date data_evento = null;
         try {
-            data_evento = sdf.parse(dataDeNascimento);
+            data_evento = sdf.parse(dataDoEvento);
         } catch (ParseException e) {
 
         }
-//		String 	dataDoEvento = request.getParameter("data_evento");
-//		String[] dataEvento = dataDoEvento.split("/");
-//		Date data_evento = new Date(Integer.parseInt(dataEvento[2]), Integer.parseInt(dataEvento[1]), Integer.parseInt(dataEvento[0]));
+//        String dataDoEvento = request.getParameter("data_evento");
+//        String[] dataEvento = dataDoEvento.split("/");
+//        Date data_evento = new Date(Integer.parseInt(dataEvento[2]), Integer.parseInt(dataEvento[1]), Integer.parseInt(dataEvento[0]));
 
         String tipo_evento = request.getParameter("tipo_evento");
 
@@ -75,8 +80,6 @@ public class ServletRegistrarEvento extends HttpServlet {
         int idMorada = 0;
 
         Familiar familiar = null;
-        Morada morada = null;
-        Evento evento = null;
 
         ArrayList<Familiar> familiares = utilitario.verTodos_Familiares(paciente.getId());
         for (Familiar f : familiares) {
@@ -85,33 +88,29 @@ public class ServletRegistrarEvento extends HttpServlet {
             }
         }
 
-        try {
-            idMorada = utilitario.novoId_Morada();
-            morada = new Morada(idMorada, paisMorada, regiaoMorada, cidadeMorada);
-            utilitario.registo_Morada(morada);
+        evento.getLocal_evento().setPais(paisMorada);
+        evento.getLocal_evento().setRegiao(regiaoMorada);
+        evento.getLocal_evento().setCidade(cidadeMorada);
+        Morada morada = evento.getLocal_evento();
+        utilitario.edita_Morada(morada);
 
-            System.out.println("idMorada " + idMorada);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (familiar != null) {
+            evento.setData(data_evento);
+            evento.setTipo_de_evento(tipo_evento);
+            evento.setDescricao(descricao);
+            evento.setFamiliar(familiar);
+        } else {
+            evento.setData(data_evento);
+            evento.setTipo_de_evento(tipo_evento);
+            evento.setDescricao(descricao);
+
         }
 
-        try {
-
-            idEvento = utilitario.novoId_Evento();
-            if (familiar != null) {
-                evento = new Evento(idEvento, data_evento, tipo_evento, morada, descricao, paciente, familiar);
-            } else {
-                evento = new Evento(idEvento, data_evento, tipo_evento, morada, descricao, paciente);
-            }
-            utilitario.registo_Evento(evento);
-            System.out.println("idEvento " + idEvento);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        utilitario.edita_Evento(evento);
+        System.out.println("idEvento " + idEvento);
 
         ServletContext sc = this.getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/Paciente.jsp");
+        RequestDispatcher rd = sc.getRequestDispatcher("/VerEventos.jsp");
 
         if (rd != null) {
             session = request.getSession();

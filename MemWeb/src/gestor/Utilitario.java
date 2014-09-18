@@ -77,7 +77,9 @@ public class Utilitario {
 	public void apaga_PacienteNome(String nomeCompleto){
 		gestorBD.delete_PacienteNome(nomeCompleto);
 	}
-
+        public void edita_Paciente(Paciente p){
+            gestorBD.update_Paciente(p);
+        }
 	public void apaga_Paciente(Paciente p){
 		gestorBD.delete_Paciente(p);
 	}
@@ -104,7 +106,11 @@ public class Utilitario {
 		return "Não há pacientes a imprimir";
 	}
 
-	public void apaga_Morada(Morada m){
+        public void edita_Morada(Morada m){
+            gestorBD.update_Morada(m);
+        }
+	
+        public void apaga_Morada(Morada m){
 		gestorBD.delete_Morada(m);
 	}
 
@@ -144,6 +150,10 @@ public class Utilitario {
 		return f;
 	}
 	
+         public void edita_Familiar(Familiar f){
+            gestorBD.update_Familiar(f);
+        }
+          
 	public void apaga_Familiar(Familiar pessoa){
 		gestorBD.delete_Familiar(pessoa);
 	}
@@ -183,7 +193,11 @@ public class Utilitario {
 		ArrayList<Tecnico> tecnicos = gestorBD.selectAll_Tecnicos();
 		return tecnicos;
 	}
-
+        
+         public void edita_Tecnico(Tecnico u){
+            gestorBD.update_Tecnico(u);
+        }
+          
 	public void apaga_Tecnico(Tecnico u){
 		gestorBD.delete_Tecnico(u);
 	}
@@ -263,7 +277,7 @@ public class Utilitario {
 		return iVelho+1;
 	}
 	
-	public Evento devolte_Evento(int id){
+	public Evento devolve_Evento(int id){
 		return gestorBD.select_EventoId(id);
 	}
 	
@@ -272,6 +286,9 @@ public class Utilitario {
 		return eventos;
 	}
 	
+        public void edita_Evento(Evento e){
+            gestorBD.update_Evento(e);
+        }
 	public void apaga_Evento(Evento e){
 		gestorBD.delete_Evento(e);
 	}

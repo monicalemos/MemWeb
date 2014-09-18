@@ -2,7 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Date;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,6 +21,9 @@ import enumerados.TipoEscolaridade;
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import gestor.Utilitario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @WebServlet("/Servlet")
@@ -46,9 +49,18 @@ public class ServletRegistrarPaciente extends HttpServlet {
 
 		String nome = request.getParameter("nome");
 
-		String 	dataDeNascimento = request.getParameter("data_nascimento");
-		String[] dataNascimento = dataDeNascimento.split("/");
-		Date data_nascimento = new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0]));
+                String dataDeNascimento = request.getParameter("data_nascimento");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date data_nascimento = null;
+                try{
+                    data_nascimento = sdf.parse(dataDeNascimento);
+                }catch(ParseException e){
+                    
+                }
+        
+//		String 	dataDeNascimento = request.getParameter("data_nascimento");
+//		String[] dataNascimento = dataDeNascimento.split("/");
+//		Date data_nascimento = new Date(Integer.parseInt(dataNascimento[2]), Integer.parseInt(dataNascimento[1]), Integer.parseInt(dataNascimento[0]));
 
 		String paisNascimento = request.getParameter("pais_nascimento");
 		String regiaoNascimento = request.getParameter("regiao_nascimento");

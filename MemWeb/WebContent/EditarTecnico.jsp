@@ -25,7 +25,7 @@
 			</ul>
 		</div>
 		<div id="container">
-			<form id="RegistrarTecnico" action="RegistrarTecnico">
+			<form id="EditarTecnico" action="EditarTecnico">
 				<header id="header" class="info">
 					<h2>Novo Registo</h2>
 				</header>

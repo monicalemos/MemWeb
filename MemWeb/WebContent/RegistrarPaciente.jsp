@@ -47,7 +47,7 @@
 				<input type="text" id="nome" name="nome" size="40px"> 
 				<br> 
 				
-				<label for="data_nascimento">Data de Nascimento: (dd/mm/aaaa)</label> 
+				<label for="data_nascimento">Data de Nascimento: (aaaa-mm-dd)</label> 
 				<input type="text" id="data_nascimento" name="data_nascimento" size="40px">
 				<br> 
 				
@@ -121,7 +121,7 @@
                                 
                                 <label for="fotografia">Insira uma fotografia:</label>
                                 <input type="file" name="pic" accept="image/*">
-                                <input type="submit">
+                                <br>
 				
 				<label for="nivel_sessao">Nível de Sessão Inicial Esperado:</label> 
 				<select name="nivel_sessao">

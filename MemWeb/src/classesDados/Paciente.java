@@ -1,7 +1,6 @@
 package classesDados;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import enumerados.TipoEscolaridade;
 import enumerados.EspecialidadeMedico;
@@ -9,6 +8,7 @@ import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import enumerados.TipoUtilizador;
 import gestor.Utilitario;
+import java.util.Date;
 
 public class Paciente extends Pessoa implements Serializable {
 
@@ -31,7 +31,7 @@ public class Paciente extends Pessoa implements Serializable {
 			String password, int nivel_sessao, Tecnico tecnico) {
 
 		super(idPessoa, nome_completo, data_de_nascimento, local_nascimento,
-				genero, profissao, morada);
+				genero, estado_civil, profissao, morada);
 
 		//setRelacoes();
 		//setEventos();
@@ -46,7 +46,6 @@ public class Paciente extends Pessoa implements Serializable {
 		this.nivel_sessao = nivel_sessao;
 		//this.cuidador = cuidador;
 		this.tecnico = tecnico;
-		setEstado_civil(estado_civil);
 	}
 
 	private void setRelacoes() {

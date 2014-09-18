@@ -61,18 +61,23 @@
 			<h2>Dados do Paciente:</h2>
 			<%
 				Paciente p = (Paciente) session.getAttribute("paciente");
+                                session.setAttribute("paciente", p);
 			%>
-			<label for="nome"> Nome: <%=p.getNome_completo()%></label><br> <label
-				for="data_nascimento"> Data de Nascimento: <%=p.getData_de_nascimento()%></label><br>
+			<label for="nome"> Nome: <%=p.getNome_completo()%></label><br> 
+                        <label for="data_nascimento"> Data de Nascimento: <%=p.getData_de_nascimento()%></label><br>
 			<label for="local_nascimento"> Local de Nascimento: <%=p.getLocal_nascimento()%></label><br>
 			<label for="morada_atual"> Morada Atual: <%=p.getMorada()%></label><br>
 			<label for="profissao"> Profissão: <%=p.getProfissao()%></label><br>
 			<label for="escolaridade"> Escolaridade: <%=p.getEscolaridade()%></label><br>
-			<label for="estado_civil"> Estado civil: <%=p.getEstado_civil()%></label><br>
+			<label for="estado_civil"> Estado civil: <%=p.getEstadoCivil()%></label><br>
 			<label for="nivel_doenca"> Nível da Doença: <%=p.getNivel_doenca()%></label><br>
 			<label for="nome_medico"> Nome do Médico: <%=p.getNome_medico()%></label><br>
 			<label for="especialidade_medico"> Especialidade do Médico: <%=p.getEspecialidade_medico()%></label><br>
 			<label for="nivel_sessao"> Nível de Sessão: <%=p.getNivel_sessao()%></label><br>
+                        
+                        <form id="EditarPaciente" action="./Inicial?accao=editarPaciente" method="post">
+                          <input type="submit" value="Editar Paciente">
+                        </form>
 
 		</div>
 	</div>

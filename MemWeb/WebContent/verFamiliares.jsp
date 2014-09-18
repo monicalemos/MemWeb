@@ -101,10 +101,21 @@
 			 <td><c:out value="${current.profissao}" /></td>
 			 <td><c:out value="${current.parentesco}" /></td>
 			 <td>
-			 <form action="./Inicial?accao=verFamiliar" method="post">
-			 <input type="hidden" name="linhaId" value="${current.id}"/>
-			 <input type="submit" value="Ver Familiar"/>
-			 </form>
+                            <form action="./Inicial?accao=verFamiliar" method="post">
+                                <input type="hidden" name="linhaId" value="${current.id}"/>
+                                <input type="submit" value="Ver"/>
+                            </form>
+                            
+                            <form id="EditarFamiliar" action="./Inicial?accao=editarFamiliar" method="post">
+                                 <input type="hidden" name="linhaId" value="${current.id}"/>
+                                 <input type="submit" value="Editar">
+                            </form>
+
+                            <form id="ApagarFamiliar" action="./Inicial?accao=apagarFamiliar" method="post">
+                                 <input type="hidden" name="linhaId" value="${current.id}"/>
+                                 <input type="submit" value="Apagar">
+                            </form>
+                                 
 			 </td>
   			</tr>	
   		</c:forEach>

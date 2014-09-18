@@ -43,7 +43,7 @@
 		<div id="menu-lateral">
 			<div class="line"></div>
 			<ul>
-				<li><a href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
+				<li><a href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
 				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
 						Familiar</a></li>
 				<li><a  href="./ServletInicial?accao=verFamiliares">Ver
@@ -56,6 +56,11 @@
 
 		<div id="container">
 	
+                    <%
+                                Paciente u = (Paciente) session.getAttribute("paciente");
+                                session.setAttribute("paciente", u);
+                               // Relacao r = (Relacao) session.getAttribute("relacao");
+			%>
 	<table>
 	 <% ArrayList<Evento> list = new ArrayList<Evento>(); 
 		Object lista_eventos = session.getAttribute("lista_eventos");  
@@ -82,6 +87,7 @@
 			<th>Local do Evento</th>
 			<th>Descrição</th>
 			<th>Familiar Presente</th>
+                        <th></th>
 			<th></th>
 			</tr>
 		<c:forEach items="${eventos}" var="current">
@@ -91,6 +97,17 @@
 			 <td><c:out value="${current.morada_evento}" /></td>
 			 <td><c:out value="${current.descricao}" /></td>
 			 <td><c:out value="${current.familiar}" /></td>	
+                         <td>
+                            <form id="EditarEvento" action="EditarEvento">
+                                 <input type="hidden" name="linhaId" value="${current.id}"/>
+                                 <input type="submit" value="Editar">
+                            </form>
+
+                            <form id="ApagarEvento" action="ApagarEvento">
+                                 <input type="hidden" name="linhaId" value="${current.id}"/>
+                                 <input type="submit" value="Apagar">
+                            </form>
+                        </td>
   			</tr>	
   		</c:forEach>
 </table>

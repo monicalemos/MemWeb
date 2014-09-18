@@ -60,6 +60,8 @@
 			<h2>Dados do Familiar</h2>
 			<%
 				Familiar p = (Familiar) session.getAttribute("familiar");
+                                Paciente u = (Paciente) session.getAttribute("paciente");
+                                session.setAttribute("paciente", u);
                                // Relacao r = (Relacao) session.getAttribute("relacao");
 			%>
 			<label for="nome"> Nome: <%=p.getNome_completo()%></label><br> <label
@@ -67,9 +69,13 @@
 			<label for="local_nascimento"> Local de Nascimento: <%=p.getLocal_nascimento()%></label><br>
 			<label for="morada_atual"> Morada Atual: <%=p.getMorada()%></label><br>
 			<label for="profissao"> Profissão: <%=p.getProfissao()%></label><br>
-			<label for="estado_civil"> Estado civil: <%=p.getEstado_civil()%></label><br>
+			<label for="estado_civil"> Estado civil: <%=p.getEstadoCivil()%></label><br>
                        <!-- <label for="parentesco"> Relação com Paciente:</label><br> -->
 			<label for="eCuidador"> É cuidador?: <%=p.eCuidador()%></label><br>
+                        
+                        <form id="EditarFamiliar" action="./Inicial?accao=editarFamiliar" method="post">
+                          <input type="submit" value="Editar Familiar">
+                        </form>
 
 		</div>
 	</div>

@@ -71,10 +71,20 @@
 			 <td><c:out value="${current.nivel_doenca}" /></td>
 			 <td><c:out value="${current.nivel_sessao}" /></td>	
 			 <td>
-			 <form action="./Inicial?accao=verPaciente" method="post">
-			 <input type="hidden" name="linhaId" value="${current.id}"/>
-			 <input type="submit" value="Ver Paciente"/>
-			 </form>
+                            <form action="./Inicial?accao=verPaciente" method="post">
+                            <input type="hidden" name="linhaId" value="${current.id}"/>
+                            <input type="submit" value="Ver"/>
+                            </form>
+
+                            <form id="EditarPaciente" action="./Inicial?accao=editarPaciente" method="post">
+                                <input type="hidden" name="linhaId" value="${current.id}"/>
+                                <input type="submit" value="Editar">
+                           </form>
+
+                           <form id="ApagarPaciente" action="./Inicial?accao=apagarPaciente" method="post">
+                                <input type="hidden" name="linhaId" value="${current.id}"/>
+                                <input type="submit" value="Apagar">
+                           </form>                        
 			 </td>
   			</tr>	
   		</c:forEach>

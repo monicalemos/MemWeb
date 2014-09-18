@@ -56,7 +56,7 @@ function show(group)
 		<div id="menu-lateral">
 			<div class="line"></div>
 			<ul>
-				<li><a href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
+				<li><a href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
 				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
 						Familiar</a></li>
 				<li><a href="./ServletInicial?accao=verFamiliares">Ver
@@ -68,48 +68,50 @@ function show(group)
 		</div>
 
 		<div id="container">
-			<form id="RegistrarEvento" action="RegistrarEvento">
+			<form id="EditarEvento" action="EditarEvento">
 				<header id="header" class="info">
 					<h2>Novo Evento</h2>
 				</header>
 								
 				<%
-                                Paciente u = (Paciente) session.getAttribute("paciente");
-                                session.setAttribute("paciente", u);
-                               // Relacao r = (Relacao) session.getAttribute("relacao");
+				Evento e = (Evento) session.getAttribute("evento");
+                                Map pac2 = new HashMap();
+                                pac2.put("tipo_evento", e.getTipo_de_evento());
+                                pac2.put("nome_familiar", e.getFamiliar().getNome_completo());
+                                pageContext.setAttribute("paciente", pac2);
                                 %>
-                        
+                            
 				<label for="data_evento">Data do Evento: (aaaa-mm-dd)</label> 
-				<input type="text" id="data_evento" name="data_evento"> 
+                                <input type="text" id="data_evento" name="data_evento" value='<%=e.getData()%>'> 
 				<br> 
 				
 				<label for="tipo_evento">Tipo de Evento</label> 
 				<select name="tipo_evento" id="tipo_evento">
-						<option value="Nascimento">Nascimento</option>
-						<option value="Baptizado">Baptizado</option>
-						<option value="Aniversário">Aniversário</option>
-						<option value="Noivado">Noivado</option>
-						<option value="Casamento">Casamento</option>
-						<option value="Festa">Festa</option>
-						<option value="Morte">Morte</option>
-						<option value="Funeral">Funeral</option>
+						<option value="Nascimento" ${paciente.tipo_evento== 'Nascimento' ? 'selected' : ''}>Nascimento</option>
+						<option value="Baptizado" ${paciente.tipo_evento== 'Baptizado' ? 'selected' : ''}>Baptizado</option>
+						<option value="Aniversário" ${paciente.tipo_evento== 'Aniversário' ? 'selected' : ''}>Aniversário</option>
+						<option value="Noivado" ${paciente.tipo_evento== 'Noivado' ? 'selected' : ''}>Noivado</option>
+						<option value="Casamento" ${paciente.tipo_evento== 'Casamento' ? 'selected' : ''}>Casamento</option>
+						<option value="Festa" ${paciente.tipo_evento== 'Festa' ? 'selected' : ''}>Festa</option>
+						<option value="Morte" ${paciente.tipo_evento== 'Morte' ? 'selected' : ''}>Morte</option>
+						<option value="Funeral" ${paciente.tipo_evento== 'Funeral' ? 'selected' : ''}>Funeral</option>
 					</select> 
 				<br> 
 				
 				<label for="morada_evento">Morada do Evento: </label> 
 				<br>
 				<label2 for="pais">País:</label2>
-				<input type="text" id="pais_evento" name="pais_nascimento" size="40px"> 
+				<input type="text" id="pais_evento" name="pais_nascimento" size="40px" value='<%=e.getLocal_evento().getPais()%>'> 
 				<br>
 				<label2 for="regiao">Região: </label2>
-				<input type="text" id="regiao_evento" name="regiao_nascimento" size="40px"> 
+				<input type="text" id="regiao_evento" name="regiao_nascimento" size="40px" value='<%=e.getLocal_evento().getRegiao()%>'> 
 				<br>
 				<label2 for="cidade">Cidade: </label2>
-				<input type="text" id="cidade_evento" name="cidade_nascimento" size="40px"> 
+				<input type="text" id="cidade_evento" name="cidade_nascimento" size="40px" value='<%=e.getLocal_evento().getCidade()%>'> 
 				<br> 
 				
 				<label for="descricao_evento">Descrição do Evento:</label> 
-				<textarea id="descricao_evento" name="descricao_evento" rows="5" cols="60">
+				<textarea id="descricao_evento" name="descricao_evento" rows="5" cols="60" value='<%=e.getDescricao()%>'>
 				</textarea>
 				<br> 
 				
@@ -119,7 +121,8 @@ function show(group)
                                 <br>
                                 
 				<div class="checkbox">
-					<input type="checkbox" value="1" id="temFamiliar" onclick="show('myGroup');"/><label for="temFamiliar">Esteve um familiar presente</label>
+					<input type="checkbox" value="1" id="temFamiliar" onclick="show('myGroup');"/>
+                                        <label for="temFamiliar">Esteve um familiar presente</label>
 					<label for="checkboxInput"></label>
 				</div><br>
 				
@@ -136,6 +139,7 @@ function show(group)
 						for(Familiar f : list){
 							Map pac = new HashMap();			
 							pac.put("id", f.getId());
+                                                        pac.put("nome completo", f.getNome_completo());
 							pac.put("nome_proprio", f.getNomeProprio());
 							pac.put("apelido", f.getApelido());
 							familiares.add(pac);
@@ -145,7 +149,7 @@ function show(group)
 				
 						<c:forEach items="${familiares}" var="current">
 							
-								<option value="${current.id}">${current.nome_proprio} ${current.apelido}</option>
+								<option value="${current.id}" ${paciente.nome_familiar== current.nomeCompelto ? 'selected' : ''}>${current.nome_proprio} ${current.apelido}</option>
 								
 				
 				  		</c:forEach>
