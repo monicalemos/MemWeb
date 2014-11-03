@@ -172,7 +172,7 @@ public class ServletEditarFamiliar extends HttpServlet {
 
         if (rd != null) {
             session = request.getSession();
-            utilitario.devolve_Paciente(paciente.getId(), tecnico.getId());
+            utilitario.devolve_Paciente(paciente.getId());
             session.setAttribute("paciente", paciente);
             utilitario.devolve_Familiar(familiar.getId());
             System.out.println(familiar);

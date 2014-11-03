@@ -16,8 +16,8 @@ import classesDados.Tecnico;
 
 
 public class Utilitario {
-	private LigacaoBD ligacaoBD;
-	private GestorBD gestorBD;
+	private final LigacaoBD ligacaoBD;
+	private final GestorBD gestorBD;
 
 	public Utilitario() {
 		ligacaoBD = new LigacaoBD("root","");
@@ -55,25 +55,10 @@ public class Utilitario {
 		return pacientes;
 	}
 	
-	public Paciente devolve_Paciente(int id_paciente, int id_tecnico){
-		return gestorBD.select_PacienteId(id_paciente, id_tecnico);
+	public Paciente devolve_Paciente(int id_paciente){
+		return gestorBD.select_PacienteId(id_paciente);
 	}
-	
-	public Paciente devolve_Paciente(String user, String pass){
-		Paciente p = gestorBD.select_PacienteNomeUtilizador(user);
-
-		if (p != null) {
-			if (BCrypt.checkpw(pass, p.getPassword())) {
-				System.out.println("Password matches");
-				return p;
-			} else {
-				System.out.println("Password does not match");
-			}
-		}
-
-		return p;
-	}
-	
+		
 	public void apaga_PacienteNome(String nomeCompleto){
 		gestorBD.delete_PacienteNome(nomeCompleto);
 	}
@@ -216,17 +201,12 @@ public class Utilitario {
 	}
 
 
-	public Relacao devolve_Relacao_Paciente_Familiar(int id_tecnico, int id_paciente, int id_familiar){
-		return gestorBD.select_Relacao_Paciente_Familiar(id_tecnico, id_paciente, id_familiar);
-	}
-
-	public ArrayList<Relacao> verTodos_Relacao_Paciente_Familiar(int idTecnico) {
-		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar(idTecnico);
-		return relacoes;
+	public Relacao devolve_Relacao_Paciente_Familiar(int id_paciente, int id_familiar){
+		return gestorBD.select_Relacao_Paciente_Familiar(id_paciente, id_familiar);
 	}
 
 	public ArrayList<Relacao> verTodos_Relacao_Paciente_Familiar_Do_Paciente(Paciente p) {
-		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar_Do_Paciente(p);
+		ArrayList<Relacao> relacoes = gestorBD.selectAll_Relacao_Paciente_Familiar(p.getId());
 	
 		return relacoes;
 	}

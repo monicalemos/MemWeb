@@ -5,66 +5,78 @@ import java.util.Date;
 
 import enumerados.TipoGenero;
 
-public class Familiar extends Pessoa{
+public class Familiar extends Pessoa {
 
-	private boolean eCuidador;
-	private Date data_obito;
-	private String nome_utilizador;
-	private String password;
-	
-	public Familiar(int id, String nome_completo,
-			Date data_de_nascimento, Morada local_nascimento, Morada morada,
-			TipoGenero genero, TipoEstadoCivil estado_civil, String profissao, boolean eCuidador) {
-		super(id, nome_completo, data_de_nascimento, local_nascimento,
-				genero, estado_civil, profissao, morada);
-		this.eCuidador = eCuidador;
-	}
+    private int telefone;
+    private boolean eCuidador;
+    private Date data_obito;
+    private String nome_utilizador;
+    private String password;
 
-	public Familiar(int id, String nome_completo,
-			Date data_de_nascimento, Morada local_nascimento, Morada morada,
-			TipoGenero genero, TipoEstadoCivil estado_civil, String profissao, boolean eCuidador,
-			String nome_utilizador, String password) {
-		super(id, nome_completo, data_de_nascimento, local_nascimento,
-				genero, estado_civil, profissao, morada);
-		this.eCuidador = eCuidador;
-		
-		if(eCuidador == true){
-			this.nome_utilizador = nome_utilizador;
-			this.password = password;
-		}
-	}
+    public Familiar(int id, String nome_completo,
+            Date data_de_nascimento, Morada local_nascimento, Morada morada,
+            TipoGenero genero, TipoEstadoCivil estado_civil, String profissao, int telefone, boolean eCuidador) {
+        super(id, nome_completo, data_de_nascimento, local_nascimento,
+                genero, estado_civil, profissao, morada);
+        this.eCuidador = eCuidador;
+        this.telefone = telefone;
+    }
 
-	//GETTERS:
-	public boolean eCuidador() {
-		return eCuidador;
-	}
+    public Familiar(int id, String nome_completo,
+            Date data_de_nascimento, Morada local_nascimento, Morada morada,
+            TipoGenero genero, TipoEstadoCivil estado_civil, String profissao, int telefone, boolean eCuidador,
+            String nome_utilizador, String password) {
+        super(id, nome_completo, data_de_nascimento, local_nascimento,
+                genero, estado_civil, profissao, morada);
 
-	public Date getData_obito() {
-		return data_obito;
-	}
+        this.eCuidador = eCuidador;
+        this.telefone = telefone;
 
-	public String getNome_utilizador() {
-		return nome_utilizador;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
+        if (eCuidador == true) {
+            this.nome_utilizador = nome_utilizador;
+            this.password = password;
+        }
+    }
 
-	//SETTERS
+    //GETTERS:
+    public int getTelefone() {
+        return telefone;
+    }
 
-	public void seteCuidador(boolean eCuidador) {
-		this.eCuidador = eCuidador;
-	}
+    public boolean eCuidador() {
+        return eCuidador;
+    }
 
-	public void setData_obito(Date data_obito) {
-		this.data_obito = data_obito;
-	}
+    public Date getData_obito() {
+        return data_obito;
+    }
 
-	public void setNome_utilizador(String nome_utilizador) {
-		this.nome_utilizador = nome_utilizador;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getNome_utilizador() {
+        return nome_utilizador;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    //SETTERS
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+    
+    public void seteCuidador(boolean eCuidador) {
+        this.eCuidador = eCuidador;
+    }
+
+    public void setData_obito(Date data_obito) {
+        this.data_obito = data_obito;
+    }
+
+    public void setNome_utilizador(String nome_utilizador) {
+        this.nome_utilizador = nome_utilizador;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

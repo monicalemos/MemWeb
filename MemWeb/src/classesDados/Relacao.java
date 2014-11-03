@@ -8,23 +8,20 @@ public class Relacao implements Serializable {
 
 	private int id;
 	private Paciente paciente;
-	private Tecnico tecnico;
 	private Familiar familiar_nivel1;
 	private Familiar familiar_nivel2;
 	private TipoRelacao tipo_relacao;
 	
-	public Relacao(int id, Paciente paciente, Tecnico tecnico, Familiar  familiar_nivel1, TipoRelacao tipo_relacao) {
+	public Relacao(int id, Paciente paciente, Familiar  familiar_nivel1, TipoRelacao tipo_relacao) {
 		this.id = id;
 		this.paciente = paciente;
-		this.tecnico = tecnico;
 		this.familiar_nivel1 = familiar_nivel1;
 		this.tipo_relacao = tipo_relacao;
 	}
 
-	public Relacao(int id, Paciente paciente, Tecnico tecnico, Familiar familiar1, Familiar familiar2, TipoRelacao tipo){
+	public Relacao(int id, Paciente paciente, Familiar familiar1, Familiar familiar2, TipoRelacao tipo){
 		this.id=id;
 		this.paciente = paciente;
-		this.tecnico = tecnico;
 		this.familiar_nivel1 = familiar1;
 		this.familiar_nivel2 = familiar2;
 		this.tipo_relacao = tipo;
@@ -36,9 +33,6 @@ public class Relacao implements Serializable {
 	
 	public Paciente getPaciente() {
 		return paciente;
-	}
-	public Tecnico getTecnico() {
-		return tecnico;
 	}
 	public Familiar getFamiliar_nivel1() {
 		return familiar_nivel1;
@@ -53,9 +47,6 @@ public class Relacao implements Serializable {
 	//SETTERS:
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
-	}
-	public void setTecnico(Tecnico tecnico) {
-		this.tecnico = tecnico;
 	}
 	public void setTipo_relacao(TipoRelacao tipo_relacao) {
 		this.tipo_relacao = tipo_relacao;

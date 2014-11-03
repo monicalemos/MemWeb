@@ -46,25 +46,10 @@ public class ServletLogin extends HttpServlet {
 
 			Utilitario utilitario = new Utilitario();
 			
-			paciente = utilitario.devolve_Paciente(user, pass);
 			familiar = utilitario.devolve_Familiar(user, pass);
 			tecnico = utilitario.devolve_Tecnico(user, pass);
 
-			if (paciente != null) {
-				System.out.println("encontrei o paciente");
-
-				session = request.getSession();
-				session.setAttribute("tipo_utilizador", TipoUtilizador.PACIENTE);
-				session.setAttribute("username", paciente.getNome_utilizador());
-				session.setAttribute("nome_utilizador", paciente.getNome_completo());
-				session.setAttribute("idUtilizador", paciente.getId());
-				session.setAttribute("validado", "sim");
-				System.out.println(session.getAttribute("nome_utilizador"));
-				String ret = "LoggedPage.jsp";
-				response.sendRedirect(ret);
-			}
-			
-			else if(familiar != null) {
+			if(familiar != null) {
 				System.out.println("encontrei o familiar");
 
 				session = request.getSession();

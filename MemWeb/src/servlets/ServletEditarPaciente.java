@@ -80,12 +80,9 @@ public class ServletEditarPaciente extends HttpServlet {
         TipoEscolaridade escolaridade = TipoEscolaridade.valueOf(request.getParameter("escolaridade").toUpperCase());
         TipoEstadoCivil estadoCivil = TipoEstadoCivil.valueOf(request.getParameter("estado_civil").toUpperCase());
 
-        int nivelDoenca = Integer.parseInt(request.getParameter("nivel_doenca"));
+        String nivelDoenca = request.getParameter("nivel_doenca");
         String nomeMedico = request.getParameter("nome_medico");
         EspecialidadeMedico especialidadeMedico = EspecialidadeMedico.valueOf(request.getParameter("especialidade_medico").toUpperCase());
-
-        String nomeUtilizador = request.getParameter("nome_utilizador");
-        String password = request.getParameter("password");
 
         int nivelSessao = Integer.parseInt(request.getParameter("nivel_sessao"));
 
@@ -120,8 +117,6 @@ public class ServletEditarPaciente extends HttpServlet {
         paciente.setNome_medico(nomeMedico);
         paciente.setEspecialidade_medico(especialidadeMedico);
         paciente.setNivel_sessao(nivelSessao);
-        paciente.setNome_utilizador(nomeUtilizador);
-        paciente.setPassword(password);
 
         utilitario.edita_Paciente(paciente);
 
@@ -130,7 +125,7 @@ public class ServletEditarPaciente extends HttpServlet {
 
         if (rd != null) {
             session = request.getSession();
-            utilitario.devolve_Paciente(idPaciente, tecnico.getId());
+            utilitario.devolve_Paciente(idPaciente);
             session.setAttribute("paciente", paciente);
             System.out.println(paciente);
             rd.forward(request, response);

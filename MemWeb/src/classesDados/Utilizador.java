@@ -11,15 +11,6 @@ public class Utilizador {
 	private Tecnico tecnico;
 	private TipoUtilizador tipo;
 
-	public Utilizador(String nome_utilizador, String pass, Paciente p) {
-		this.nome_utilizador = nome_utilizador;
-		this.password = pass;
-		this.paciente = p;
-		p.setNome_utilizador(this.nome_utilizador);
-		p.setPassword(this.password);
-		this.tipo = TipoUtilizador.PACIENTE;
-	}
-
 	public Utilizador(String nome_utilizador, String pass, Familiar f) {
 		this.nome_utilizador = nome_utilizador;
 		this.password = pass;
@@ -53,10 +44,6 @@ public class Utilizador {
 			return "familiar";
 		}
 
-		else if(tipo == TipoUtilizador.PACIENTE){
-		//	getPaciente();
-			return "paciente";
-		}
 		else if(tipo == TipoUtilizador.TECNICO){
 		//	getTecnico();
 			return "tecnico";
@@ -66,9 +53,6 @@ public class Utilizador {
 
 	public Familiar getFamiliar() {
 		return familiar;
-	}
-	public Paciente getPaciente() {
-		return paciente;
 	}
 	public Tecnico getTecnico() {
 		return tecnico;

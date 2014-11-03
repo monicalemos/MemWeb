@@ -2,7 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,11 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import classesDados.Familiar;
-import classesDados.Morada;
-import classesDados.Paciente;
-import classesDados.Relacao;
-import classesDados.Tecnico;
+import classesDados.*;
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
 import enumerados.TipoRelacao;
@@ -25,13 +21,13 @@ import gestor.Utilitario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet("/ServletRegistrarFamiliar")
-public class ServletRegistrarFamiliar extends HttpServlet {
+@WebServlet("/ServletAdicionarFamiliar")
+public class ServletAdicionarFamiliar extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     HttpSession session = null;
 
-    public ServletRegistrarFamiliar() {
+    public ServletAdicionarFamiliar() {
         super();
     }
 
@@ -40,7 +36,7 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 
         Utilitario utilitario = new Utilitario();
         session = request.getSession();
-
+        System.out.println("entrou no servelt adicionar");
         Tecnico tecnico = (Tecnico) session.getAttribute("utilizador");
         System.out.println("tem tecnico?" + session.getAttribute("utilizador"));
         System.out.println("nome tecnico? " + tecnico.getNome_completo());
@@ -51,6 +47,11 @@ public class ServletRegistrarFamiliar extends HttpServlet {
         System.out.println("nome paciente? " + paciente.getNome_completo());
         System.out.println("Tem id paciente? " + paciente.getId());
 
+        Familiar familiarAScendente = (Familiar) session.getAttribute("familiar");
+        System.out.println("tem familiarAScendente?" + session.getAttribute("familiarAScendente"));
+        System.out.println("nome familiarAScendente? " + familiarAScendente.getNome_completo());
+        System.out.println("Tem id familiarAScendente? " + familiarAScendente.getId());
+
         // reading the user input
         TipoRelacao tipoRelacao = TipoRelacao.valueOf(request.getParameter("tipo_relacao").toUpperCase());
 
@@ -58,7 +59,7 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 
         String dataDeNascimento = request.getParameter("data_nascimento");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date data_nascimento = null;
+        Date data_nascimento = null;
         try {
             data_nascimento = sdf.parse(dataDeNascimento);
         } catch (ParseException e) {
@@ -80,18 +81,8 @@ public class ServletRegistrarFamiliar extends HttpServlet {
 
         TipoEstadoCivil estado_civil = TipoEstadoCivil.valueOf(request.getParameter("estado_civil").toUpperCase());
 
-        String profissao = request.getParameter("profissao");
         int telefone = Integer.parseInt(request.getParameter("telefone"));
-
-        boolean eCuidador = request.getParameter("eCuidador") != null;
-
-        String nomeUtilizador = null;
-        String password = null;
-        if (request.getParameter("e_cuidador") != null) {
-            eCuidador = true;
-            nomeUtilizador = request.getParameter("nome_utilizador");
-            password = request.getParameter("password");
-        }
+        String profissao = request.getParameter("profissao");
 
         int idLocalNascimento = 0;
         int idMorada = 0;
@@ -129,11 +120,8 @@ public class ServletRegistrarFamiliar extends HttpServlet {
         try {
             idFamiliar = utilitario.novoId_Familiar();
             System.out.println("id familiar: " + idFamiliar);
-            if (eCuidador) {
-                familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, estado_civil, profissao, telefone, eCuidador, nomeUtilizador, password);
-            } else {
-                familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, estado_civil, profissao, telefone, eCuidador);
-            }
+
+            familiar = new Familiar(idFamiliar, nome, data_nascimento, localNascimento, morada, genero, estado_civil, profissao,telefone, false);
 
             utilitario.registo_Familiar(familiar);
             System.out.println("registou familiar");
@@ -141,70 +129,45 @@ public class ServletRegistrarFamiliar extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (session.getAttribute("familiar") == null) {
-            System.out.println("não tem um familiar" + session.getAttribute("familiar"));
-            try {
-                idRelacao = utilitario.novoId_Relacao_Paciente_Familiar();
-                relacao = new Relacao(idRelacao, paciente, familiar, tipoRelacao);
 
-                utilitario.registo_Relacao_Paciente_Familiar(relacao);
-                System.out.println("registou relacao");
+        try {
+            idRelacao = utilitario.novoId_Relacao_Familiar_Familiar();
+            relacao = new Relacao(idRelacao, paciente, familiarAScendente, familiar, tipoRelacao);
 
-                if (familiar.getRelacoes() != null & !familiar.getRelacoes().contains(relacao)) {
-                    familiar.novaRelacao(relacao);
-                    System.out.println("Nova relacao no familiar " + relacao.getId());
-                } else {
-                    System.out.println("esta relacao ja existe no familiar");
-                }
+            utilitario.registo_Relacao_Familiar_Familiar(relacao);
+            System.out.println("registou relacao");
 
-                if (!paciente.getRelacoes().contains(relacao)) {
-                    paciente.novaRelacao(relacao);
-                    System.out.println("Nova relacao no paciente " + relacao.getId());
-                } else {
-                    System.out.println("esta relacao ja existe no paciente");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (familiar.getRelacoes() != null & !familiar.getRelacoes().contains(relacao)) {
+                familiar.novaRelacao(relacao);
+                System.out.println("Nova relacao no familiar " + relacao.getId());
+            } else {
+                System.out.println("esta relacao ja existe no familiar");
             }
-        } else {
-            System.out.println("ja tem um familiar" + session.getAttribute("familiar"));
-            Familiar familiar_nivel1 = (Familiar) session.getAttribute("familiar");
-            System.out.println("e é o familiar" + familiar_nivel1.getNome_completo());
-            
-            try {
-                idRelacao = utilitario.novoId_Relacao_Familiar_Familiar();
-                relacao = new Relacao(idRelacao, paciente, familiar_nivel1, familiar, tipoRelacao);
 
-                utilitario.registo_Relacao_Familiar_Familiar(relacao);
-                System.out.println("registou relacao");
-
-                if (familiar.getRelacoes() != null & !familiar.getRelacoes().contains(relacao)) {
-                    familiar.novaRelacao(relacao);
-                    System.out.println("Nova relacao no familiar " + relacao.getId());
-                } else {
-                    System.out.println("esta relacao ja existe no familiar");
-                }
-
-                if (!paciente.getRelacoes().contains(relacao)) {
-                    paciente.novaRelacao(relacao);
-                    System.out.println("Nova relacao no paciente " + relacao.getId());
-                } else {
-                    System.out.println("esta relacao ja existe no paciente");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (!paciente.getRelacoes().contains(relacao)) {
+                paciente.novaRelacao(relacao);
+                System.out.println("Nova relacao no paciente " + relacao.getId());
+            } else {
+                System.out.println("esta relacao ja existe no paciente");
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         ServletContext sc = this.getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher("/Familiar.jsp");
 
         if (rd != null) {
             session = request.getSession();
             utilitario.devolve_Paciente(paciente.getId());
-            session.setAttribute("familiar", familiar);
+            
             session.setAttribute("paciente", paciente);
+            session.setAttribute("familiar", familiar);
+
+            session.setAttribute("idUtilizador", tecnico.getId());
+            session.setAttribute("tecnico", tecnico);
+
             System.out.println(paciente);
             rd.forward(request, response);
         }

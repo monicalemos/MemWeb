@@ -11,15 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
-<script type="text/javascript">
-
-function showHide(checkbox, group)
-{
-	 var visSetting = (checkbox.checked) ? "visible" : "hidden"; 
-	 document.getElementById(group).style.visibility = visSetting; 
-}
-
-</script>
 <body>
 	<div class="content">
 		<header>
@@ -56,20 +47,20 @@ function showHide(checkbox, group)
 			<div class="line"></div>
 			<ul>
 				<li><a 	href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
-				<li><a class="selected" href="./ServletInicial?accao=registrarFamiliar">Inserir
-						Familiar</a></li>
+				<!--<li><a class="selected" href="./ServletInicial?accao=registrarFamiliar">Inserir
+						Familiar</a></li>-->
 				<li><a href="./ServletInicial?accao=verFamiliares">Ver
 						Familiares</a></li>
-				<li><a href="./ServletInicial?accao=novoEvento">Inserir
-						Evento</a></li>
+				<!--<li><a href="./ServletInicial?accao=novoEvento">Inserir
+						Evento</a></li>-->
 				<li><a href="./ServletInicial?accao=verEventos">Ver Eventos</a></li>
 			</ul>
 		</div>
 
 		<div id="container">
-			<form id="RegistrarFamiliar" action="RegistrarFamiliar">
+			<form id="AdicionarFamiliar" action="AdicionarFamiliar">
 				<header id="header" class="info">
-					<h2>Dados do Familiar</h2>
+                                    <h2>Adicionar Familiar direto de: <%=session.getAttribute("nome_familiar")%></h2>
 				</header>
                                 <%
                                 Paciente u = (Paciente) session.getAttribute("paciente");
@@ -137,10 +128,6 @@ function showHide(checkbox, group)
 				</select> 
 				<br> 
                                 
-                                <label for="telefone">Telefone: </label> 
-                                <input type="tel" id="telefone" name="telefone" size="40px"> 
-				<br>
-                                
 				<label for="profissao">Profissão: </label> 
 				<input type="text" id="profissao" name="profissao" size="40px"> 
 				<br>
@@ -148,20 +135,7 @@ function showHide(checkbox, group)
                                 <label for="fotografia">Insira uma fotografia:</label>
                                 <input type="file" name="pic" accept="image/*">                                
                                 <br>
-                                
-				<div class="checkbox">
-					<input type="checkbox" value="1" id="eCuidador" onclick="showHide(this, 'myGroup');"/> 
-					<label for="eCuidador">É cuidador?</label>
-				</div><br>
-				
-				<span id="myGroup" style="visibility:hidden" >
-				<label for="nome_utilizador" id="label_user">Nome de Utilizador: </label> 
-					<input type="text" id="nome_utilizador" name="nome_utilizador" size="40px" >
-				<br>
-				<label for="password" id= "label_password">Password: </label> 
-					<input type="password" id="password" name="password" size="40px" >
-				</span>
-				
+                                			
 				<div id="lower">
 					<input type="submit" value="Registar">
 				</div>

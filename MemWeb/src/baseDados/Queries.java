@@ -3,224 +3,216 @@ package baseDados;
 public class Queries {
 
     //FOTOS
-    public static final String insert_Imagem = "insert into `memDb`.`Imagem`"
+    public static final String insert_Imagem = "insert into `memdb`.`Imagem`"
             + " values(?,?,?);";
 
     public static final String ultimoId_Imagem = "select `idImagem` from "
-            + "`memDb`.`Imagem` order by `idImagem` desc limit 1;";
+            + "`memdb`.`Imagem` order by `idImagem` desc limit 1;";
 
     // PACIENTE
     public static final String insert_Paciente = "insert into "
-            + "`memDb`.`Paciente` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            + "`memdb`.`paciente` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
     //public static final String insert_Paciente_2Morada = "insert into 
-    //+ `memDb`.`Paciente` (`Morada_idMorada`) values (?) where 
-    //`Paciente`.`idPaciente`= ?;";
+    //+ `memdb`.`paciente` (`Morada_idMorada`) values (?) where 
+    //`paciente`.`idPaciente`= ?;";
     public static final String ultimoId_Paciente = "select `idPaciente` from "
-            + "`memDb`.`Paciente` order by `idPaciente` desc limit 1;";
+            + "`memdb`.`paciente` order by `idPaciente` desc limit 1;";
 
     public static final String selectAll_PacientesComMorada = "select * from "
-            + "`memDb`.`Paciente`, `memDb`.`Morada` where "
-            + "`Paciente`.`LocalNascimento_idMorada` = `Morada`.`idMorada` and "
-            + "`Paciente`.`Tecnico_idTecnico` = ?;";
+            + "`memdb`.`paciente`, `memdb`.`morada` where "
+            + "`paciente`.`LocalNascimento_idMorada` = `morada`.`idMorada` and "
+            + "`paciente`.`Tecnico_idTecnico` = ?;";
 
     public static final String select_PacienteId = "select * from "
-            + "`memDb`.`Paciente` where `Paciente`.`idPaciente`=? and "
-            + "`Paciente`.`Tecnico_idTecnico`= ?;";
-
-    public static final String select_PacienteNomeUtilizador = "select * from "
-            + "`memDb`.`Paciente` where `Paciente`.`nome_utilizador`=?;";
+            + "`memdb`.`paciente` where `paciente`.`idPaciente`=?;";
 
     public static final String delete_PacienteNome = "delete from "
-            + "`memDb`.`Paciente` where `idPaciente` = ?;";
+            + "`memdb`.`paciente` where `idPaciente` = ?;";
 
     public static final String delete_Paciente = "delete from "
-            + "`memDb`.`Paciente` where nomeCompleto = ?;";
+            + "`memdb`.`paciente` where nomeCompleto = ?;";
 
     public static final String selectAll_Pacientes = "select * from "
-            + "`memDb`.`Paciente`;";
+            + "`memdb`.`paciente`;";
 
     public static final String select_PacienteNome = "select * from "
-            + "`memDb`.`Paciente` WHERE nomeCompleto = ?;";
+            + "`memdb`.`paciente` WHERE nomeCompleto = ?;";
 
-    public static final String update_Paciente = "update `memDb`.`Paciente` "
+    public static final String update_Paciente = "update `memdb`.`paciente` "
             + "set nome_completo = ?, nome_proprio = ?, apelido = ?, "
             + "data_de_nascimento = ?, LocalNascimento_idMorada = ?, "
             + "Morada_idMorada = ?, genero = ?, profissao = ?, "
             + "escolaridade = ?,estado_civil = ?, nivel_de_doenca = ?, "
-            + "nome_medico = ?, especialidade_medico = ?, nome_utilizador = ?, "
-            + "password = ?, nivel_sessao = ?  WHERE idPaciente = ?;";
+            + "nome_medico = ?, especialidade_medico = ?, nivel_sessao = ?  "
+            + "WHERE idPaciente = ?;";
 
     //MORADA
-    public static final String insert_Morada = "insert into `memDb`.`Morada` "
+    public static final String insert_Morada = "insert into `memdb`.`morada` "
             + "values(?,?,?,?);";
 
     public static final String ultimoId_Morada = "select `idMorada` from "
-            + "`memDb`.`Morada` order by `idMorada` desc limit 1;";
+            + "`memdb`.`morada` order by `idMorada` desc limit 1;";
 
     public static final String select_MoradaId = "select * "
-            + "from `memDb`.`Morada` where `Morada`.`idMorada`=?;";
+            + "from `memdb`.`morada` where `morada`.`idMorada`=?;";
 
     public static final String selectAll_Moradas = "select * "
-            + "from `memDb`.`Morada`;";
+            + "from `memdb`.`morada`;";
 
-    public static final String delete_Morada = "delete from `memDb`.`Morada` "
+    public static final String delete_Morada = "delete from `memdb`.`morada` "
             + "where `idMorada` = ?;";
 
     public static final String selectAll_IdsMorada = "select `Morada_idMorada`"
-            + "from `memDb`.`Paciente`;";
+            + "from `memdb`.`paciente`;";
 
-    public static final String update_Morada = "update `memDb`.`Morada` set "
+    public static final String update_Morada = "update `memdb`.`morada` set "
             + "pais = ?, regiao = ?, cidade = ?  WHERE idMorada = ?;";
 
     //Familiar:
     public static final String insert_Familiar = "insert into "
-            + "`memDb`.`Familiar` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            + "`memdb`.`familiar` values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
     public static final String ultimoId_Familiar = "select `idFamiliar` from "
-            + "`memDb`.`Familiar` order by `idFamiliar` desc limit 1;";
+            + "`memdb`.`familiar` order by `idFamiliar` desc limit 1;";
 
     public static final String selectAll_Familiares = "select * from "
-            + "`memDb`.`Familiar`, `memDb`.`relacao_paciente_familiar` where "
+            + "`memdb`.`familiar`, `memdb`.`relacao_paciente_familiar` where "
             + "`relacao_paciente_familiar`.`Familiar_idFamiliar` = "
-            + "`Familiar`.`idFamiliar`and "
+            + "`familiar`.`idFamiliar`and "
             + "`relacao_paciente_familiar`.`Paciente_idPaciente` = ?;";
 
     public static final String select_FamiliarId = "select * from "
-            + "`memDb`.`Familiar` where `Familiar`.`idFamiliar`=?;";
+            + "`memdb`.`familiar` where `familiar`.`idFamiliar`=?;";
 
     public static final String select_FamiliarNomeUtilizador = "select * from "
-            + "`memDb`.`Familiar` where `Familiar`.`nome_utilizador`=?;";
+            + "`memdb`.`familiar` where `familiar`.`nome_utilizador`=?;";
 
     public static final String delete_Familiar = "delete from "
-            + "`memDb`.`Familiar` where `idFamiliar` = ?;";
+            + "`memdb`.`familiar` where `idFamiliar` = ?;";
 
-    public static final String update_Familiar = "update `memDb`.`Familiar` set"
+    public static final String update_Familiar = "update `memdb`.`familiar` set"
             + " nome_completo = ?, nome_proprio = ?, apelido = ?, "
             + "data_de_nascimento = ?, LocalNascimento_idMorada = ?, "
             + "Morada_idMorada = ?, genero = ?, estado_civil = ?, "
             + "profissao = ?, e_cuidador = ?, nome_utilizador = ?, "
-            + "password = ? data_de_obito = ?  WHERE idFamiliar = ?;";
+            + "telefone = ?, password = ? data_de_obito = ?  "
+            + "WHERE idFamiliar = ?;";
 
     //TECNICO
-    public static final String insert_Tecnico = "insert into `memDb`.`Tecnico` "
+    public static final String insert_Tecnico = "insert into `memdb`.`tecnico` "
             + "values(?,?,?,?,?,?,?);";
 
     public static final String ultimoId_Tecnico = "select `idTecnico` from "
-            + "`memDb`.`Tecnico` order by `idTecnico` desc limit 1;";
+            + "`memdb`.`tecnico` order by `idTecnico` desc limit 1;";
 
     public static final String select_TecnicoEmail = "select * from "
-            + "`memDb`.`Tecnico` where `Tecnico`.`email`=?;";
+            + "`memdb`.`tecnico` where `tecnico`.`email`=?;";
 
     public static final String select_TecnicoNome_Utilizador = "select * from "
-            + "`memDb`.`Tecnico` where `Tecnico`.`nome_utilizador`=?;";
+            + "`memdb`.`tecnico` where `tecnico`.`nome_utilizador`=?;";
 
     public static final String select_TecnicoId = "select * from "
-            + "`memDb`.`Tecnico` where `Tecnico`.`idTecnico`=?;";
+            + "`memdb`.`tecnico` where `tecnico`.`idTecnico`=?;";
 
     public static final String selectAll_Tecnicos = "select * from "
-            + "`memDb`.`Tecnico`;";
+            + "`memdb`.`tecnico`;";
 
-    public static final String delete_Tecnico = "delete from `memDb`.`Tecnico` "
+    public static final String delete_Tecnico = "delete from `memdb`.`tecnico` "
             + "where `idTecnico` = ?;";
 
-    public static final String update_Tecnico = "update `memDb`.`Tecnico` set"
+    public static final String update_Tecnico = "update `memdb`.`tecnico` set"
             + " nome_completo = ?, nome_proprio = ?, apelido = ?,"
             + " nome_utilizador = ?, password = ? email = ? "
             + " WHERE idTecnico = ?;";
 
     //RELACAO_PACIENTE_FAMILIAR
     public static final String insert_Relacao_Paciente_Familiar = "insert into"
-            + " `memDb`.`Relacao_Paciente_Familiar` values(?,?,?,?,?);";
+            + " `memdb`.`relacao_paciente_familiar` values(?,?,?,?);";
 
     public static final String ultimoId_Relacao_Paciente_Familiar = "select"
             + " `idRelacao_Paciente_Familiar` from "
-            + "`memDb`.`Relacao_Paciente_Familiar` order by "
+            + "`memdb`.`relacao_paciente_familiar` order by "
             + "`idRelacao_Paciente_Familiar` desc limit 1;";
 
     public static final String select_Relacao_Paciente_FamiliarId = "select * "
-            + "from `memDb`.`Relacao_Paciente_Familiar` where "
-            + "`Relacao_Paciente_Familiar`.`idRelacao_Paciente_Familiar` = ? ;";
+            + "from `memdb`.`relacao_paciente_familiar` where "
+            + "`relacao_paciente_familiar`.`idRelacao_Paciente_Familiar` = ? ;";
 
     public static final String select_Relacao_Paciente_Familiar = "select * "
-            + "from `memDb`.`Relacao_Paciente_Familiar` where "
-            + "`Relacao_Paciente_Familiar`.`Paciente_Tecnico_idTecnico` = ? "
-            + "and `Relacao_Paciente_Familiar`.`Paciente_idPaciente` = ? and"
-            + " `Relacao_Paciente_Familiar`.`Familiar_idFamiliar` = ? ;";
+            + "from `memdb`.`relacao_paciente_familiar` where "
+            + " `relacao_paciente_familiar`.`Paciente_idPaciente` = ? and"
+            + " `relacao_paciente_familiar`.`Familiar_idFamiliar` = ? ;";
 
     public static final String selectAll_Relacao_Paciente_Familiar = "select *"
-            + " from `memDb`.`Relacao_Paciente_Familiar`"
-            + " where `Relacao_Paciente_Familiar`.`Paciente_Tecnico_idTecnico`"
+            + " from `memdb`.`relacao_paciente_familiar`"
+            + " where `relacao_paciente_familiar`.`Paciente_idPaciente`"
             + " = ? ;";
 
-    public static final String selectAll_Relacao_Paciente_Familiar_Do_Paciente
-            = "select * from `memDb`.`Relacao_Paciente_Familiar` where "
-            + "`Relacao_Paciente_Familiar`.`Paciente_idPaciente`=?;";
-
     public static final String delete_Relacao_Paciente_Familiar = "delete from "
-            + "`memDb`.`Relacao_Paciente_Familiar` where `idFamiliar` = ?;";
+            + "`memdb`.`relacao_paciente_familiar` where `idFamiliar` = ?;";
 
     public static final String update_Relacao_Paciente_Familiar = "update "
-            + "`memDb`.`Relacao_Paciente_Familiar` set Familiar_idFamiliar = ?,"
-            + " Paciente_idPaciente = ?, Paciente_Tecnico_idTecnico = ?,"
-            + " tipo_relacao = ? WHERE idRelacao_Paciente_Familiar = ?;";
+            + "`memdb`.`relacao_paciente_familiar` set Familiar_idFamiliar = ?,"
+            + " Paciente_idPaciente = ?, tipo_relacao = ? "
+            + "WHERE idRelacao_Paciente_Familiar = ?;";
 
     //RELACAO_FAMILIAR_FAMILIAR
     public static final String insert_Relacao_Familiar_Familiar = "insert into"
-            + " `memDb`.`Relacao_Familiar_Familiar` values(?,?,?,?,?);";
+            + " `memdb`.`Relacao_Familiar_Familiar` values(?,?,?,?,?);";
 
     public static final String ultimoId_Relacao_Familiar_Familiar = "select"
             + " `idRelacao_Familiar_Familiar` from "
-            + "`memDb`.`Relacao_Familiar_Familiar` order "
+            + "`memdb`.`Relacao_Familiar_Familiar` order "
             + "by `idRelacao_Familiar_Familiar` desc limit 1;";
 
     public static final String select_Relacao_Familiar_FamiliarId = "select *"
-            + " from `memDb`.`Relacao_Familiar_Familiar` where"
+            + " from `memdb`.`Relacao_Familiar_Familiar` where"
             + " `Relacao_Familiar_Familiar`.`idRelacaoFamiliar_Familiar` = ? ;";
 
     public static final String selectAll_Relacao_Familiar_Familiar = "select *"
-            + " from `memDb`.`Relacao_Familiar_Familiar`;";
+            + " from `memdb`.`Relacao_Familiar_Familiar`;";
 
     public static final String selectAll_Relacao_Familiar_Familiar_Do_Familiar
-            = "select * from `memDb`.`Relacao_Paciente_Familiar` where"
-            + " `Relacao_Familiar_Familiar`.`Familiar_idFamiliar`=?;";
+            = "select * from `memdb`.`relacao_familiar_familiar` where"
+            + " `Familiar_idFamiliar`=?;";
 
     public static final String delete_Relacao_Familiar_Familiar = "delete from"
-            + " `memDb`.`Relacao_Familiar_Familiar` where "
+            + " `memdb`.`Relacao_Familiar_Familiar` where "
             + "`Familiar_idFamiliar` = ? or `Familiar_idFamiliar1 = ?;";
 
     public static final String update_Relacao_Familiar_Familiar = "update"
-            + " `memDb`.`Relacao_Familiar_Familiar` set "
+            + " `memdb`.`Relacao_Familiar_Familiar` set "
             + "Familiar_idFamiliar = ?, Familiar_idFamiliar1 = ?,"
-            + " Paciente_idPaciente = ?, Paciente_Tecnico_idTecnico = ?,"
-            + " tipo_relacao = ? WHERE idRelacao_Familiar_Familiar = ?;";
+            + " Paciente_idPaciente = ?, tipo_relacao = ? "
+            + "WHERE idRelacao_Familiar_Familiar = ?;";
 
     //EVENTO:
     public static final String insert_Evento_Sem_Familiar = "insert into"
-            + " `memDb`.`Evento` values(?,?,?,?,?,?);";
+            + " `memdb`.`Evento` values(?,?,?,?,?,?);";
 
     public static final String insert_Evento_Com_Familiar = "insert into"
-            + " `memDb`.`Evento` values(?,?,?,?,?,?,?);";
+            + " `memdb`.`Evento` values(?,?,?,?,?,?,?);";
 
     public static final String ultimoId_Evento = "select `idEvento` from"
-            + " `memDb`.`Evento` order by `idEvento` desc limit 1;";
+            + " `memdb`.`Evento` order by `idEvento` desc limit 1;";
 
     public static final String select_EventoId = "select * from"
-            + " `memDb`.`Evento` where `Evento`.`idEvento` = ?;";
+            + " `memdb`.`Evento` where `Evento`.`idEvento` = ?;";
 
     public static final String selectAll_Evento = "select * from "
-            + "`memDb`.`Evento` where `Evento`.`Paciente_idPaciente`=?;";
+            + "`memdb`.`Evento` where `Evento`.`Paciente_idPaciente`=?;";
 
-    public static final String delete_Evento = "delete from `memDb`.`Evento` "
+    public static final String delete_Evento = "delete from `memdb`.`Evento` "
             + "where `Evento`.`idEvento`= ?;";
 
     public static final String update_Evento_Com_Familiar = "update"
-            + " `memDb`.`Evento` set Data = ?, tipo_de_evento = ?, "
+            + " `memdb`.`Evento` set Data = ?, tipo_de_evento = ?, "
             + "Local_Evento_idMorada = ?, descricao = ?, "
             + "Familiar_idFamiliar = ? WHERE idEvento = ?;";
 
     public static final String update_Evento_Sem_Familiar = "update"
-            + " `memDb`.`Evento` set Data = ?, tipo_de_evento = ?,"
+            + " `memdb`.`Evento` set Data = ?, tipo_de_evento = ?,"
             + " Local_Evento_idMorada = ?, descricao = ?,"
             + " WHERE idEvento = ?;";
 }

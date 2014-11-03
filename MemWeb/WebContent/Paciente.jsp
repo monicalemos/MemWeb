@@ -47,12 +47,12 @@
 			<ul>
 				<li><a class="selected"
 					href="./ServletInicial?accao=verPaciente">Dados do Paciente</a></li>
-				<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
-						Familiar</a></li>
+				<!--<li><a href="./ServletInicial?accao=registrarFamiliar">Inserir
+						Familiar</a></li>-->
 				<li><a href="./ServletInicial?accao=verFamiliares">Ver
 						Familiares</a></li>
-				<li><a href="./ServletInicial?accao=novoEvento">Inserir
-						Evento</a></li>
+				<!--<li><a href="./ServletInicial?accao=novoEvento">Inserir
+						Evento</a></li>-->
 				<li><a href="./ServletInicial?accao=verEventos">Ver Eventos</a></li>
 			</ul>
 		</div>
@@ -61,6 +61,7 @@
 			<h2>Dados do Paciente:</h2>
 			<%
 				Paciente p = (Paciente) session.getAttribute("paciente");
+                                System.out.println(p.getNome_completo());
                                 session.setAttribute("paciente", p);
 			%>
 			<label for="nome"> Nome: <%=p.getNome_completo()%></label><br> 

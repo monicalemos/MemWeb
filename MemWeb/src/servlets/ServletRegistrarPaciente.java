@@ -20,6 +20,7 @@ import enumerados.EspecialidadeMedico;
 import enumerados.TipoEscolaridade;
 import enumerados.TipoEstadoCivil;
 import enumerados.TipoGenero;
+import enumerados.TipoInteresses;
 import gestor.Utilitario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -70,18 +71,17 @@ public class ServletRegistrarPaciente extends HttpServlet {
 		String regiaoMorada = request.getParameter("regiao_atual");
 		String cidadeMorada = request.getParameter("cidade_atual");
 
+                TipoInteresses interesses = TipoInteresses.valueOf(request.getParameter("interesse").toUpperCase());
+                String atividades = request.getParameter("atividade");
+                
 		TipoGenero genero = TipoGenero.valueOf(request.getParameter("genero").toUpperCase());
 		String profissao = request.getParameter("profissao");
 		TipoEscolaridade escolaridade = TipoEscolaridade.valueOf(request.getParameter("escolaridade").toUpperCase());
 		TipoEstadoCivil estadoCivil = TipoEstadoCivil.valueOf(request.getParameter("estado_civil").toUpperCase());
 
-		int nivelDoenca = Integer.parseInt(request.getParameter("nivel_doenca"));
+		String nivelDoenca = request.getParameter("nivel_doenca");
 		String nomeMedico= request.getParameter("nome_medico");
 		EspecialidadeMedico especialidadeMedico = EspecialidadeMedico.valueOf(request.getParameter("especialidade_medico").toUpperCase());
-
-
-		String nomeUtilizador = request.getParameter("nome_utilizador");
-		String password = request.getParameter("password");
 
 		int nivelSessao = Integer.parseInt(request.getParameter("nivel_sessao"));
 
@@ -125,8 +125,10 @@ public class ServletRegistrarPaciente extends HttpServlet {
 
 		try {
 			idPaciente = utilitario.novoId_Paciente();
-			paciente = new Paciente(idPaciente, nome, data_nascimento, localNascimento, morada, genero, profissao, escolaridade, estadoCivil, nivelDoenca, nomeMedico, especialidadeMedico, nomeUtilizador, password, nivelSessao, tecnico);
-			utilitario.registo_Paciente(paciente);
+			paciente = new Paciente(idPaciente, nome, data_nascimento, localNascimento, morada, genero, profissao, escolaridade, estadoCivil, nivelDoenca, nomeMedico, especialidadeMedico, nivelSessao, tecnico);
+			paciente.adicionaAtividades(atividades);
+                        paciente.adicionaInteresses(interesses);
+                        utilitario.registo_Paciente(paciente);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,7 +139,7 @@ public class ServletRegistrarPaciente extends HttpServlet {
 
 		if (rd != null){
 			session = request.getSession();
-			utilitario.devolve_Paciente(idPaciente, tecnico.getId());
+			utilitario.devolve_Paciente(idPaciente);
 			session.setAttribute("paciente", paciente);
 			System.out.println(paciente);					
 			rd.forward(request, response);

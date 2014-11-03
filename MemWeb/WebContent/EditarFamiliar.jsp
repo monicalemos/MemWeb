@@ -56,12 +56,12 @@ function showHide(checkbox, group)
 			<div class="line"></div>
 			<ul>
 				<li><a 	href="./ServletInicial?accao=dadosPaciente">Dados do Paciente</a></li>
-				<li><a class="selected" href="./ServletInicial?accao=registrarFamiliar">Inserir
-						Familiar</a></li>
+				<!--<li><a class="selected" href="./ServletInicial?accao=registrarFamiliar">Inserir
+						Familiar</a></li>-->
 				<li><a href="./ServletInicial?accao=verFamiliares">Ver
 						Familiares</a></li>
-				<li><a href="./ServletInicial?accao=novoEvento">Inserir
-						Evento</a></li>
+				<!--<li><a href="./ServletInicial?accao=novoEvento">Inserir
+						Evento</a></li>-->
 				<li><a href="./ServletInicial?accao=verEventos">Ver Eventos</a></li>
 			</ul>
 		</div>
