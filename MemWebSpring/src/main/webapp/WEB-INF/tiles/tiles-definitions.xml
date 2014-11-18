@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="template-main" template="/WEB-INF/layout/default/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" />
+		<put-attribute name="title" value="MEM+" />
+		<put-attribute name="menu" value="/WEB-INF/layout/common/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" />
+	</definition>
+
+<!-- 	<definition name="template-login" template="/WEB-INF/layout/login/layout.jsp"> -->
+<!-- 		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" /> -->
+<!-- 		<put-attribute name="title" value="MEM+" /> -->
+<!-- 		<put-attribute name="body" value="" /> -->
+<!-- 		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" /> -->
+<!-- 	</definition> -->
+	
+<!-- 	<definition name="template-logout" template="/WEB-INF/layout/logout/layout.jsp"> -->
+<!-- 		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" /> -->
+<!-- 		<put-attribute name="title" value="MEM+" /> -->
+<!-- 		<put-attribute name="body" value="" /> -->
+<!-- 		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" /> -->
+<!-- 	</definition> -->
+	
+	
+	<!-- Home -->
+	<definition name="home-tiles" extends="template-main">
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+	</definition>
+
+	<!-- /Account/login-->
+		<definition name="Account-login" extends="template-main">
+			<put-attribute name="menu" value="" />
+			<put-attribute name="body" value="/WEB-INF/views/Account/login.jsp" />
+		</definition>	
+
+	<!-- /Account/logout-->
+		<definition name="Account-logout" extends="template-main">
+			<put-attribute name="menu" value="" />
+			<put-attribute name="body" value="/WEB-INF/views/Account/logout.jsp" />
+		</definition>	
+
+</tiles-definitions>

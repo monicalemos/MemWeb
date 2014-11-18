@@ -10,5 +10,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<a href="<%=request.getContextPath()%>/Account/Login">login</a>
+<a href="<%=request.getContextPath()%>/Account/Logout">logout</a>
 </body>
 </html>
