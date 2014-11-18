@@ -110,7 +110,7 @@ public class ServletEditarEvento extends HttpServlet {
         System.out.println("idEvento " + idEvento);
 
         ServletContext sc = this.getServletContext();
-        RequestDispatcher rd = sc.getRequestDispatcher("/VerEventos.jsp");
+        RequestDispatcher rd = sc.getRequestDispatcher("defaultLayout");
 
         if (rd != null) {
             session = request.getSession();
