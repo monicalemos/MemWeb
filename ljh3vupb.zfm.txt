@@ -1,0 +1,51 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+Conflicts:
+	.gitignore
+	MemWeb/WebContent/LoggedPage.jsp
+	MemWeb/WebContent/META-INF/context.xml
+	MemWeb/WebContent/Styles/Estilos.css
+	MemWeb/WebContent/Styles/Home.css
+	MemWeb/WebContent/Styles/Paciente.css
+	MemWeb/WebContent/Styles/Registo.css
+	MemWeb/WebContent/Styles/Tabelas.css
+	MemWeb/WebContent/images/mem+.png
+	MemWeb/src/servlets/ServletEditarEvento.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 2 and 5 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	deleted:    .gitignore
+#	deleted:    MemWeb/WebContent/LoggedPage.jsp
+#	deleted:    MemWeb/WebContent/META-INF/context.xml
+#	deleted:    MemWeb/WebContent/Styles/Estilos.css
+#	deleted:    MemWeb/WebContent/Styles/Home.css
+#	deleted:    MemWeb/WebContent/Styles/Paciente.css
+#	deleted:    MemWeb/WebContent/Styles/Registo.css
+#	deleted:    MemWeb/WebContent/Styles/Tabelas.css
+#	new file:   MemWeb/WebContent/images/fundo.png
+#	deleted:    MemWeb/WebContent/images/mem+.png
+#	new file:   MemWeb/nbproject/genfiles.properties~origin_master
+#	new file:   MemWeb/nbproject/project.properties~origin_master
+#	new file:   MemWeb/nbproject/project.xml~origin_master
+#	deleted:    MemWeb/src/servlets/ServletEditarEvento.java
+#
+# Untracked files:
+#	MemWeb/dist/
+#	MemWeb/nbbuild/
+#	MemWeb/nbproject/private/
+#
+
