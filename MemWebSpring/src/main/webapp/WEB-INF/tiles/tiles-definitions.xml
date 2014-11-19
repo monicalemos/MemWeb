@@ -42,5 +42,9 @@
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Account/logout.jsp" />
 		</definition>	
+				<definition name="Games-jigsaw" extends="template-main">
+			<put-attribute name="menu" value="" />
+			<put-attribute name="body" value="/WEB-INF/views/Games/jigsaw.jsp" />
+		</definition>
 
 </tiles-definitions>
