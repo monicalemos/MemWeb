@@ -1,4 +1,4 @@
-package pt.memplus.web;
+package pt.memplus.web.controllers;
 
 import java.util.Locale;
 
