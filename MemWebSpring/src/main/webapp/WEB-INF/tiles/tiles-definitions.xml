@@ -42,9 +42,16 @@
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Account/logout.jsp" />
 		</definition>	
-				<definition name="Games-jigsaw" extends="template-main">
+		<definition name="Games-jigsaw" extends="template-main">
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Games/jigsaw.jsp" />
 		</definition>
-
+		<definition name="Games-phone" extends="template-main">
+			<put-attribute name="menu" value="" />
+			<put-attribute name="body" value="/WEB-INF/views/Games/phone.jsp" />
+		</definition>
+		<definition name="Games-money" extends="template-main">
+			<put-attribute name="menu" value="" />
+			<put-attribute name="body" value="/WEB-INF/views/Games/Money.jsp" />
+		</definition>
 </tiles-definitions>

@@ -173,7 +173,7 @@ function jigsaw(canvasID, imageID, rows, columns) {
 	function OnFinished() {
 
 		var audioElement = document.createElement('audio');
-		audioElement.setAttribute('src', 'web/resources/static/music/games/jigsaw/finish.mp3');
+		audioElement.setAttribute('src', 'resources/static/music/games/jigsaw/finish.mp3');
 		audioElement.play();
 
 		remove_width = BLOCK_WIDTH;
@@ -203,7 +203,7 @@ function jigsaw(canvasID, imageID, rows, columns) {
 						remove_width, remove_height);
 			}
 
-			DrawGame();
+			//DrawGame();
 		} else {
 
 			clearInterval(interval);
