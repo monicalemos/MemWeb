@@ -1,4 +1,4 @@
-package pt.memplus.web.models;
+package pt.memplus.web.models.account;
 
 public class Login {
 //	@NotNull
