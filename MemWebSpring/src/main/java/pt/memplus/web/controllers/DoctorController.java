@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/Doctor")
 public class DoctorController {
 	private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
+	
 	public DoctorController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -21,8 +22,8 @@ public class DoctorController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(Locale locale, Model model) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView index() {
 		//TODO Handle the View and Model 
 		return new ModelAndView("doctor-home");
 	}

@@ -22,9 +22,33 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView homeRedirect(Locale locale, Model model) {
-		return new ModelAndView("home-tiles");
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView index() {
+		return new ModelAndView("home");
 	}
-	
+	@RequestMapping(value = "/About", method = RequestMethod.GET)
+	public ModelAndView about() {
+		//TODO Handle the View and Model
+		return new ModelAndView("about");
+	}
+	@RequestMapping(value = "/Contacts", method = RequestMethod.GET)
+	public ModelAndView contacts() {
+		//TODO Handle the View and Model
+		return new ModelAndView("contacts");
+	}
+	@RequestMapping(value = "/Mission", method = RequestMethod.GET)
+	public ModelAndView mission() {
+		//TODO Handle the View and Model
+		return new ModelAndView("mission");
+	}
+	@RequestMapping(value = "/Values", method = RequestMethod.GET)
+	public ModelAndView values() {
+		//TODO Handle the View and Model
+		return new ModelAndView("values");
+	}
+	@RequestMapping(value = "/Vision", method = RequestMethod.GET)
+	public ModelAndView vision() {
+		//TODO Handle the View and Model
+		return new ModelAndView("vision");
+	}
 }

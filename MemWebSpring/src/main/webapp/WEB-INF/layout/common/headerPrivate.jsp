@@ -14,6 +14,7 @@
                         <li><a href="#vision">Vision</a></li>
                         <li><a href="#values">Values</a></li>
                         <li><a href="#contacts">Contacts</a></li>
+                        <li><a href="Logout">Logout</a></li>
                         </ul>
                  </div>
             </div>

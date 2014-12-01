@@ -3,45 +3,162 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+	<!-- Private -->
 	<definition name="template-main" template="/WEB-INF/layout/default/layout.jsp">
-		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" />
+		<put-attribute name="header" value="/WEB-INF/layout/common/headerPrivate.jsp" />
 		<put-attribute name="title" value="MEM+" />
 		<put-attribute name="menu" value="/WEB-INF/layout/common/menu.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" />
 	</definition>
 
-<!-- 	<definition name="template-login" template="/WEB-INF/layout/login/layout.jsp"> -->
-<!-- 		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" /> -->
-<!-- 		<put-attribute name="title" value="MEM+" /> -->
-<!-- 		<put-attribute name="body" value="" /> -->
-<!-- 		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" /> -->
-<!-- 	</definition> -->
-	
-<!-- 	<definition name="template-logout" template="/WEB-INF/layout/logout/layout.jsp"> -->
-<!-- 		<put-attribute name="header" value="/WEB-INF/layout/common/header.jsp" /> -->
-<!-- 		<put-attribute name="title" value="MEM+" /> -->
-<!-- 		<put-attribute name="body" value="" /> -->
-<!-- 		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" /> -->
-<!-- 	</definition> -->
-	
+	<!-- Public -->
+	<definition name="template-main-public" template="/WEB-INF/layout/default/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/common/headerPublic.jsp" />
+		<put-attribute name="title" value="MEM+" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/layout/common/footer.jsp" />
+	</definition>
+	<definition name="home" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/index.jsp" />
+	</definition>
+	<definition name="about" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/about.jsp" />
+	</definition>
+	<definition name="contacts" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/contacts.jsp" />
+	</definition>
+	<definition name="mission" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/mission.jsp" />
+	</definition>
+	<definition name="values" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/values.jsp" />
+	</definition>
+	<definition name="vision" extends="template-main-public">
+		<put-attribute name="body" value="/WEB-INF/views/Public/vision.jsp" />
+	</definition>	
 	
 	<!-- Home -->
 	<definition name="home-tiles" extends="template-main">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+	
+	
 
-	<!-- /Account/login-->
-		<definition name="Account-login" extends="template-main">
+	<!-- /Account-->
+		<definition name="Account-login" extends="template-main-public">
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Account/login.jsp" />
 		</definition>	
-
-	<!-- /Account/logout-->
 		<definition name="Account-logout" extends="template-main">
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Account/logout.jsp" />
+		</definition>
+	
+		<!-- /Doctor -->
+		<definition name="doctor-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/index.jsp" />
+		</definition>
+		<definition name="doctor-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/edit.jsp" />
+		</definition>
+		<definition name="doctor-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/new.jsp" />
+		</definition>
+		<definition name="doctor-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/view.jsp" />
+		</definition>
+		<definition name="doctor-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/detail.jsp" />
 		</definition>	
+		<definition name="doctor-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Doctor/delete.jsp" />
+		</definition>	
+		<!-- /Manager -->
+		<definition name="manager-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/index.jsp" />
+		</definition>
+		<definition name="manager-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/edit.jsp" />
+		</definition>
+		<definition name="manager-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/new.jsp" />
+		</definition>
+		<definition name="manager-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/view.jsp" />
+		</definition>
+		<definition name="manager-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/detail.jsp" />
+		</definition>	
+		<definition name="manager-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Manager/delete.jsp" />
+		</definition>	
+
+		<!-- /Pacient -->
+		<definition name="pacient-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/index.jsp" />
+		</definition>
+		<definition name="pacient-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/edit.jsp" />
+		</definition>
+		<definition name="pacient-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/new.jsp" />
+		</definition>
+		<definition name="pacient-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/view.jsp" />
+		</definition>
+		<definition name="pacient-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/detail.jsp" />
+		</definition>	
+		<definition name="pacient-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Pacient/delete.jsp" />
+		</definition>
+
+		<!-- /Therapeutic -->
+		<definition name="therapeutic-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/index.jsp" />
+		</definition>
+		<definition name="therapeutic-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/edit.jsp" />
+		</definition>
+		<definition name="therapeutic-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/new.jsp" />
+		</definition>
+		<definition name="therapeutic-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/view.jsp" />
+		</definition>
+		<definition name="therapeutic-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/detail.jsp" />
+		</definition>	
+		<definition name="therapeutic-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/delete.jsp" />
+		</definition>
+
+		<!-- /Therapist -->
+		<definition name="therapist-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/index.jsp" />
+		</definition>
+		<definition name="therapist-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/edit.jsp" />
+		</definition>
+		<definition name="therapist-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/new.jsp" />
+		</definition>
+		<definition name="therapist-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/view.jsp" />
+		</definition>
+		<definition name="therapist-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/detail.jsp" />
+		</definition>	
+		<definition name="therapist-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Therapist/delete.jsp" />
+		</definition>
+
+
+
+
+	<!-- GAMES -->
 		<definition name="Games-jigsaw" extends="template-main">
 			<put-attribute name="menu" value="" />
 			<put-attribute name="body" value="/WEB-INF/views/Games/jigsaw.jsp" />

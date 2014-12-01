@@ -20,8 +20,8 @@ public class TherapistController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(Locale locale, Model model) {
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ModelAndView index() {
 		//TODO Handle the View and Model 
 		return new ModelAndView("therapist-home");
 	}
