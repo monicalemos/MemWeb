@@ -1,0 +1,49 @@
+package pt.memplus.web.models;
+
+import java.util.LinkedList;
+
+
+public class Pacient extends Person{
+	private Address address;
+	private MedicalChart medicalChart;
+	private Iterable<Relative> relatives;
+	
+	
+	public Pacient() {
+		super();
+		address = new Address();
+		medicalChart = new MedicalChart();
+		relatives = new LinkedList<Relative>();
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
+	public MedicalChart getMedicalChart() {
+		return medicalChart;
+	}
+
+
+	public void setMedicalChart(MedicalChart medicalChart) {
+		this.medicalChart = medicalChart;
+	}
+
+
+	public Iterable<Relative> getRelatives() {
+		return relatives;
+	}
+
+
+	public void setRelatives(Iterable<Relative> relatives) {
+		this.relatives = relatives;
+	}
+
+	
+}

@@ -3,32 +3,74 @@
 <%-- <%@ page session="false"%> --%>
 <fieldset>
 	<div class="control-group">
+		<div class="controls"><form:hidden path="id" /></div>
+	</div>
+	<div class="control-group">
+		<label for="firstName" class="control-label">Nome:</label>
 		<div class="controls">
-			<form:hidden path="id" />
+			<form:input path="firstName" cssClass="input-sm focused" id="firstName"/>
+			<font color="red"><form:errors path="firstName" /></font><br/>
+		</div>
+		<label for="middleName" class="control-label">Nome do Meio:</label>
+		<div class="controls">
+			<form:input path="middleName" cssClass="input-sm focused" id="middleName"/>
+			<font color="red"><form:errors path="middleName" /></font><br/>
+		</div>
+		<label for="lastName" class="control-label">Apelido:</label>
+		<div class="controls">
+			<form:input path="lastName" cssClass="input-sm focused" id="lastName"/>
+			<font color="red"><form:errors path="lastName" /></font><br/>
+		</div>
+	</div>		
+	
+	<div class="control-group">
+		<label for="dateOfBirth" class="control-label">Data de Nascimento:</label>
+		<div class="controls">
+			<form:input  path="dateOfBirth" cssClass="input-sm focused" id="dateOfBirth" />
+			<font color="red"><form:errors path="dateOfBirth" /></font><br/>
 		</div>
 	</div>
 	<div class="control-group">
-		<label for="nome" class="control-label">Nome Completo:</label>
+		<label for="gender" class="control-label">Género:</label>
 		<div class="controls">
-			<form:input path="nome_completo" cssClass="input-xlarge focused" id="nome"/>
-			<font color="red"><form:errors path="nome_completo" /></font><br/>
+			<form:input path="gender" cssClass="input-sm focused" id="gender"/>
+			<font color="red"><form:errors path="gender" /></font><br/>
 		</div>
 	</div>
 	<div class="control-group">
-		<label for="data_nascimento" class="control-label">Data de Nascimento:</label>
+		<label for="maritalStatus" class="control-label">Estado Civil:</label>
 		<div class="controls">
-			<form:input path="data_de_nascimento" cssClass="input-xlarge focused" id="data_nascimento"/>
-			<font color="red"><form:errors path="data_de_nascimento" /></font><br/>
+			<form:input path="maritalStatus" cssClass="input-sm focused" id="maritalStatus"/>
+			<font color="red"><form:errors path="maritalStatus" /></font><br/>
 		</div>
+	</div>
+	<div class="control-group">
+		<label for="profession" class="control-label">Profissão:</label>
+		<div class="controls">
+			<form:input path="profession" cssClass="input-sm focused" id="profession"/>
+			<font color="red"><form:errors path="profession" /></font><br/>
+		</div>
+	</div>
+</fieldset>
 
-	</div>
+<fieldset>
 	<div class="control-group">
-		<label for="local_nascimento" class="control-label">Local de Nascimento</label>
+		<label for="address.country" class="control-label">País:</label>
 		<div class="controls">
-			<form:input path="local_nascimento" cssClass="input-xlarge focused" id="local_nascimento"/>
-			<font color="red"><form:errors path="local_nascimento" /></font><br/>
+			<form:input path="address.country" cssClass="input-sm focused" id="address.country"/>
+			<font color="red"><form:errors path="address.country" /></font><br/>
 		</div>
-
+				<label for="address.region" class="control-label">Região:</label>
+		<div class="controls">
+			<form:input path="address.region" cssClass="input-sm focused" id="address.region"/>
+			<font color="red"><form:errors path="address.region" /></font><br/>
+		</div>
+				<label for="address.city" class="control-label">Cidade:</label>
+		<div class="controls">
+			<form:input path="address.city" cssClass="input-sm focused" id="address.city"/>
+			<font color="red"><form:errors path="address.city" /></font><br/>
+		</div>
+		
 	</div>
 
 </fieldset>
