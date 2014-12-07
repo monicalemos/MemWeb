@@ -2,7 +2,7 @@
 <div>
 	<div class="container-fluid">
 		<div>
-			<h1>Editar</h1>
+			<h1>Alterar</h1>
 			<a class="brand"
 				href="<%=request.getContextPath()%>/Doctor"> <img
 				src="<%=request.getContextPath()%>/resources/static/img/24x24/go-back-icon.png"

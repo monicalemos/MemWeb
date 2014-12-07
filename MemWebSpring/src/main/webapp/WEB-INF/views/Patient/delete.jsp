@@ -2,18 +2,17 @@
 <div>
 	<div class="container-fluid">
 		<div>
-			<h1>Alterar</h1>
+			<h1>Apagar Registo</h1>
 			<a class="brand"
-				href="<%=request.getContextPath()%>/Pacient"> <img
+				href="<%=request.getContextPath()%>/Patient"> <img
 				src="<%=request.getContextPath()%>/resources/static/img/24x24/go-back-icon.png"
 				alt="Go Back" title="Go Back" />
-			</a>			
+			</a>
 		</div>
 		<div class="row-fluid">
 
-			<form:form action="Edit" modelAttribute="pacientModel">
-				<%@include file="partial/editable.jsp"%>
-				<input type="submit" value="Submit" />
+			<form:form action="Delete" modelAttribute="patientModel">
+				<%@include file="partial/readable.jsp"%>
 			</form:form>
 		</div>
 	</div>

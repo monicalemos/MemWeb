@@ -3,13 +3,13 @@ package pt.memplus.web.models;
 import java.util.LinkedList;
 
 
-public class Pacient extends Person{
+public class Patient extends Person{
 	private Address address;
 	private MedicalChart medicalChart;
 	private Iterable<Relative> relatives;
 	
 	
-	public Pacient() {
+	public Patient() {
 		super();
 		address = new Address();
 		medicalChart = new MedicalChart();

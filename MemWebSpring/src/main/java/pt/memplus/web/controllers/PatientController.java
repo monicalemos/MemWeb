@@ -13,84 +13,91 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pt.memplus.web.model.repository.DataRepositoryLocator;
 import pt.memplus.web.model.repository.IRepository;
-import pt.memplus.web.models.Doctor;
+import pt.memplus.web.models.Patient;
 
 @Controller
-@RequestMapping(value = "/Doctor")
-public class DoctorController {
-	private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
-	private static final IRepository<Doctor> repo = DataRepositoryLocator.getDoctorrepository();
-	
-	public DoctorController() {}
+@RequestMapping(value = "/Patient")
+public class PatientController {
+	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
+	private static final IRepository<Patient> repo = DataRepositoryLocator.getPacientrepository();
+
+	public PatientController() {}
+
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView index() {
-		//TODO Handle the View and Model 
-		return new ModelAndView("doctor-home");
+		//TODO Devolver lista de Pacientes 
+		return new ModelAndView("patient-home");
 	}
 	
 	/*
-	 * CREATE NEW DOCTOR
+	 * CREATE NEW PACIENT
 	 */
 	@RequestMapping(value = "/Create", method = RequestMethod.GET)
 	public ModelAndView newRecord() {
-		return new ModelAndView("doctor-new", "doctotModel",new Doctor());
+		return new ModelAndView("patient-new", "patientModel",new Patient());
 	}
+	
 	@RequestMapping(value = "/Create", method = RequestMethod.POST)
 	public String  newRecord( 
-			@ModelAttribute("doctotModel") @Valid Doctor doctotModel,
+			@ModelAttribute("patientModel") @Valid Patient patientModel,
 			BindingResult result) {
 		if (!result.hasErrors()) {
-			doctotModel.setId(-1);
-			if (repo.create(doctotModel))
-				return "doctor-detail";
+			patientModel.setId(-1);
+			if (repo.create(patientModel))
+				return "patient-detail";
 			else {
 				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
 			}
 		}
 		logger.debug("Existem Erros:" +result.hasErrors());
-		return "doctor-home";
+		return "patient-new";
+
 	}
 	/*
-	 * READ A DOCTOR
+	 * READ A PACIENT
 	 */
 	@RequestMapping(value = "/Detail", method = RequestMethod.GET)
 	public ModelAndView viewRecord(int id) {
-		return new ModelAndView("doctor-detail","doctotModel",repo.select(id));
+		return new ModelAndView("patient-detail","patientModel",repo.select(id));
 	}
+	
 	/*
-	 * UPDATE A DOCTOR
+	 * UPDATE A PACIENT
 	 */
 	@RequestMapping(value = "/Update", method = RequestMethod.GET)
 	public ModelAndView editRecord(int id) {
-		return new ModelAndView("doctor-edit","doctotModel",repo.select(id));
+		return new ModelAndView("patient-edit","patientModel",repo.select(id));
 	}
 	@RequestMapping(value = "/Update", method = RequestMethod.POST)
 	public String  editRecord( 
-			@ModelAttribute("doctotModel") @Valid Doctor doctotModel,
+			@ModelAttribute("patientModel") @Valid Patient patientModel,
 			BindingResult result) {
 		if (!result.hasErrors()) {
-			if (repo.update(doctotModel))
-				return "doctor-detail";
+			if (repo.update(patientModel))
+				return "patient-detail";
 			else {
 				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
 			}
 		}
 		logger.debug("Existem Erros:" +result.hasErrors());
-		return "doctor-edit";
+		return "patient-edit";
 	}
+	
 	/*
-	 * DELETE A DOCTOR
+	 * DELETE A PACIENT
 	 */
 	@RequestMapping(value = "/Delete", method = RequestMethod.GET)
 	public ModelAndView deleteRecord(int id) {
-		return new ModelAndView("doctor-edit","doctotModel",repo.select(id));
+		//TODO Handle the View and Model
+		return new ModelAndView("patient-delete","patientModel",repo.select(id));
 	}
 	@RequestMapping(value = "/Delete", method = RequestMethod.POST)
-	public String  deletedRecord(int id) {
-		if (repo.delete(id))
-			return "doctor-home";
+	public String deletedRecord(int id) {
+			if (repo.delete(id))
+				return "patient-home";
 		logger.debug("Ocorreram Erros:");
-		return "doctor-home";
-	}
+		return "patient-delete";
+	}	
+	
 }

@@ -95,24 +95,24 @@
 			<put-attribute name="body" value="/WEB-INF/views/Manager/delete.jsp" />
 		</definition>	
 
-		<!-- /Pacient -->
-		<definition name="pacient-home" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/index.jsp" />
+		<!-- /Patient -->
+		<definition name="patient-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/index.jsp" />
 		</definition>
-		<definition name="pacient-edit" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/edit.jsp" />
+		<definition name="patient-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/edit.jsp" />
 		</definition>
-		<definition name="pacient-new" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/new.jsp" />
+		<definition name="patient-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/new.jsp" />
 		</definition>
-		<definition name="pacient-view" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/view.jsp" />
+		<definition name="patient-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/view.jsp" />
 		</definition>
-		<definition name="pacient-detail" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/detail.jsp" />
+		<definition name="patient-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/detail.jsp" />
 		</definition>	
-		<definition name="pacient-delete" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Pacient/delete.jsp" />
+		<definition name="patient-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Patient/delete.jsp" />
 		</definition>
 
 		<!-- /Therapeutic -->
@@ -135,24 +135,24 @@
 			<put-attribute name="body" value="/WEB-INF/views/Therapeutic/delete.jsp" />
 		</definition>
 
-		<!-- /Therapist -->
-		<definition name="therapist-home" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/index.jsp" />
+		<!-- /Technician -->
+		<definition name="technician-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/index.jsp" />
 		</definition>
-		<definition name="therapist-edit" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/edit.jsp" />
+		<definition name="technician-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/edit.jsp" />
 		</definition>
-		<definition name="therapist-new" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/new.jsp" />
+		<definition name="technician-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/new.jsp" />
 		</definition>
-		<definition name="therapist-view" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/view.jsp" />
+		<definition name="technician-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/view.jsp" />
 		</definition>
-		<definition name="therapist-detail" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/detail.jsp" />
+		<definition name="technician-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/detail.jsp" />
 		</definition>	
-		<definition name="therapist-delete" extends="template-main">
-			<put-attribute name="body" value="/WEB-INF/views/Therapist/delete.jsp" />
+		<definition name="technician-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Technician/delete.jsp" />
 		</definition>
 
 
