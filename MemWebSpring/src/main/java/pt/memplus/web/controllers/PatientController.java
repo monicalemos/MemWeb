@@ -19,7 +19,7 @@ import pt.memplus.web.models.Patient;
 @RequestMapping(value = "/Patient")
 public class PatientController {
 	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
-	private static final IRepository<Patient> repo = DataRepositoryLocator.getPacientrepository();
+	private static final IRepository<Patient> repo = DataRepositoryLocator.getPacientRepository();
 
 	public PatientController() {}
 

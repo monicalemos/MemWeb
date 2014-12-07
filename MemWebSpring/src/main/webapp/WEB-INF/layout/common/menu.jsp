@@ -4,7 +4,7 @@
 		<li><a href="${pageContext.request.contextPath}/Doctor">Médicos</a></li>
 		<li><a href="${pageContext.request.contextPath}/Manager">Manager</a></li>
 		<li><a href="${pageContext.request.contextPath}/Patient">Patient</a></li>
-		<li><a href="${pageContext.request.contextPath}/Therapeutic">Therapeutic</a></li>
+		<li><a href="${pageContext.request.contextPath}/TherapySession">TherapySession</a></li>
 		<li><a href="${pageContext.request.contextPath}/Technician">Technician</a></li>
 		<li><a href="${pageContext.request.contextPath}/GAMES">GAMES</a></li>
 	</ul>

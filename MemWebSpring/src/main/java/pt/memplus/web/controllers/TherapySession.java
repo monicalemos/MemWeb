@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/Therapeutic")
-public class TherapeuticController {
-	private static final Logger logger = LoggerFactory.getLogger(TherapeuticController.class);
-	public TherapeuticController() {
+public class TherapySession {
+	private static final Logger logger = LoggerFactory.getLogger(TherapySession.class);
+	public TherapySession() {
 		// TODO Auto-generated constructor stub
 	}
 
