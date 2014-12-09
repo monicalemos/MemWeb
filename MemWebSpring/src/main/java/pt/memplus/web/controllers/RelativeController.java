@@ -16,9 +16,8 @@ import pt.memplus.web.model.repository.IRepository;
 import pt.memplus.web.models.Relative;
 
 @Controller
-@RequestMapping(value = "/Pacient/Relative")
+@RequestMapping(value = "/Patient/Relative")
 public class RelativeController {
-
 	private static final Logger logger = LoggerFactory.getLogger(RelativeController.class);
 	private static final IRepository<Relative> repo = DataRepositoryLocator.getRelativeRepository();
 
@@ -26,9 +25,9 @@ public class RelativeController {
 
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView index() {
-		//TODO Devolver lista de familiares do Pacientes 
-		return new ModelAndView("patient-relative-home");
+	public ModelAndView index(int patientId) {
+		//TODO Devolver lista de familiares do Patientes 
+		return new ModelAndView("patient-relative-home","patientRelativesCollection", repo.getAll());
 	}
 	
 	/*
@@ -43,15 +42,15 @@ public class RelativeController {
 	public String  newRecord( 
 			@ModelAttribute("relativeModel") @Valid Relative relativeModel,
 			BindingResult result) {
-//TODO		
-//		if (!result.hasErrors()) {
-//			relativeModel.setId(-1);
-//			if (repo.create(relativeModel))
-//				return "patient-detail";
-//			else {
-//				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
-//			}
-//		}
+	
+		if (!result.hasErrors()) {
+			relativeModel.setId(-1);
+			if (repo.create(relativeModel))
+				return "patient-relative-detail";
+			else {
+				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
+			}
+		}
 		logger.debug("Existem Erros:" +result.hasErrors());
 		return "patient-relative-new";
 

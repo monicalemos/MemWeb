@@ -16,7 +16,7 @@ import pt.memplus.web.model.repository.IRepository;
 import pt.memplus.web.models.Event;
 
 @Controller
-@RequestMapping(value = "/Pacient/Event")
+@RequestMapping(value = "/Patient/Event")
 public class EventController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RelativeController.class);
@@ -26,32 +26,34 @@ public class EventController {
 
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView index() {
-		//TODO Devolver lista de familiares do Pacientes 
-		return new ModelAndView("patient-event-home");
+	public ModelAndView index(int personId) {
+		//TODO Devolver lista de familiares do Patientes 
+		return new ModelAndView("patient-event-home", "personEventsCollection", repo.getAll());
 	}
 	
 	/*
 	 * CREATE NEW PACIENT
 	 */
 	@RequestMapping(value = "/Create", method = RequestMethod.GET)
-	public ModelAndView newRecord() {
-		return new ModelAndView("patient-event-new", "eventModel",new Event());
+	public ModelAndView newRecord(int personId) {
+		Event e = new Event();
+		e.setRelatedToPersonId(personId);
+		return new ModelAndView("patient-event-new", "eventModel",e);
 	}
 	
 	@RequestMapping(value = "/Create", method = RequestMethod.POST)
 	public String  newRecord( 
 			@ModelAttribute("eventModel") @Valid Event eventModel,
 			BindingResult result) {
-//TODO		
-//		if (!result.hasErrors()) {
-//			eventModel.setId(-1);
-//			if (repo.create(eventModel))
-//				return "patient-detail";
-//			else {
-//				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
-//			}
-//		}
+	
+		if (!result.hasErrors()) {
+			eventModel.setId(-1);
+			if (repo.create(eventModel))
+				return "patient-event-detail";
+			else {
+				result.rejectValue("id", "CustomMessage", "Ocorreu um erro");
+			}
+		}
 		logger.debug("Existem Erros:" +result.hasErrors());
 		return "patient-event-new";
 
@@ -102,8 +104,4 @@ public class EventController {
 		return "patient-event-delete";
 	}	
 	
-
-
-
-
 }

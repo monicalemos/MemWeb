@@ -11,6 +11,7 @@ public class Relative extends Person{
 	
 	public Relative() {
 		super();
+		address = new Address();
 	}
 
 	public String getRelation() {
@@ -52,6 +53,4 @@ public class Relative extends Person{
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-
-
 }

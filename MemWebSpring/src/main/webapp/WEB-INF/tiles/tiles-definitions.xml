@@ -13,7 +13,7 @@
 	</definition>
 
 	<!-- Public -->
-	<definition name="template-main-public" template="/WEB-INF/layout/default/layout.jsp">
+	<definition name="template-main-public" template="/WEB-INF/layout/default/public_layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/common/headerPublic.jsp" />
 		<put-attribute name="title" value="MEM+" />
 		<put-attribute name="menu" value="" />
@@ -114,6 +114,49 @@
 		<definition name="patient-delete" extends="template-main">
 			<put-attribute name="body" value="/WEB-INF/views/Patient/delete.jsp" />
 		</definition>
+		
+		<!-- /Patient/Relative -->
+		<definition name="patient-relative-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/index.jsp" />
+		</definition>
+		<definition name="patient-relative-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/edit.jsp" />
+		</definition>
+		<definition name="patient-relative-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/new.jsp" />
+		</definition>
+		<definition name="patient-relative-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/view.jsp" />
+		</definition>
+		<definition name="patient-relative-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/detail.jsp" />
+		</definition>	
+		<definition name="patient-relative-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Relative/delete.jsp" />
+		</definition>
+
+		<!-- /Patient/Event -->
+		<definition name="patient-event-home" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/index.jsp" />
+		</definition>
+		<definition name="patient-event-edit" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/edit.jsp" />
+		</definition>
+		<definition name="patient-event-new" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/new.jsp" />
+		</definition>
+		<definition name="patient-event-view" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/view.jsp" />
+		</definition>
+		<definition name="patient-event-detail" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/detail.jsp" />
+		</definition>	
+		<definition name="patient-event-delete" extends="template-main">
+			<put-attribute name="body" value="/WEB-INF/views/Event/delete.jsp" />
+		</definition>
+
+
+
 
 		<!-- /Therapeutic -->
 		<definition name="therapeutic-home" extends="template-main">

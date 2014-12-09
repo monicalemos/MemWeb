@@ -27,7 +27,7 @@ public class PatientController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView index() {
 		//TODO Devolver lista de Pacientes 
-		return new ModelAndView("patient-home");
+		return new ModelAndView("patient-home","patientModelCollection",repo.getAll());
 	}
 	
 	/*

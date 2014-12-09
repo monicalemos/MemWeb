@@ -1,5 +1,5 @@
-<div class="col-sm-3 col-md-2 sidebar">
-	<ul class="nav nav-sidebar">
+<div class="sidebar-nav navbar-collapse">
+	<ul class="nav" id="side-menu">
 		<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
 		<li><a href="${pageContext.request.contextPath}/Doctor">Médicos</a></li>
 		<li><a href="${pageContext.request.contextPath}/Manager">Manager</a></li>
