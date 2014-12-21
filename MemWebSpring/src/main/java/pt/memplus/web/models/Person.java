@@ -2,18 +2,32 @@ package pt.memplus.web.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+//TODO
+@Entity
+@Table(name="Person")
 public class Person {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotEmpty(message="Campo obrigatório")
+	@Column(name = "firstName", nullable = false)
 	private String firstName;
+	@Column(name = "middleName", nullable = true)
 	private String middleName;
 	@NotEmpty(message="Campo obrigatório")
+	@Column(name = "lastName", nullable = false)
 	private String lastName;
 	private String fullName;
 	@NotNull(message="Campo obrigatório")

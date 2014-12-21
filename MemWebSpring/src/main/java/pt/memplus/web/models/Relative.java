@@ -2,6 +2,11 @@ package pt.memplus.web.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+//TODO
+@Entity
+@Table(name="Relative")
 public class Relative extends Person{
 	private String relation;
 	private int patientId;

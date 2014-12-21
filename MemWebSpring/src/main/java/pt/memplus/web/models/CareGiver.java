@@ -1,6 +1,13 @@
 package pt.memplus.web.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CareGiver")
 public class CareGiver extends Person {
+	@Column(name = "caregiver", nullable = false)
 	private boolean caregiver;
 	
 	public CareGiver() {
