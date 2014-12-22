@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pt.memplus.web.daos.AddressDAO;
 import pt.memplus.web.models.Address;
 
-@Service("AddressService")
+@Service("addressService")
 @Transactional
 public class AddressServiceImpl implements AddressService {
 	@Autowired
@@ -17,32 +17,30 @@ public class AddressServiceImpl implements AddressService {
 	
 	@Override
 	public void save(Address address) {
-		// TODO Auto-generated method stub
+		dao.save(address);
 		
 	}
 
 	@Override
 	public void update(Address address) {
-		// TODO Auto-generated method stub
+		dao.update(address);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		dao.delete(id);
 		
 	}
 
 	@Override
 	public Iterable<Address> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getAll();
 	}
 
 	@Override
 	public Address getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getById(id);
 	}
 
 

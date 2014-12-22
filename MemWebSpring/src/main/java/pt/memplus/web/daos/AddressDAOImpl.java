@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import pt.memplus.web.models.Address;
-@Repository("Address")
+@Repository("addressDAO")
 public class AddressDAOImpl extends AbstractDao implements AddressDAO  {
 	private static final Logger logger = LoggerFactory.getLogger(AddressDAOImpl.class);
 
@@ -34,6 +34,7 @@ public class AddressDAOImpl extends AbstractDao implements AddressDAO  {
 		// TODO Auto-generated method stub
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public Iterable<Address> getAll() {
 		Criteria criteria = getSession().createCriteria(Address.class);

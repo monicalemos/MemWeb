@@ -1,14 +1,16 @@
 package pt.memplus.web.controllers;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import pt.memplus.web.models.Address;
+import pt.memplus.web.models.Doctor;
+import pt.memplus.web.services.AddressService;
+import pt.memplus.web.services.AddressServiceImpl;
 
 /**
  * Handles requests for the application home page.
@@ -24,6 +26,14 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView index() {
+		AddressService as = new AddressServiceImpl();
+		Iterable<Address>id =  as.getAll();
+		
+		for(Address d : id)
+		{
+			logger.debug(d.getCountry());
+		}
+		
 		return new ModelAndView("home");
 	}
 	@RequestMapping(value = "/About", method = RequestMethod.GET)
