@@ -6,11 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 //TODO
-@Entity
-@Table(name="MedicalChart")
+//@Entity
+//@Table(name="MedicalCharts")
 public class MedicalChart {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String education;
 	private String sicknessLevel;

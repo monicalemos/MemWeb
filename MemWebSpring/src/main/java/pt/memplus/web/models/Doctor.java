@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="Doctor")
+//@Entity
+//@Table(name="Doctors")
 public class Doctor extends Person{
-	@Column(name = "speciality", nullable = false)
+//	@Column(name = "speciality", nullable = false)
 	private String speciality;
 	
 	public Doctor() {

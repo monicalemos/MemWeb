@@ -10,7 +10,7 @@ import pt.memplus.web.models.CareGiver;
 @Transactional
 public class CareGiverServiceImpl implements CareGiverService {
 	@Autowired
-    private CareGiverDao dao;
+    private CareGiverDao careGiverDao;
 	@Override
 	public void save(CareGiver cg) {
 		// TODO Auto-generated method stub

@@ -10,7 +10,7 @@ import pt.memplus.web.models.TherapySession;
 @Transactional
 public class TherapySessionServiceImpl implements TherapySessionService {
 	@Autowired
-    private TherapySessionDao dao;
+    private TherapySessionDao therapySessionDao;
 	@Override
 	public void save(TherapySession ts) {
 		// TODO Auto-generated method stub

@@ -15,7 +15,9 @@
 		<tiles.version>3.0.5</tiles.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>4.3.7.Final</hibernate.version>
+		<mysql.version>5.1.31</mysql.version>
+        <joda-time.version>2.3</joda-time.version>
 	</properties>
 	<dependencies>
 			<!-- Validations -->
@@ -25,6 +27,11 @@
 			<version>${hibernate.validator.version}</version>
 		</dependency>
 		<!-- Spring -->
+<!-- 		<dependency> -->
+<!--             <groupId>org.springframework</groupId> -->
+<!--             <artifactId>spring-core</artifactId> -->
+<!--             <version>${org.springframework-version}</version> -->
+<!--         </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -37,17 +44,18 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-web</artifactId>
-		    <version>${spring.security.version}</version>
-	  	</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.springframework.security</groupId> -->
+<!-- 		    <artifactId>spring-security-web</artifactId> -->
+<!-- 		    <version>${spring.security.version}</version> -->
+<!-- 	  	</dependency> -->
 	  	<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -58,29 +66,46 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>${spring.security.version}</version>
 	  	</dependency>
-	  	<!-- Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <!-- Apache Commons DBCP -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <!-- Spring ORM -->
+	  	<!-- Spring ORM -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+		<!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+ 
+        <!-- Joda-Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+ 
+        <!-- To map JodaTime with database type -->
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <version>3.0.0.CR1</version>
+        </dependency>
+        <!-- Apache Commons DBCP -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <version>2.0</version>
+		</dependency>
+        
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -141,23 +166,23 @@
 				
 		<!-- Servlet -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
+		    <groupId>javax.servlet.jsp</groupId>
+		    <artifactId>javax.servlet.jsp-api</artifactId>
+		    <version>2.3.1</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

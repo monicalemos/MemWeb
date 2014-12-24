@@ -10,7 +10,7 @@ import pt.memplus.web.models.Patient;
 @Transactional
 public class PatientServiceImpl implements PatientService {
 	@Autowired
-    private PatientDao dao;
+    private PatientDao patientDao;
 	@Override
 	public void save(Patient pat) {
 		// TODO Auto-generated method stub

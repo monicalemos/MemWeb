@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 //TODO
-@Entity
-@Table(name="Relative")
+//@Entity
+//@Table(name="Relatives")
 public class Relative extends Person{
 	private String relation;
 	private int patientId;

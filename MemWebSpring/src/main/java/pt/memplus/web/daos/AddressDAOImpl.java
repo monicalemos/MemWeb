@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import pt.memplus.web.models.Address;
-@Repository("addressDAO")
+@Repository
 public class AddressDAOImpl extends AbstractDao implements AddressDAO  {
 	private static final Logger logger = LoggerFactory.getLogger(AddressDAOImpl.class);
 

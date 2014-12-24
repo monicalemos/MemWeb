@@ -10,7 +10,7 @@ import pt.memplus.web.models.Person;
 @Transactional
 public class PersonServiceImpl implements PersonService {
 	@Autowired
-    private PersonDao dao;
+    private PersonDao personDao;
 	@Override
 	public void save(Person per) {
 		// TODO Auto-generated method stub

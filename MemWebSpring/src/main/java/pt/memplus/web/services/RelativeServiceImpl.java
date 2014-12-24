@@ -10,7 +10,7 @@ import pt.memplus.web.models.Relative;
 @Transactional
 public class RelativeServiceImpl implements RelativeService {
 	@Autowired
-    private RelativeDao dao;
+    private RelativeDao relativeDao;
 	@Override
 	public void save(Relative rel) {
 		// TODO Auto-generated method stub

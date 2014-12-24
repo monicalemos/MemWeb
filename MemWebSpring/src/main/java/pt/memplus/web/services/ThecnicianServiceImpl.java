@@ -10,7 +10,7 @@ import pt.memplus.web.models.Technician;
 @Transactional
 public class ThecnicianServiceImpl implements ThecnicianService {
 	@Autowired
-    private ThecnicianDao dao;
+    private ThecnicianDao thecnicianDao;
 	@Override
 	public void save(Technician tec) {
 		// TODO Auto-generated method stub

@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 //TODO
-@Entity
-@Table(name="Patient")
+//@Entity
+//@Table(name="Patients")
 public class Patient extends Person{
 	private Address address;
 	private MedicalChart medicalChart;

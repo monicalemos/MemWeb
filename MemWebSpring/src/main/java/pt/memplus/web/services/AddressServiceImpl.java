@@ -13,34 +13,34 @@ import pt.memplus.web.models.Address;
 @Transactional
 public class AddressServiceImpl implements AddressService {
 	@Autowired
-    private AddressDAO dao;
+    private AddressDAO addressDAO;
 	
 	@Override
 	public void save(Address address) {
-		dao.save(address);
+		addressDAO.save(address);
 		
 	}
 
 	@Override
 	public void update(Address address) {
-		dao.update(address);
+		addressDAO.update(address);
 		
 	}
 
 	@Override
 	public void delete(int id) {
-		dao.delete(id);
+		addressDAO.delete(id);
 		
 	}
 
 	@Override
 	public Iterable<Address> getAll() {
-		return dao.getAll();
+		return addressDAO.getAll();
 	}
 
 	@Override
 	public Address getById(int id) {
-		return dao.getById(id);
+		return addressDAO.getById(id);
 	}
 
 

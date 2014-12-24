@@ -15,19 +15,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 //TODO
-@Entity
-@Table(name="Person")
+//@Entity
+//@Table(name="Persons")
 public class Person {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotEmpty(message="Campo obrigatório")
-	@Column(name = "firstName", nullable = false)
+//	@Column(name = "firstName", nullable = false)
 	private String firstName;
-	@Column(name = "middleName", nullable = true)
+//	@Column(name = "middleName", nullable = true)
 	private String middleName;
 	@NotEmpty(message="Campo obrigatório")
-	@Column(name = "lastName", nullable = false)
+//	@Column(name = "lastName", nullable = false)
 	private String lastName;
 	private String fullName;
 	@NotNull(message="Campo obrigatório")

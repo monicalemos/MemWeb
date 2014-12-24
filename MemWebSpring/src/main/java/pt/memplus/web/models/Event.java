@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 //TODO
-@Entity
-@Table(name="Event")
+//@Entity
+//@Table(name="Events")
 public class Event {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int relatedToPersonId;
 	private String title;

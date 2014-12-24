@@ -10,7 +10,7 @@ import pt.memplus.web.models.Doctor;
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
 	@Autowired
-    private DoctorDao dao;
+    private DoctorDao doctorDao;
 	@Override
 	public void save(Doctor doc) {
 		// TODO Auto-generated method stub

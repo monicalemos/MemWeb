@@ -10,7 +10,7 @@ import pt.memplus.web.models.Event;
 @Transactional
 public class EventServiceImpl implements EventService {
 	@Autowired
-    private EventDao dao;
+    private EventDao eventDao;
 	@Override
 	public void save(Event ev) {
 		// TODO Auto-generated method stub

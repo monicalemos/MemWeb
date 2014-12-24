@@ -11,18 +11,21 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="ADDRESS")
+@Table(name="ADDRESSES")
 public class Address {
-	@Id
+    @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	@NotEmpty(message="Campo obrigatório")
 	@Column(name = "country", nullable = false)
 	private String country;
+	
 	@NotEmpty(message="Campo obrigatório")
 	@Column(name = "city", nullable = false)
 	private String city;
+	
 	@NotEmpty(message="Campo obrigatório")
 	@Column(name = "region", nullable = false)
 	private String region;
@@ -30,6 +33,7 @@ public class Address {
 	public Address() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 	public int getId() {
 		return id;
@@ -41,26 +45,6 @@ public class Address {
 
 	public String getCountry() {
 		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
 	}
 
 	@Override
@@ -101,6 +85,26 @@ public class Address {
 		} else if (!region.equals(other.region))
 			return false;
 		return true;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 	
 }

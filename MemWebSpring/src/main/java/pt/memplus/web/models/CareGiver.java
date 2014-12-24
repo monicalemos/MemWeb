@@ -3,11 +3,11 @@ package pt.memplus.web.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-@Entity
-@Table(name="CareGiver")
+//
+//@Entity
+//@Table(name="CareGivers")
 public class CareGiver extends Person {
-	@Column(name = "caregiver", nullable = false)
+//	@Column(name = "caregiver", nullable = false)
 	private boolean caregiver;
 	
 	public CareGiver() {

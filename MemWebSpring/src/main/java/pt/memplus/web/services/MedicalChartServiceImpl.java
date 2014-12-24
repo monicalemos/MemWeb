@@ -10,7 +10,7 @@ import pt.memplus.web.models.MedicalChart;
 @Transactional
 public class MedicalChartServiceImpl implements MedicalChartService {
 	@Autowired
-    private MedicalChartDao dao;
+    private MedicalChartDao medicalChartDao;
 	
 	@Override
 	public void save(MedicalChart mc) {
