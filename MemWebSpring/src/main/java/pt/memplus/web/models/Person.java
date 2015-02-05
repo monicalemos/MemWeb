@@ -13,18 +13,18 @@ public class Person {
 	@NotEmpty(message="Campo obrigatório")
 	private String firstName;
 	private String middleName;
-	@NotEmpty(message="Campo obrigatório")
+	@NotEmpty(message="Campo obrigatï¿½rio")
 	private String lastName;
 	private String fullName;
-	@NotNull(message="Campo obrigatório")
+	@NotNull(message="Campo obrigatï¿½rio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Past
 	private Date dateOfBirth;
-	@NotEmpty(message="Campo obrigatório")
+	@NotEmpty(message="Campo obrigatï¿½rio")
 	private String gender;
-	@NotEmpty(message="Campo obrigatório")
+	@NotEmpty(message="Campo obrigatï¿½rio")
 	private String maritalStatus;
-	@NotEmpty(message="Campo obrigatório")
+	@NotEmpty(message="Campo obrigatï¿½rio")
 	private String profession;
 	
 	public Person() {}
